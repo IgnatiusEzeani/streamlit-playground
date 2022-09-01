@@ -20,7 +20,7 @@ def read_file(file_source='example'):
         if uploaded_file:
             fname = uploaded_file.name
         else:
-            return st.info('''**NoFileUploaded:** Please upload your file using the upload button or by dragging the file into the upload area. Acceptable file formats include '.txt','.tsv','.xlsx', '.xls' ''', icon="ℹ️")
+            return st.info('''**NoFileUploaded:** Please upload your file using the upload button or by dragging the file into the upload area. Acceptable file formats include `.txt`, `.xlsx`, `.xls`, `.tsv`.''', icon="ℹ️")
     else:
         return st.error(f"FileSourceError: '{file_source}' is not a valid file source. Use 'example' or 'uploaded' only.")
 
@@ -37,7 +37,7 @@ def read_file(file_source='example'):
         data = pd.read_csv(fname, sep='\t', encoding='cp1252') if file_source=='example' else pd.read_csv(uploaded_file, sep='\t', encoding='cp1252')
         data        
     else:
-        return st.error(f"FileTypeError: Unrecognised file type. Use only '.txt', '.xlsx', '.xls', '.tsv' files.")
+        return st.error(f"""**FileTypeError:** Unrecognised file format. Use only `.txt`, `.xlsx`, `.xls`, `.tsv` files.""", icon="🚨")
     return data
 
 def read_pasted_data():
@@ -61,63 +61,8 @@ def select_columns(dataframe):
          list(dataframe.keys())[:4])
     return dataframe[options]
 
-# def read_example_file():
-    # example_fname = st.sidebar.selectbox(MESSAGES[lang][4], sorted([f for f in os.listdir(EXAMPLES_DIR) if f.startswith('Reviews')]))
-    # if example_fname.endswith('.txt'):
-        # with open(os.path.join(EXAMPLES_DIR, example_fname), 'r', encoding='iso-8859-1') as example_file:
-            # data = st.text_area('Review to analyse', example_file.read(), height=150)
-           
-    # elif example_fname.endswith(('.xls','.xlsx')):
-        # data = pd.read_excel(pd.ExcelFile(os.path.join(EXAMPLES_DIR, example_fname)))
-        # data
-        
-    # elif example_fname.endswith('.tsv'):
-        # data = pd.read_table(os.path.join(EXAMPLES_DIR, example_fname), encoding='cp1252')
-        # data
-    
-    # else:
-        # data = 'Invalid file format'
-    
-    # return data
-
-# def read_uploaded_data():
-    # uploaded_fname=''
-    # uploaded_file = st.sidebar.file_uploader("Upload review data", type=['txt','tsv','xlsx', 'xls'])
-    # if uploaded_file is not None:
-        # uploaded_fname = uploaded_file.name
-
-    # if uploaded_fname.endswith('.txt'):
-        # data = st.text_area('Review to analyse', uploaded_file.read(), height=150)
-    # elif uploaded_fname.endswith(('.xls','.xlsx')):
-        # data = pd.read_excel(uploaded_file)
-        # data
-    # elif uploaded_fname.endswith('.tsv'):
-        # data = pd.read_table(uploaded_file, encoding='cp1252')
-        # data
-    # else:
-        # data = 'Invalid file format'
-    # return data
-
 option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2], MESSAGES[lang][3]))
-if option == MESSAGES[lang][1]:
-    # input_data = read_example_file()
-    input_data = read_file()
-
-elif option == MESSAGES[lang][2]:
-    # input_data = read_uploaded_data()
-    input_data = read_file(file_source='uploaded')
-
-elif option == MESSAGES[lang][3]:
-    input_data = read_pasted_data()
-else:
-    pass
-
-#----------------------------
-    # for option in options:
-        # option, Counter(dataframe[option])
-
-# df1 = df[['a', 'b']]
-# test_uploaded_file = st.sidebar.file_uploader("Just testing file upload", type=['txt','xlsx', 'xls'])
-# if test_uploaded_file is not None:
-    # if test_uploaded_file.type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
-        # process_excel_file(test_uploaded_file)
+if option == MESSAGES[lang][1]: input_data = read_file()
+elif option == MESSAGES[lang][2]: input_data = read_file(file_source='uploaded')
+elif option == MESSAGES[lang][3]: input_data = read_pasted_data()
+else: pass
