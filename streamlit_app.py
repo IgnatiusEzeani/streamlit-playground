@@ -30,8 +30,12 @@ def read_file(file_source='example'):
         data
 
     elif fname.endswith('.tsv'):
-        data = pd.read_table(pd.ExcelFile(fname), encoding='cp1252') if file_source=='example' else pd.read_table(uploaded_file, encoding='cp1252')
+        data = pd.read_csv(fname, sep='\t', encoding='cp1252') if file_source=='example' else pd.read_csv(uploaded_file, sep='\t', encoding='cp1252')
         data
+        
+pd.read_csv('c:/~/trainSetRel3.txt')
+
+
     else:
         return st.error(f"FileTypeError: Unrecognised file type. Use only '.txt', '.xlsx', '.xls', '.tsv' files.")
     return data
