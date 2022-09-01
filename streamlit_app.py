@@ -12,7 +12,6 @@ EXAMPLES_DIR = 'example_texts_pub'
 # read example and uploaded files
 def read_file(file_source='example'):
     fname = ''
-    if not fname:
     if file_source=='example':
         fname = st.sidebar.selectbox(MESSAGES[lang][4], sorted([f for f in os.listdir(EXAMPLES_DIR) if f.startswith('Reviews')]))
         fname = os.path.join(EXAMPLES_DIR, fname)
