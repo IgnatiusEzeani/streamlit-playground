@@ -11,13 +11,15 @@ EXAMPLES_DIR = 'example_texts_pub'
 
 # read example and uploaded files
 def read_file(file_source='example'):
-    # fname, uploaded_file = '',None
     if file_source=='example':
         fname = st.sidebar.selectbox(MESSAGES[lang][4], sorted([f for f in os.listdir(EXAMPLES_DIR) if f.startswith('Reviews')]))
         fname = os.path.join(EXAMPLES_DIR, fname)
     elif file_source=='uploaded':
         uploaded_file = st.sidebar.file_uploader("Upload review data", type=['txt','tsv','xlsx', 'xls'])
-        fname = uploaded_file.name
+        if uploaded_file:
+            fname = uploaded_file.name
+        else:
+            st.info('Please upload your file using the upload button or by dragging the file into the upload area', icon="ℹ️")
     else:
         return st.error(f"FileSourceError: '{file_source}' is not a valid file source. Use 'example' or 'uploaded' only.")
 
