@@ -1,5 +1,4 @@
 import os
-import xlrd
 import pandas as pd
 import streamlit as st
 from collections import Counter
@@ -31,7 +30,7 @@ def read_file(file_source='example'):
         data
 
     elif fname.endswith('.tsv'):
-        data = pd.read_table(pd.ExcelFile(fname), encoding='cp1252', engine='openpyxl') if file_source=='example' else pd.read_table(uploaded_file, encoding='cp1252', engine='openpyxl')
+        data = pd.read_table(pd.ExcelFile(fname), encoding='cp1252') if file_source=='example' else pd.read_table(uploaded_file, encoding='cp1252')
         data
     else:
         return st.error(f"FileTypeError: Unrecognised file type. Use only '.txt', '.xlsx', '.xls', '.tsv' files.")
