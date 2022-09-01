@@ -20,12 +20,12 @@ def read_file(file_source='example'):
         if uploaded_file:
             fname = uploaded_file.name
         else:
-            return st.info('''NoFileUploaded: Please upload your file using the upload button or by dragging the file into the upload area''', icon="ℹ️")
+            return st.info('''*NoFileUploaded:* Please upload your file using the upload button or by dragging the file into the upload area''', icon="ℹ️")
     else:
         return st.error(f"FileSourceError: '{file_source}' is not a valid file source. Use 'example' or 'uploaded' only.")
 
     if fname.endswith('.txt'):
-        text = open(fname, 'r', encoding='utf8').read() if file_source=='example' else uploaded_file.read().decode('utf8') 
+        text = pd.DataFrame(open(fname, 'r', encoding='utf8').read()) if file_source=='example' else pd.DataFrame(uploaded_file.read().decode('utf8'))
         # pd.DataFrame({'Reviews': uploaded_file.read().split('\n')})
         data = st.text_area('Review to analyse', text, height=150)
                 
