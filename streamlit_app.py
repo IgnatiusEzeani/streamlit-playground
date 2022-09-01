@@ -25,7 +25,7 @@ def read_file(file_source='example'):
         return st.error(f"FileSourceError: '{file_source}' is not a valid file source. Use 'example' or 'uploaded' only.")
 
     if fname.endswith('.txt'):
-        text = open(fname, 'r', encoding='iso-8859-1').read() if file_source=='example' else uploaded_file.read()
+        text = open(fname, 'r', encoding='iso-8859-1').read() if file_source=='example' else open(uploaded_file.name, 'r', encoding='iso-8859-1').read()#uploaded_file.read()
         data = st.text_area('Review to analyse', text, height=150)
                 
     elif fname.endswith(('.xls','.xlsx')):
