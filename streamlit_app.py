@@ -20,9 +20,9 @@ def read_file(file_source='example'):
         if uploaded_file:
             fname = uploaded_file.name
         else:
-            return st.info('''**NoFileUploaded:** Please upload your file using the upload button or by dragging the file into the upload area. Acceptable file formats include `.txt`, `.xlsx`, `.xls`, `.tsv`.''', icon="ℹ️")
+            return False, st.info('''**NoFileUploaded:** Please upload your file using the upload button or by dragging the file into the upload area. Acceptable file formats include `.txt`, `.xlsx`, `.xls`, `.tsv`.''', icon="ℹ️")
     else:
-        return st.error(f"FileSourceError: '{file_source}' is not a valid file source. Use 'example' or 'uploaded' only.")
+        return False, st.error(f"FileSourceError: '{file_source}' is not a valid file source. Use 'example' or 'uploaded' only.")
 
     if fname.endswith('.txt'):
         text = open(fname, 'r', encoding='utf8').read() if file_source=='example' else uploaded_file.read().decode('utf8')
@@ -36,11 +36,11 @@ def read_file(file_source='example'):
         data = pd.read_csv(fname, sep='\t', encoding='cp1252') if file_source=='example' else pd.read_csv(uploaded_file, sep='\t', encoding='cp1252')
         # data     
     else:
-        return st.error(f"""**FileTypeError:** Unrecognised file format. Please ensure your file name has the extension `.txt`, `.xlsx`, `.xls`, `.tsv`.""", icon="🚨")
-    return data
+        return False, st.error(f"""**FileTypeError:** Unrecognised file format. Please ensure your file name has the extension `.txt`, `.xlsx`, `.xls`, `.tsv`.""", icon="🚨")
+    return True, data
 
 def read_pasted_data():
-    return st.text_area('Paste reviews (replace the example text) to analyze',
+    return True, st.text_area('Paste reviews (replace the example text) to analyze',
 '''Poor excuse for a hotel
 Not really what we expected
 Not bad Not bad
@@ -71,7 +71,8 @@ class Analysis:
         self.reviews = reviews
 
     def count_reviews(self):
-        return len(self.reviews)
+        status, data = self.reviews
+        return len(data) if status else data
 
 analysis1 = Analysis(input_data)
 'No of reviews: ', analysis1.count_reviews()
