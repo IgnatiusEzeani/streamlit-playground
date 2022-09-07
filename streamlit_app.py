@@ -72,7 +72,7 @@ class Analysis:
 
     def count_reviews(self):
         status, data = self.reviews
-        return len(data) if status else data
+        return len(data) if status else None
 
 analysis1 = Analysis(input_data)
 'No of reviews: ', analysis1.count_reviews()
