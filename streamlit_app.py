@@ -73,5 +73,5 @@ class Analysis:
     def count_reviews(self):
         return len(self.reviews)
 
-analysis1(input_data)
+analysis1 = Analysis(input_data)
 'No of reviews: ', analysis1.count_reviews()
