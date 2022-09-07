@@ -4,7 +4,7 @@ import streamlit as st
 from collections import Counter
 from labels import MESSAGES
 '''
-#### List of reviews
+##### List of reviews
 '''
 lang='en'
 EXAMPLES_DIR = 'example_texts_pub'
