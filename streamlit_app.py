@@ -4,7 +4,7 @@ import streamlit as st
 from collections import Counter
 from labels import MESSAGES
 '''
-### Testing file upload
+#### List of reviews
 '''
 lang='en'
 EXAMPLES_DIR = 'example_texts_pub'
@@ -26,22 +26,21 @@ def read_file(file_source='example'):
 
     if fname.endswith('.txt'):
         text = open(fname, 'r', encoding='utf8').read() if file_source=='example' else uploaded_file.read().decode('utf8')
-        # pd.DataFrame({'Reviews': uploaded_file.read().split('\n')})
         data = st.text_area('Review to analyse', text, height=150)
                 
     elif fname.endswith(('.xls','.xlsx')):
         data = pd.read_excel(pd.ExcelFile(fname)) if file_source=='example' else pd.read_excel(uploaded_file)
-        data
+        # data
 
     elif fname.endswith('.tsv'):
         data = pd.read_csv(fname, sep='\t', encoding='cp1252') if file_source=='example' else pd.read_csv(uploaded_file, sep='\t', encoding='cp1252')
-        data        
+        # data     
     else:
-        return st.error(f"""**FileTypeError:** Unrecognised file format. Use only `.txt`, `.xlsx`, `.xls`, `.tsv` files.""", icon="🚨")
+        return st.error(f"""**FileTypeError:** Unrecognised file format. Please ensure your file name has the extension `.txt`, `.xlsx`, `.xls`, `.tsv`.""", icon="🚨")
     return data
 
 def read_pasted_data():
-    return st.text_area('Paste reviews to analyze (replace the example text)',
+    return st.text_area('Paste reviews (replace the example text) to analyze',
 '''Poor excuse for a hotel
 Not really what we expected
 Not bad Not bad
@@ -66,3 +65,13 @@ if option == MESSAGES[lang][1]: input_data = read_file()
 elif option == MESSAGES[lang][2]: input_data = read_file(file_source='uploaded')
 elif option == MESSAGES[lang][3]: input_data = read_pasted_data()
 else: pass
+
+class Analysis:
+    def __init__(self, reviews):
+        self.reviews = reviews
+
+    def count_reviews(self):
+        return len(self.reviews)
+
+analysis1(input_data)
+'No of reviews: ', analysis1.count_reviews()
