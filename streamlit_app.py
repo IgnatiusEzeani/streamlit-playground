@@ -50,7 +50,7 @@ Not for claustrophobics
 This is not a three stars hotel!
 Sssshh - really good value!!!
 Great hotel
-Loved the Shellbourne Hotel''', height=150)
+Loved the Shellbourne Hotel''', height=150).split('\n')
 
 def select_columns(dataframe): 
     "Total number of reviews: ", len(dataframe)
