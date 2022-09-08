@@ -71,14 +71,17 @@ class Analysis:
         self.reviews = reviews
 
     def show_reviews(self):
-        '''##### List of reviews'''
         status, data = self.reviews
-        return data if status else None
+        if status:
+            '''##### List of reviews'''
+            data
+            'No of reviews: ', len(data)
+        else:
+            return
 
-    def count_reviews(self):
-        status, data = self.reviews
-        return len(data) if status else None
+    # def count_reviews(self):
+        # status, data = self.reviews
+        # return len(data) if status else None
 
 analysis1 = Analysis(input_data)
-'No of reviews: ', analysis1.count_reviews()
 analysis1.show_reviews()
