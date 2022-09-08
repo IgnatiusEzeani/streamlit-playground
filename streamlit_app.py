@@ -81,4 +81,4 @@ class Analysis:
 
 analysis1 = Analysis(input_data)
 'No of reviews: ', analysis1.count_reviews()
-'No of reviews: ', analysis1.show_reviews()
+analysis1.show_reviews()
