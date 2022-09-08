@@ -25,8 +25,8 @@ def read_file(file_source='example'):
         return False, st.error(f"FileSourceError: '{file_source}' is not a valid file source. Use 'example' or 'uploaded' only.")
 
     if fname.endswith('.txt'):
-        text = open(fname, 'r', encoding='utf8').read() if file_source=='example' else uploaded_file.read().decode('utf8')
-        data = st.text_area('Review to analyse', text, height=150).split('\n')
+        data = open(fname, 'r', encoding='utf8').read() if file_source=='example' else uploaded_file.read().decode('utf8')
+        # data = st.text_area('Review to analyse', text, height=150).split('\n')
                 
     elif fname.endswith(('.xls','.xlsx')):
         data = pd.read_excel(pd.ExcelFile(fname)) if file_source=='example' else pd.read_excel(uploaded_file)
