@@ -30,7 +30,7 @@ def read_file(file_source='example'):
                 
     elif fname.endswith(('.xls','.xlsx')):
         data = pd.read_excel(pd.ExcelFile(fname)) if file_source=='example' else pd.read_excel(uploaded_file)
-        # data
+        data.columns
 
     elif fname.endswith('.tsv'):
         data = pd.read_csv(fname, sep='\t', encoding='cp1252') if file_source=='example' else pd.read_csv(uploaded_file, sep='\t', encoding='cp1252')
