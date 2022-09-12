@@ -114,6 +114,9 @@ class Analysis:
             )
         nlp = spacy.load('en_core_web_sm')
         doc = nlp(input_data)
+        
+        bigrams      = Counter(input_bigrams)
+        trigrams     = Counter(input_trigrams)
         nouns        = Counter([token.text for token in doc if token.pos_ == "NOUN"])
         verbs        = Counter([token.text for token in doc if token.pos_ == "VERB"])
         proper_nouns = Counter([token.text for token in doc if token.pos_ == "PROPN"])
@@ -126,7 +129,6 @@ class Analysis:
                 max_words=maxWords,
                 stopwords=STOPWORDS,
                 width=2000, height=1000,
-                # contour_color= "black", 
                 relative_scaling = 0,
                 mask=mask,
                 background_color="white",
@@ -138,9 +140,9 @@ class Analysis:
             if cloud_type == 'All words':
                 wordcloud = wc.generate(input_data)        
             elif cloud_type == 'Bigrams':
-                wordcloud = wc.generate_from_frequencies(input_bigrams)        
+                wordcloud = wc.generate_from_frequencies(bigrams)        
             elif cloud_type == 'Trigrams':
-                wordcloud = wc.generate_from_frequencies(input_trigrams)        
+                wordcloud = wc.generate_from_frequencies(trigrams)        
             elif cloud_type == 'Nouns':
                 wordcloud = wc.generate_from_frequencies(nouns)        
             elif cloud_type == 'Proper nouns':
