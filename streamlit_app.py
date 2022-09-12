@@ -81,7 +81,7 @@ def read_example_data():
     fname = os.path.join(EXAMPLES_DIR, 'example_reviews.txt')
     text = open(fname, 'r', encoding='cp1252').read()
     lines = st.text_area('Paste reviews (replace the example text) to analyze', text, height=150).split('\n'))
-    data = pd.DataFrame.from_dict({i+1: line[i] for i in range(len(line))}, orient='index', columns = ['Reviews'])
+    data = pd.DataFrame.from_dict({i+1: lines[i] for i in range(len(lines))}, orient='index', columns = ['Reviews'])
     return True, data
 
 
