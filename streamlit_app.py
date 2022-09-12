@@ -58,12 +58,12 @@ class Analysis:
                 )
             nlp = spacy.load('en_core_web_sm')
             doc = nlp(input_data)        
-            nouns = Counter([token.lemma_ for token in doc if token.pos_ == "NOUN"])
-            verbs = Counter([token.lemma_ for token in doc if token.pos_ == "VERB"])
-            proper_nouns = Counter([token.lemma_ for token in doc if token.pos_ == "PROPN"])
+            nouns = Counter([token.text for token in doc if token.pos_ == "NOUN"])
+            verbs = Counter([token.text for token in doc if token.pos_ == "VERB"])
+            proper_nouns = Counter([token.text for token in doc if token.pos_ == "PROPN"])
             adjectives = Counter([token.text for token in doc if token.pos_ == "ADJ"])
-            adverbs = Counter([token.lemma_ for token in doc if token.pos_ == "ADV"])
-            numbers = Counter([token.lemma_ for token in doc if token.pos_ == "NUM"])
+            adverbs = Counter([token.text for token in doc if token.pos_ == "ADV"])
+            numbers = Counter([token.text for token in doc if token.pos_ == "NUM"])
 
             #creating wordcloud
             wc = WordCloud(
