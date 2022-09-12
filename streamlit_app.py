@@ -44,7 +44,7 @@ class Analysis:
         if status:
             cloud_columns = st.multiselect('Select your free text columns:', data.columns, list(data.columns)[1:4], help='Select free text columns to view the word cloud')
             
-            input_data = ' '.join([' '.join(list(data[col])) for col in cloud_columns])
+            input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in cloud_columns])
             for c in PUNCS: input_data = input_data.lower().replace(c,'')
             
             mask = np.array(Image.open('img/welsh_flag.png'))
