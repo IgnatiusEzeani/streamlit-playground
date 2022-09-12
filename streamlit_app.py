@@ -77,7 +77,7 @@ def read_file(file_source='example'):
             return False, st.error(f"""**FileTypeError:** Unrecognised file format. Please ensure your file name has the extension `.txt`, `.xlsx`, `.xls`, `.tsv`.""", icon="🚨")
         return True, data
     except Exception as err:
-        return False, st.error(f"""**FileError:** `{err}`: '{fname}' may be invalid or empty. Use a valid non-empty file.""", , icon="🚨")
+        return False, st.error(f"""**FileError:** `{err}`: '{fname}' may be invalid or empty. Use a valid non-empty file.""", icon="🚨")
 
 def read_example_data():
     fname = os.path.join(EXAMPLES_DIR, 'example_reviews.txt')
