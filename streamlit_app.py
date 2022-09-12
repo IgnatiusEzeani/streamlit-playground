@@ -30,10 +30,10 @@ def read_file(file_source='example'):
                 
     elif fname.endswith(('.xls','.xlsx')):
         data = pd.read_excel(pd.ExcelFile(fname)) if file_source=='example' else pd.read_excel(uploaded_file)
-        selected_columns = ['Q3. What date and time did you visit?', 'Q9. Anything you would like to tell us?', 'Other factors preventing you from visiting heritage sites:']
+        selected_columns = st.multiselect('Select columns to analyse', data.columns, data.columns[:5], format_func=special_internal_function, key=None, help='Select columns you are interested in with this selection box')
+
+        # selected_columns = ['Q3. What date and time did you visit?', 'Q9. Anything you would like to tell us?', 'Other factors preventing you from visiting heritage sites:']
         data=data[selected_columns]
-        
-        # st.multiselect(data.columns, options, default=None, format_func=special_internal_function, key=None, help=None, on_change=None, args=None, kwargs=None, *, disabled=False)
 
     elif fname.endswith('.tsv'):
         data = pd.read_csv(fname, sep='\t', encoding='cp1252') if file_source=='example' else pd.read_csv(uploaded_file, sep='\t', encoding='cp1252')
@@ -55,13 +55,13 @@ Sssshh - really good value!!!
 Great hotel
 Loved the Shellbourne Hotel''', height=150).split('\n')
 
-def select_columns(dataframe): 
-    "Total number of reviews: ", len(dataframe)
-    options = st.sidebar.multiselect(
-         'Select columns to analyse',
-         list(dataframe.keys()),
-         list(dataframe.keys())[:4])
-    return dataframe[options]
+# def select_columns(dataframe): 
+    # "Total number of reviews: ", len(dataframe)
+    # options = st.sidebar.multiselect(
+         # 'Select columns to analyse',
+         # list(dataframe.keys()),
+         # list(dataframe.keys())[:4])
+    # return dataframe[options]
 
 option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2], MESSAGES[lang][3]))
 if option == MESSAGES[lang][1]: input_data = read_file()
