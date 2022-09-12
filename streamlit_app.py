@@ -72,7 +72,6 @@ def read_file(file_source='example'):
 
     elif fname.endswith('.tsv'):
         data = pd.read_csv(fname, sep='\t', encoding='cp1252') if file_source=='example' else pd.read_csv(uploaded_file, sep='\t', encoding='cp1252')
-        # data     
     else:
         return False, st.error(f"""**FileTypeError:** Unrecognised file format. Please ensure your file name has the extension `.txt`, `.xlsx`, `.xls`, `.tsv`.""", icon="🚨")
     return True, data
@@ -80,7 +79,7 @@ def read_file(file_source='example'):
 def read_example_data():
     fname = os.path.join(EXAMPLES_DIR, 'example_reviews.txt')
     text = open(fname, 'r', encoding='cp1252').read()
-    lines = st.text_area('Paste reviews (replace the example text) to analyze', text, height=150).split('\n'))
+    lines = st.text_area('Paste reviews (replace the example text) to analyze', text, height=150).split('\n')
     data = pd.DataFrame.from_dict({i+1: lines[i] for i in range(len(lines))}, orient='index', columns = ['Reviews'])
     return True, data
 
