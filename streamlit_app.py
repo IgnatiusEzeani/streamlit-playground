@@ -152,7 +152,7 @@ Sssshh - really good value!!!
 Great hotel
 Loved the Shellbourne Hotel''', height=150).split('\n')
 
-option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2], MESSAGES[lang][3]))
+option = st.sidebar.radio(f'{MESSAGES[lang][0]}', (MESSAGES[lang][1], MESSAGES[lang][2], MESSAGES[lang][3]))
 if   option == MESSAGES[lang][1]: input_data = read_file()
 elif option == MESSAGES[lang][2]: input_data = read_file(file_source='uploaded')
 elif option == MESSAGES[lang][3]: input_data = read_pasted_data()
