@@ -125,12 +125,11 @@ def read_file(file_source='example'):
 
     if fname.endswith('.txt'):
         data = open(fname, 'r', encoding='cp1252').read().split('\n') if file_source=='example' else uploaded_file.read().decode('utf8').split('\n')
-        data = pd.DataFrame.from_dict({i+1: data[i] for i in range(len(data))}, columns = ['Index', 'Reviews'], orient='index')
+        data = pd.DataFrame.from_dict({i+1: data[i] for i in range(len(data))}, orient='index', columns = ['Reviews'])
                 
     elif fname.endswith(('.xls','.xlsx')):
         data = pd.read_excel(pd.ExcelFile(fname)) if file_source=='example' else pd.read_excel(uploaded_file)
         selected_columns = st.multiselect('Select columns to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box')
-        # selected_columns = ['Q3. What date and time did you visit?', 'Q9. Anything you would like to tell us?', 'Other factors preventing you from visiting heritage sites:']
         data=data[selected_columns]
 
     elif fname.endswith('.tsv'):
