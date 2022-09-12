@@ -76,12 +76,7 @@ class Analysis:
         if status:
             st.dataframe(data)
             st.write('No of reviews: ', len(data))
-        # return data if status else None
 
-    # def count_reviews(self):
-        # status, data = self.reviews
-        # return len(data) if status else None
 
 analysis1 = Analysis(input_data)
 analysis1.show_reviews()
-# 'No of reviews: ', analysis1.count_reviews()
