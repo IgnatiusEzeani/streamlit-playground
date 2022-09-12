@@ -18,7 +18,6 @@ from nltk.corpus import stopwords
 nltk.download('punkt') # one time execution
 nltk.download('stopwords')
 nltk.download('averaged_perceptron_tagger')
-random.seed(10)
 
 # Update with the Welsh stopwords (source: https://github.com/techiaith/ataleiriau)
 en_stopwords = list(stopwords.words('english'))
