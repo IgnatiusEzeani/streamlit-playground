@@ -125,7 +125,7 @@ def read_file(file_source='example'):
 
     if fname.endswith('.txt'):
         data = open(fname, 'r', encoding='cp1252').read().split('\n') if file_source=='example' else uploaded_file.read().decode('utf8').split('\n')
-        data = st.dataframe({data})
+        data = st.dataframe({i: data[i] for i in range(len(data))})
         # data = st.text_area('Review to analyse', text, height=150).split('\n')
                 
     elif fname.endswith(('.xls','.xlsx')):
