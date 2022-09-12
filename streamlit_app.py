@@ -125,8 +125,7 @@ def read_file(file_source='example'):
 
     if fname.endswith('.txt'):
         data = open(fname, 'r', encoding='cp1252').read().split('\n') if file_source=='example' else uploaded_file.read().decode('utf8').split('\n')
-        data = pd.DataFrame.from_dict({i+1: data[i] for i in range(len(data))}, orient='index')
-        # data = st.text_area('Review to analyse', text, height=150).split('\n')
+        data = pd.DataFrame.from_dict({i+1: data[i] for i in range(len(data))}, columns = ['Index', 'Reviews'], orient='index')
                 
     elif fname.endswith(('.xls','.xlsx')):
         data = pd.read_excel(pd.ExcelFile(fname)) if file_source=='example' else pd.read_excel(uploaded_file)
