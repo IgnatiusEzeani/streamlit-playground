@@ -79,7 +79,7 @@ def read_file(file_source='example'):
 
 def read_pasted_data():
     fname = os.path.join(EXAMPLES_DIR, 'example_reviews.txt')
-    text open(fname, 'r', encoding='cp1252').read().split('\n')
+    text = open(fname, 'r', encoding='cp1252').read().split('\n')
     return True, st.text_area('Paste reviews (replace the example text) to analyze', text, height=150).split('\n')
 
 class Analysis:
