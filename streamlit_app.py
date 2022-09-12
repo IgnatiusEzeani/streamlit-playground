@@ -170,7 +170,7 @@ class Analysis:
                 st.set_option('deprecation.showPyplotGlobalUse', False)
                 st.pyplot()
             except ValueError as err:
-                st.errors(f'ValueError: {err}', icon="🚨")
+                st.error(f'ValueError: {err}', icon="🚨")
                 
 st.sidebar.markdown('''#### 🔍 Free Text Visualizer''')
 option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2], MESSAGES[lang][3]))
