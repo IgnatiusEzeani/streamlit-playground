@@ -3,11 +3,110 @@ import pandas as pd
 import streamlit as st
 from collections import Counter
 from labels import MESSAGES
-'''
-##### List of reviews
-'''
+import spacy
+import nltk
+import en_core_web_sm
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+import networkx as nx
+from PIL import Image
+from textblob import TextBlob
+from nltk import word_tokenize, sent_tokenize, ngrams
+from wordcloud import WordCloud, ImageColorGenerator
+from nltk.corpus import stopwords
+nltk.download('punkt') # one time execution
+nltk.download('stopwords')
+nltk.download('averaged_perceptron_tagger')
+random.seed(10)
+
+# Update with the Welsh stopwords (source: https://github.com/techiaith/ataleiriau)
+en_stopwords = list(stopwords.words('english'))
+cy_stopwords = open('welsh_stopwords.txt', 'r', encoding='iso-8859-1').read().split('\n') # replaced 'utf8' with 'iso-8859-1'
+STOPWORDS = set(en_stopwords + cy_stopwords)
+PUNCS = '''!→()-[]{};:'"\,<>./?@#$%^&*_~'''
+
 lang='en'
 EXAMPLES_DIR = 'example_texts_pub'
+
+class Analysis:
+    def __init__(self, reviews):
+        self.reviews = reviews
+
+    def show_reviews(self):
+        '''##### List of reviews'''
+        status, data = self.reviews
+        if status:
+            st.dataframe(data)
+            st.write('No of reviews: ', len(data))
+    
+    def get_wordcloud (self)
+        status, data = self.reviews
+        if status:
+            cloud_columns = st.multiselect('Select your free text columns:', data.columns, list(data.columns)[1:4], help='Select free text columns to view the word cloud')
+            
+            input_data = ' '.join([' '.join(list(data[col])) for col in cloud_columns])
+            for c in PUNCS: input_data = input_data.lower().replace(c,'')
+            
+            mask = np.array(Image.open('img/welsh_flag.png'))
+            maxWords = st.number_input("Number of words:",
+                value=300,
+                step=50,
+                min_value=50,
+                max_value=300,
+                help='Maximum number of words featured in the cloud.'
+                )
+            nlp = spacy.load('en_core_web_sm')
+            doc = nlp(input_data)        
+            nouns = Counter([token.lemma_ for token in doc if token.pos_ == "NOUN"])
+            verbs = Counter([token.lemma_ for token in doc if token.pos_ == "VERB"])
+            proper_nouns = Counter([token.lemma_ for token in doc if token.pos_ == "PROPN"])
+            adjectives = Counter([token.lemma_ for token in doc if token.pos_ == "ADJ"])
+            adverbs = Counter([token.lemma_ for token in doc if token.pos_ == "ADV"])
+            numbers = Counter([token.lemma_ for token in doc if token.pos_ == "NUM"])
+
+            #creating wordcloud
+            wc = WordCloud(
+                max_words=maxWords,
+                stopwords=STOPWORDS,
+                width=2000, height=1000,
+                # contour_color= "black", 
+                relative_scaling = 0,
+                mask=mask,
+                background_color="white",
+                font_path='font/Ubuntu-B.ttf'
+            ).generate(input_data)
+                
+            cloud_type = st.selectbox('Choose cloud type:', ['All words', 'Nouns', 'Proper nouns', 'Verbs', 'Adjectives', 'Adverbs', 'Numbers'])
+            if cloud_type == 'All words':
+                wordcloud = wc.generate(input_data)        
+            elif cloud_type == 'Nouns':
+                wordcloud = wc.generate_from_frequencies(nouns)        
+            elif cloud_type == 'Proper nouns':
+                wordcloud = wc.generate_from_frequencies(proper_nouns)        
+            elif cloud_type == 'Verbs':
+                wordcloud = wc.generate_from_frequencies(verbs)
+            elif cloud_type == 'Adjectives':
+                wordcloud = wc.generate_from_frequencies(adjectives)
+            elif cloud_type == 'Adverbs':
+                wordcloud = wc.generate_from_frequencies(adverbs)
+            elif cloud_type == 'Numbers':
+                wordcloud = wc.generate_from_frequencies(numbers)
+            else: 
+                pass
+
+            color = st.radio('Switch image colour:', ('Color', 'Black'))
+            img_cols = ImageColorGenerator(mask) if color == 'Black' else None
+                
+            # image_colors = ImageColorGenerator(mask)
+            plt.figure(figsize=[20,15])
+            
+            # plt.imshow(wordcloud.recolor(color_func=image_colors), interpolation="bilinear")
+            plt.imshow(wordcloud.recolor(color_func=img_cols), interpolation="bilinear")
+            plt.axis("off")
+            st.set_option('deprecation.showPyplotGlobalUse', False)
+            st.pyplot()
+
 
 # read example and uploaded files
 def read_file(file_source='example'):
@@ -31,7 +130,6 @@ def read_file(file_source='example'):
     elif fname.endswith(('.xls','.xlsx')):
         data = pd.read_excel(pd.ExcelFile(fname)) if file_source=='example' else pd.read_excel(uploaded_file)
         selected_columns = st.multiselect('Select columns to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box')
-
         # selected_columns = ['Q3. What date and time did you visit?', 'Q9. Anything you would like to tell us?', 'Other factors preventing you from visiting heritage sites:']
         data=data[selected_columns]
 
@@ -55,31 +153,13 @@ Sssshh - really good value!!!
 Great hotel
 Loved the Shellbourne Hotel''', height=150).split('\n')
 
-# def select_columns(dataframe): 
-    # "Total number of reviews: ", len(dataframe)
-    # options = st.sidebar.multiselect(
-         # 'Select columns to analyse',
-         # list(dataframe.keys()),
-         # list(dataframe.keys())[:4])
-    # return dataframe[options]
-
 option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2], MESSAGES[lang][3]))
-if option == MESSAGES[lang][1]: input_data = read_file()
+if   option == MESSAGES[lang][1]: input_data = read_file()
 elif option == MESSAGES[lang][2]: input_data = read_file(file_source='uploaded')
 elif option == MESSAGES[lang][3]: input_data = read_pasted_data()
 else: pass
 
-class Analysis:
-    def __init__(self, reviews):
-        self.reviews = reviews
-
-    def show_reviews(self):
-        '''##### List of reviews'''
-        status, data = self.reviews
-        if status:
-            st.dataframe(data)
-            st.write('No of reviews: ', len(data))
-
-
 analysis1 = Analysis(input_data)
 analysis1.show_reviews()
+
+analysis1.get_wordcloud()
