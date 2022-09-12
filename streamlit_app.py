@@ -89,9 +89,7 @@ class Analysis:
         self.reviews = reviews
 
     def show_reviews(self):
-        '''
-        ##### List of reviews
-        '''
+        st.sidebar.markdown('''# 🌼 Free Text Visualizer''')
         if status:
             st.dataframe(self.reviews)
             st.write('Total number of reviews: ', len(self.reviews))
@@ -112,12 +110,12 @@ class Analysis:
             )
         nlp = spacy.load('en_core_web_sm')
         doc = nlp(input_data)        
-        nouns = Counter([token.text for token in doc if token.pos_ == "NOUN"])
-        verbs = Counter([token.text for token in doc if token.pos_ == "VERB"])
+        nouns        = Counter([token.text for token in doc if token.pos_ == "NOUN"])
+        verbs        = Counter([token.text for token in doc if token.pos_ == "VERB"])
         proper_nouns = Counter([token.text for token in doc if token.pos_ == "PROPN"])
-        adjectives = Counter([token.text for token in doc if token.pos_ == "ADJ"])
-        adverbs = Counter([token.text for token in doc if token.pos_ == "ADV"])
-        numbers = Counter([token.text for token in doc if token.pos_ == "NUM"])
+        adjectives   = Counter([token.text for token in doc if token.pos_ == "ADJ"])
+        adverbs      = Counter([token.text for token in doc if token.pos_ == "ADV"])
+        numbers      = Counter([token.text for token in doc if token.pos_ == "NUM"])
         try:
             #creating wordcloud
             wc = WordCloud(
@@ -131,7 +129,8 @@ class Analysis:
                 font_path='font/Ubuntu-B.ttf'
             ).generate(input_data)
                 
-            cloud_type = st.selectbox('Choose cloud type:', ['All words', 'Nouns', 'Proper nouns', 'Verbs', 'Adjectives', 'Adverbs', 'Numbers'])
+            cloud_type = st.selectbox('Choose cloud category:',
+                ['All words', 'Nouns', 'Proper nouns', 'Verbs', 'Adjectives', 'Adverbs', 'Numbers'])
             if cloud_type == 'All words':
                 wordcloud = wc.generate(input_data)        
             elif cloud_type == 'Nouns':
@@ -158,7 +157,7 @@ class Analysis:
         except ValueError as err:
             st.error(f'ValueError: {err}', icon="🚨")
 
-st.sidebar.markdown('''## 🔍 Free Text Visualizer''')
+st.sidebar.markdown('''# 🌼 Free Text Visualizer''')
 option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2], MESSAGES[lang][3]))
 if   option == MESSAGES[lang][1]: input_data = read_file()
 elif option == MESSAGES[lang][2]: input_data = read_file(file_source='uploaded')
