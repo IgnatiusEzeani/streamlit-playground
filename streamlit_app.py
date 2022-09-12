@@ -40,7 +40,7 @@ class Analysis:
             st.dataframe(data)
             st.write('No of reviews: ', len(data))
     
-    def get_wordcloud (self)
+    def get_wordcloud (self):
         status, data = self.reviews
         if status:
             cloud_columns = st.multiselect('Select your free text columns:', data.columns, list(data.columns)[1:4], help='Select free text columns to view the word cloud')
