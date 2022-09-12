@@ -48,19 +48,22 @@ def get_selected_checkboxes():
 
 # read example and uploaded files
 def read_file(file_source='example'):
-    fname = ''
-    if file_source=='example':
-        fname = st.sidebar.selectbox(MESSAGES[lang][4], sorted([f for f in os.listdir(EXAMPLES_DIR) if f.startswith('Reviews')]))
-        fname = os.path.join(EXAMPLES_DIR, fname)
-    elif file_source=='uploaded':
-        uploaded_file = st.sidebar.file_uploader("Upload review data", type=['txt','tsv','xlsx', 'xls'])
-        if uploaded_file:
-            fname = uploaded_file.name
+    try:
+        fname = ''
+        if file_source=='example':
+            fname = st.sidebar.selectbox(MESSAGES[lang][4], sorted([f for f in os.listdir(EXAMPLES_DIR) if f.startswith('Reviews')]))
+            fname = os.path.join(EXAMPLES_DIR, fname)
+        elif file_source=='uploaded':
+            uploaded_file = st.sidebar.file_uploader("Upload review data", type=['txt','tsv','xlsx', 'xls'])
+            if uploaded_file:
+                fname = uploaded_file.name
+            else:
+                return False, st.info('''**NoFileUploaded:** Please upload your file using the upload button or by dragging the file into the upload area. Acceptable file formats include `.txt`, `.xlsx`, `.xls`, `.tsv`.''', icon="ℹ️")
         else:
-            return False, st.info('''**NoFileUploaded:** Please upload your file using the upload button or by dragging the file into the upload area. Acceptable file formats include `.txt`, `.xlsx`, `.xls`, `.tsv`.''', icon="ℹ️")
-    else:
-        return False, st.error(f"FileSourceError: '{file_source}' is not a valid file source. Use 'example' or 'uploaded' only.")
-
+            return False, st.error(f"FileSourceError: '{file_source}' is not a valid file source. Use 'example' or 'uploaded' only.")
+    except:
+        return False, st.error(f"FileSourceError: '{file_source}' may be invalid or empty. Use 'example' or 'uploaded' only.")
+    
     if fname.endswith('.txt'):
         data = open(fname, 'r', encoding='cp1252').read().split('\n') if file_source=='example' else uploaded_file.read().decode('utf8').split('\n')
         data = pd.DataFrame.from_dict({i+1: data[i] for i in range(len(data))}, orient='index', columns = ['Reviews'])
