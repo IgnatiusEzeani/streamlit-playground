@@ -89,79 +89,75 @@ class Analysis:
         self.reviews = reviews
 
     def show_reviews(self):
-        '''##### List of reviews'''
-        status, data = self.reviews
+        '''
+        ##### List of reviews
+        '''
         if status:
-            st.dataframe(data)
-            st.write('No of reviews: ', len(data))
+            st.dataframe(self.reviews)
+            st.write('Total number of reviews: ', len(self.reviews))
     
     def get_wordcloud (self):
-        status, data = self.reviews
-        if status:
-            cloud_columns = st.multiselect('Select your free text columns:', data.columns, list(data.columns), help='Select free text columns to view the word cloud')
-            
-            input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in cloud_columns])
-            for c in PUNCS: input_data = input_data.lower().replace(c,'')
-            
-            mask = np.array(Image.open('img/welsh_flag.png'))
-            maxWords = st.number_input("Number of words:",
-                value=300,
-                step=50,
-                min_value=50,
-                max_value=300,
-                help='Maximum number of words featured in the cloud.'
-                )
-            nlp = spacy.load('en_core_web_sm')
-            doc = nlp(input_data)        
-            nouns = Counter([token.text for token in doc if token.pos_ == "NOUN"])
-            verbs = Counter([token.text for token in doc if token.pos_ == "VERB"])
-            proper_nouns = Counter([token.text for token in doc if token.pos_ == "PROPN"])
-            adjectives = Counter([token.text for token in doc if token.pos_ == "ADJ"])
-            adverbs = Counter([token.text for token in doc if token.pos_ == "ADV"])
-            numbers = Counter([token.text for token in doc if token.pos_ == "NUM"])
-            try:
-                #creating wordcloud
-                wc = WordCloud(
-                    max_words=maxWords,
-                    stopwords=STOPWORDS,
-                    width=2000, height=1000,
-                    # contour_color= "black", 
-                    relative_scaling = 0,
-                    mask=mask,
-                    background_color="white",
-                    font_path='font/Ubuntu-B.ttf'
-                ).generate(input_data)
-                    
-                cloud_type = st.selectbox('Choose cloud type:', ['All words', 'Nouns', 'Proper nouns', 'Verbs', 'Adjectives', 'Adverbs', 'Numbers'])
-                if cloud_type == 'All words':
-                    wordcloud = wc.generate(input_data)        
-                elif cloud_type == 'Nouns':
-                    wordcloud = wc.generate_from_frequencies(nouns)        
-                elif cloud_type == 'Proper nouns':
-                    wordcloud = wc.generate_from_frequencies(proper_nouns)        
-                elif cloud_type == 'Verbs':
-                    wordcloud = wc.generate_from_frequencies(verbs)
-                elif cloud_type == 'Adjectives':
-                    wordcloud = wc.generate_from_frequencies(adjectives)
-                elif cloud_type == 'Adverbs':
-                    wordcloud = wc.generate_from_frequencies(adverbs)
-                elif cloud_type == 'Numbers':
-                    wordcloud = wc.generate_from_frequencies(numbers)
-                else: 
-                    pass
-            
-                color = st.radio('Switch image colour:', ('Color', 'Black'))
-                img_cols = ImageColorGenerator(mask) if color == 'Black' else None
-                    
-                plt.figure(figsize=[20,15])
+        cloud_columns = st.multiselect('Select your free text columns:', self.reviews.columns, list(self.reviews.columns), help='Select free text columns to view the word cloud')
+        
+        input_data = ' '.join([' '.join([str(t) for t in list(self.reviews[col]) if t not in STOPWORDS]) for col in cloud_columns])
+        for c in PUNCS: input_data = input_data.lower().replace(c,'')
+        
+        mask = np.array(Image.open('img/welsh_flag.png'))
+        maxWords = st.number_input("Number of words:",
+            value=300,
+            step=50,
+            min_value=50,
+            max_value=300,
+            help='Maximum number of words featured in the cloud.'
+            )
+        nlp = spacy.load('en_core_web_sm')
+        doc = nlp(input_data)        
+        nouns = Counter([token.text for token in doc if token.pos_ == "NOUN"])
+        verbs = Counter([token.text for token in doc if token.pos_ == "VERB"])
+        proper_nouns = Counter([token.text for token in doc if token.pos_ == "PROPN"])
+        adjectives = Counter([token.text for token in doc if token.pos_ == "ADJ"])
+        adverbs = Counter([token.text for token in doc if token.pos_ == "ADV"])
+        numbers = Counter([token.text for token in doc if token.pos_ == "NUM"])
+        try:
+            #creating wordcloud
+            wc = WordCloud(
+                max_words=maxWords,
+                stopwords=STOPWORDS,
+                width=2000, height=1000,
+                # contour_color= "black", 
+                relative_scaling = 0,
+                mask=mask,
+                background_color="white",
+                font_path='font/Ubuntu-B.ttf'
+            ).generate(input_data)
                 
-                plt.imshow(wordcloud.recolor(color_func=img_cols), interpolation="bilinear")
-                plt.axis("off")
-                st.set_option('deprecation.showPyplotGlobalUse', False)
-                st.pyplot()
-            except ValueError as err:
-                st.error(f'ValueError: {err}', icon="🚨")
-                
+            cloud_type = st.selectbox('Choose cloud type:', ['All words', 'Nouns', 'Proper nouns', 'Verbs', 'Adjectives', 'Adverbs', 'Numbers'])
+            if cloud_type == 'All words':
+                wordcloud = wc.generate(input_data)        
+            elif cloud_type == 'Nouns':
+                wordcloud = wc.generate_from_frequencies(nouns)        
+            elif cloud_type == 'Proper nouns':
+                wordcloud = wc.generate_from_frequencies(proper_nouns)        
+            elif cloud_type == 'Verbs':
+                wordcloud = wc.generate_from_frequencies(verbs)
+            elif cloud_type == 'Adjectives':
+                wordcloud = wc.generate_from_frequencies(adjectives)
+            elif cloud_type == 'Adverbs':
+                wordcloud = wc.generate_from_frequencies(adverbs)
+            elif cloud_type == 'Numbers':
+                wordcloud = wc.generate_from_frequencies(numbers)
+            else: 
+                pass
+            color = st.radio('Switch image colour:', ('Color', 'Black'))
+            img_cols = ImageColorGenerator(mask) if color == 'Black' else None
+            plt.figure(figsize=[20,15])
+            plt.imshow(wordcloud.recolor(color_func=img_cols), interpolation="bilinear")
+            plt.axis("off")
+            st.set_option('deprecation.showPyplotGlobalUse', False)
+            st.pyplot()
+        except ValueError as err:
+            st.error(f'ValueError: {err}', icon="🚨")
+
 st.sidebar.markdown('''## 🔍 Free Text Visualizer''')
 option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2], MESSAGES[lang][3]))
 if   option == MESSAGES[lang][1]: input_data = read_file()
@@ -169,20 +165,19 @@ elif option == MESSAGES[lang][2]: input_data = read_file(file_source='uploaded')
 elif option == MESSAGES[lang][3]: input_data = read_example_data()
 else: pass
 
-if 'feature_list' not in st.session_state.keys():
-    feature_list = ['View data', 'View WordCloud','View Collocation','View Keyword in Context', 'View Sentiments']
-    st.session_state['feature_list'] = feature_list
-else:
-    feature_list = st.session_state['feature_list']
+status, data = input_data
+if status:
+    analysis1 = Analysis(data)
+    if 'feature_list' not in st.session_state.keys():
+        feature_list = ['View data', 'View WordCloud','View Collocation','View Keyword in Context', 'View Sentiments']
+        st.session_state['feature_list'] = feature_list
+    else:
+        feature_list = st.session_state['feature_list']
+    checkbox_container(feature_list)
+    feature_options = get_selected_checkboxes() 
 
-analysis1 = Analysis(input_data)
-
-checkbox_container(feature_list)
-feature_options = get_selected_checkboxes() 
-if 'View data' in feature_options: analysis1.show_reviews()
-if 'View WordCloud' in feature_options: analysis1.get_wordcloud()
-if 'View Collocation' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
-if 'View Keyword in Context' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
-if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
-
-
+    if 'View data' in feature_options: analysis1.show_reviews()
+    if 'View WordCloud' in feature_options: analysis1.get_wordcloud()
+    if 'View Collocation' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
+    if 'View Keyword in Context' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
+    if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
