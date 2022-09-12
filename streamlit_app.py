@@ -183,7 +183,7 @@ def checkbox_container(data):
             st.session_state['dynamic_checkbox_' + i] = False
         st.experimental_rerun()
     for i in data:
-        st.checkbox(i, key='dynamic_checkbox_' + i)
+        st.sidebar.checkbox(i, key='dynamic_checkbox_' + i)
         
 def get_selected_checkboxes():
     return [i.replace('dynamic_checkbox_','') for i in st.session_state.keys() if i.startswith('dynamic_checkbox_') and st.session_state[i]]
@@ -191,3 +191,9 @@ def get_selected_checkboxes():
 checkbox_container(feature_list)
 st.sidebar.write('You selected:')
 st.sidebar.write(get_selected_checkboxes())
+
+layout = st.sidebar.beta_columns([2, 1])
+with layout[0]: 
+    start_date = st.date_input('Date:') # omit "sidebar" 
+with layout[-1]: 
+    start_hour = st.time_input('Time:') # omit "sidebar"
