@@ -192,8 +192,8 @@ checkbox_container(feature_list)
 st.sidebar.write('You selected:')
 st.sidebar.write(get_selected_checkboxes())
 
-layout = st.sidebar.columns([2, 1])
-with layout[0]: 
+layout = st.sidebar.columns(2)
+with layout[0]:
     start_date = st.date_input('Date:') # omit "sidebar" 
 with layout[-1]: 
     start_hour = st.time_input('Time:') # omit "sidebar"
