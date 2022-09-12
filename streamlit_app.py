@@ -98,9 +98,11 @@ class Analysis:
     
     def get_wordcloud (self):
         cloud_columns = st.multiselect('Select your free text columns:', self.reviews.columns, list(self.reviews.columns), help='Select free text columns to view the word cloud')
-        
         input_data = ' '.join([' '.join([str(t) for t in list(self.reviews[col]) if t not in STOPWORDS]) for col in cloud_columns])
         for c in PUNCS: input_data = input_data.lower().replace(c,'')
+        
+        input_bigrams = [' '.join(g) for g in nltk.ngrams(input_data.split(),2)]
+        input_trigrams = [' '.join(g) for g in nltk.ngrams(input_data.split(),3)]
         
         mask = np.array(Image.open('img/welsh_flag.png'))
         maxWords = st.number_input("Number of words:",
@@ -111,7 +113,7 @@ class Analysis:
             help='Maximum number of words featured in the cloud.'
             )
         nlp = spacy.load('en_core_web_sm')
-        doc = nlp(input_data)        
+        doc = nlp(input_data)
         nouns        = Counter([token.text for token in doc if token.pos_ == "NOUN"])
         verbs        = Counter([token.text for token in doc if token.pos_ == "VERB"])
         proper_nouns = Counter([token.text for token in doc if token.pos_ == "PROPN"])
@@ -132,9 +134,13 @@ class Analysis:
             ).generate(input_data)
                 
             cloud_type = st.selectbox('Choose cloud category:',
-                ['All words', 'Nouns', 'Proper nouns', 'Verbs', 'Adjectives', 'Adverbs', 'Numbers'])
+                ['All words', 'Bigrams', 'Trigrams', 'Nouns', 'Proper nouns', 'Verbs', 'Adjectives', 'Adverbs', 'Numbers'])
             if cloud_type == 'All words':
                 wordcloud = wc.generate(input_data)        
+            elif cloud_type == 'Bigrams':
+                wordcloud = wc.generate_from_frequencies(input_bigrams)        
+            elif cloud_type == 'Trigrams':
+                wordcloud = wc.generate_from_frequencies(input_trigrams)        
             elif cloud_type == 'Nouns':
                 wordcloud = wc.generate_from_frequencies(nouns)        
             elif cloud_type == 'Proper nouns':
