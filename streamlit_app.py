@@ -30,7 +30,10 @@ def read_file(file_source='example'):
                 
     elif fname.endswith(('.xls','.xlsx')):
         data = pd.read_excel(pd.ExcelFile(fname)) if file_source=='example' else pd.read_excel(uploaded_file)
-        data.columns
+        selected_columns = ['Q3. What date and time did you visit?', 'Q9. Anything you would like to tell us?', 'Other factors preventing you from visiting heritage sites:']
+        data=data[select_columns]
+        
+        # st.multiselect(data.columns, options, default=None, format_func=special_internal_function, key=None, help=None, on_change=None, args=None, kwargs=None, *, disabled=False)
 
     elif fname.endswith('.tsv'):
         data = pd.read_csv(fname, sep='\t', encoding='cp1252') if file_source=='example' else pd.read_csv(uploaded_file, sep='\t', encoding='cp1252')
