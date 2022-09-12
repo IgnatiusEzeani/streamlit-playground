@@ -60,9 +60,9 @@ def read_file(file_source='example'):
             else:
                 return False, st.info('''**NoFileUploaded:** Please upload your file using the upload button or by dragging the file into the upload area. Acceptable file formats include `.txt`, `.xlsx`, `.xls`, `.tsv`.''', icon="ℹ️")
         else:
-            return False, st.error(f"FileSourceError: '{file_source}' is not a valid file source. Use 'example' or 'uploaded' only.")
-    except:
-        return False, st.error(f"FileSourceError: '{file_source}' may be invalid or empty. Use 'example' or 'uploaded' only.")
+            return False, st.error(f"FileSourceError: '{file_source}'  may be invalid or empty. Use 'example' or 'uploaded' only.")
+    except BaseException as err:
+        return False, st.error(f"Unexpected Error {err}: '{file_source}' may be invalid or empty. Use 'example' or 'uploaded' only.")
     
     if fname.endswith('.txt'):
         data = open(fname, 'r', encoding='cp1252').read().split('\n') if file_source=='example' else uploaded_file.read().decode('utf8').split('\n')
