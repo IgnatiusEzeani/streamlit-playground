@@ -171,10 +171,8 @@ else:
     feature_list = st.session_state['feature_list']
 
 def checkbox_container(data):
-    layout = st.sidebar.columns(2)
     st.sidebar.header('What do you want to see')
-    # if st.sidebar.button('Add Coutry'):
-        # feature_list.append(new_data)
+    layout = st.sidebar.columns(2)
     if layout[0].button('Select All'):
         for i in data:
             st.session_state['dynamic_checkbox_' + i] = True
@@ -192,9 +190,3 @@ def get_selected_checkboxes():
 checkbox_container(feature_list)
 st.sidebar.write('You selected:')
 st.sidebar.write(get_selected_checkboxes())
-
-
-# with layout[0]:
-    # start_date = st.date_input('Date:') # omit "sidebar" 
-# with layout[-1]: 
-    # start_hour = st.time_input('Time:') # omit "sidebar"
