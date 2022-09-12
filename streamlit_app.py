@@ -61,7 +61,7 @@ class Analysis:
             nouns = Counter([token.lemma_ for token in doc if token.pos_ == "NOUN"])
             verbs = Counter([token.lemma_ for token in doc if token.pos_ == "VERB"])
             proper_nouns = Counter([token.lemma_ for token in doc if token.pos_ == "PROPN"])
-            adjectives = Counter([token for token in doc if token.pos_ == "ADJ"])
+            adjectives = Counter([token.text for token in doc if token.pos_ == "ADJ"])
             adverbs = Counter([token.lemma_ for token in doc if token.pos_ == "ADV"])
             numbers = Counter([token.lemma_ for token in doc if token.pos_ == "NUM"])
 
