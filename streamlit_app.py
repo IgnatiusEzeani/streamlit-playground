@@ -89,7 +89,7 @@ class Analysis:
 
     def show_reviews(self):
         if status:
-            st.sidebar.markdown('''#### 📄 Review data''')
+            st.markdown('''#### 📄 Review data''')
             st.dataframe(self.reviews)
             st.write('Total number of reviews: ', len(self.reviews))
     
