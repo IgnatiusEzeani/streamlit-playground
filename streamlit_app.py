@@ -3,11 +3,9 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 from collections import Counter
-from labels import MESSAGES
 import spacy
 import nltk
 import en_core_web_sm
-
 import matplotlib.pyplot as plt
 import seaborn as sns
 import networkx as nx
@@ -16,6 +14,7 @@ from textblob import TextBlob
 from nltk import word_tokenize, sent_tokenize, ngrams
 from wordcloud import WordCloud, ImageColorGenerator
 from nltk.corpus import stopwords
+from labels import MESSAGES
 nltk.download('punkt') # one time execution
 nltk.download('stopwords')
 nltk.download('averaged_perceptron_tagger')
@@ -79,19 +78,10 @@ def read_file(file_source='example'):
     return True, data
 
 def read_pasted_data():
-    return True, st.text_area('Paste reviews (replace the example text) to analyze',
-'''Poor excuse for a hotel
-Not really what we expected
-Not bad Not bad
-small but clean good location
-give us a smile!
-Not for claustrophobics
-This is not a three stars hotel!
-Sssshh - really good value!!!
-Great hotel
-Loved the Shellbourne Hotel''', height=150).split('\n')
+    fname = os.path.join(EXAMPLES_DIR, 'example_reviews.txt')
+    text open(fname, 'r', encoding='cp1252').read().split('\n')
+    return True, st.text_area('Paste reviews (replace the example text) to analyze', text, height=150).split('\n')
 
-    
 class Analysis:
     def __init__(self, reviews):
         self.reviews = reviews
@@ -161,10 +151,8 @@ class Analysis:
                 color = st.radio('Switch image colour:', ('Color', 'Black'))
                 img_cols = ImageColorGenerator(mask) if color == 'Black' else None
                     
-                # image_colors = ImageColorGenerator(mask)
                 plt.figure(figsize=[20,15])
                 
-                # plt.imshow(wordcloud.recolor(color_func=image_colors), interpolation="bilinear")
                 plt.imshow(wordcloud.recolor(color_func=img_cols), interpolation="bilinear")
                 plt.axis("off")
                 st.set_option('deprecation.showPyplotGlobalUse', False)
@@ -172,7 +160,7 @@ class Analysis:
             except ValueError as err:
                 st.error(f'ValueError: {err}', icon="🚨")
                 
-st.sidebar.markdown('''#### 🔍 Free Text Visualizer''')
+st.sidebar.markdown('''## 🔍 Free Text Visualizer''')
 option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2], MESSAGES[lang][3]))
 if   option == MESSAGES[lang][1]: input_data = read_file()
 elif option == MESSAGES[lang][2]: input_data = read_file(file_source='uploaded')
