@@ -65,7 +65,9 @@ def read_file(file_source='example'):
         if fname.endswith('.txt'):
             data = open(fname, 'r', encoding='cp1252').read().split('\n') if file_source=='example' else uploaded_file.read().decode('utf8').split('\n')
             data = pd.DataFrame.from_dict({i+1: data[i] for i in range(len(data))}, orient='index', columns = ['Reviews'])
-                    
+            selected_columns = st.multiselect('Select columns to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box')
+            data=data[selected_columns]
+            
         elif fname.endswith(('.xls','.xlsx')):
             data = pd.read_excel(pd.ExcelFile(fname)) if file_source=='example' else pd.read_excel(uploaded_file)
             selected_columns = st.multiselect('Select columns to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box')
@@ -115,16 +117,7 @@ class Analysis:
             )
         nlp = spacy.load('en_core_web_sm')
         doc = nlp(input_data)
-        
-        # bigrams      = Counter(input_bigrams)
-        # trigrams     = Counter(input_trigrams)
-        # fourgrams    = Counter(input_4grams)
-        # nouns        = Counter([token.text for token in doc if token.pos_ == "NOUN"])
-        # verbs        = Counter([token.text for token in doc if token.pos_ == "VERB"])
-        # proper_nouns = Counter([token.text for token in doc if token.pos_ == "PROPN"])
-        # adjectives   = Counter([token.text for token in doc if token.pos_ == "ADJ"])
-        # adverbs      = Counter([token.text for token in doc if token.pos_ == "ADV"])
-        # numbers      = Counter([token.text for token in doc if token.pos_ == "NUM"])
+
         try:
             #creating wordcloud
             wc = WordCloud(
@@ -169,7 +162,7 @@ class Analysis:
             st.set_option('deprecation.showPyplotGlobalUse', False)
             st.pyplot()
         except ValueError as err:
-            st.info(f'Oh oh..Please ensure that at least one free text column is chosen: {err}', icon="🤨")
+            st.info(f'Oh oh.. Please ensure that at least one free text column is chosen: {err}', icon="🤨")
 
 st.sidebar.markdown('''# 🌼 Free Text Visualizer''')
 option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2], MESSAGES[lang][3]))
