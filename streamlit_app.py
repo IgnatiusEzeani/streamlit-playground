@@ -168,12 +168,11 @@ elif option == MESSAGES[lang][2]: input_data = read_file(file_source='uploaded')
 else: pass
 
 status, filename, data = input_data
-analysis1 = Analysis(data)
-
-tabs = st.tabs([filename])
-for tab in tabs:
-    with tab:
-        if status:
+if status:
+    analysis1 = Analysis(data)
+    tabs = st.tabs([filename])
+    for tab in tabs:
+        with tab:
             analysis1 = Analysis(data)
             if 'feature_list' not in st.session_state.keys():
                 feature_list = ['View data', 'View WordCloud','View Collocation','View Keyword in Context', 'View Sentiments']
