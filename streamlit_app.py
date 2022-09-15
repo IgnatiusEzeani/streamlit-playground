@@ -138,13 +138,15 @@ class Analysis:
             ).generate(input_data)
                 
             cloud_type = st.selectbox('Choose cloud category:',
-                ['All words', 'Bigrams', 'Trigrams', 'Nouns', 'Proper nouns', 'Verbs', 'Adjectives', 'Adverbs', 'Numbers'])
+                ['All words', 'Bigrams', 'Trigrams', '4-grams', 'Nouns', 'Proper nouns', 'Verbs', 'Adjectives', 'Adverbs', 'Numbers'])
             if cloud_type == 'All words':
                 wordcloud = wc.generate(input_data)        
             elif cloud_type == 'Bigrams':
                 wordcloud = wc.generate_from_frequencies(bigrams)        
             elif cloud_type == 'Trigrams':
                 wordcloud = wc.generate_from_frequencies(trigrams)        
+            elif cloud_type == '4-grams':
+                wordcloud = wc.generate_from_frequencies(fourgrams)        
             elif cloud_type == 'Nouns':
                 wordcloud = wc.generate_from_frequencies(nouns)        
             elif cloud_type == 'Proper nouns':
