@@ -2,6 +2,8 @@ import os
 import pandas as pd
 import numpy as np
 import streamlit as st
+import streamlit.components.v1 as components
+from streamlit_modal import Modal
 from collections import Counter
 import spacy
 import nltk
@@ -196,3 +198,26 @@ if status:
     if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
     
 # 🏴󠁧󠁢󠁷󠁬󠁳󠁿🥸😎🤨🤔👍☑️👏🤝🏻
+
+
+modal = Modal("Demo Modal")
+open_modal = st.button("Open")
+if open_modal:
+    modal.open()
+
+if modal.is_open():
+    with modal.container():
+        st.write("Text goes here")
+
+        html_string = '''
+        <h1>HTML string in RED</h1>
+
+        <script language="javascript">
+          document.querySelector("h1").style.color = "red";
+        </script>
+        '''
+        components.html(html_string)
+
+        st.write("Some fancy text")
+        value = st.checkbox("Check me")
+        st.write(f"Checkbox checked: {value}")
