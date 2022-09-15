@@ -119,12 +119,12 @@ class Analysis:
         # bigrams      = Counter(input_bigrams)
         # trigrams     = Counter(input_trigrams)
         # fourgrams    = Counter(input_4grams)
-        nouns        = Counter([token.text for token in doc if token.pos_ == "NOUN"])
-        verbs        = Counter([token.text for token in doc if token.pos_ == "VERB"])
-        proper_nouns = Counter([token.text for token in doc if token.pos_ == "PROPN"])
-        adjectives   = Counter([token.text for token in doc if token.pos_ == "ADJ"])
-        adverbs      = Counter([token.text for token in doc if token.pos_ == "ADV"])
-        numbers      = Counter([token.text for token in doc if token.pos_ == "NUM"])
+        # nouns        = Counter([token.text for token in doc if token.pos_ == "NOUN"])
+        # verbs        = Counter([token.text for token in doc if token.pos_ == "VERB"])
+        # proper_nouns = Counter([token.text for token in doc if token.pos_ == "PROPN"])
+        # adjectives   = Counter([token.text for token in doc if token.pos_ == "ADJ"])
+        # adverbs      = Counter([token.text for token in doc if token.pos_ == "ADV"])
+        # numbers      = Counter([token.text for token in doc if token.pos_ == "NUM"])
         try:
             #creating wordcloud
             wc = WordCloud(
@@ -148,17 +148,17 @@ class Analysis:
             elif cloud_type == '4-grams':
                 wordcloud = wc.generate_from_frequencies(Counter(input_4grams))        
             elif cloud_type == 'Nouns':
-                wordcloud = wc.generate_from_frequencies(nouns)        
+                wordcloud = wc.generate_from_frequencies(Counter([token.text for token in doc if token.pos_ == "NOUN"]))        
             elif cloud_type == 'Proper nouns':
-                wordcloud = wc.generate_from_frequencies(proper_nouns)        
+                wordcloud = wc.generate_from_frequencies(Counter([token.text for token in doc if token.pos_ == "PROPN"]))        
             elif cloud_type == 'Verbs':
-                wordcloud = wc.generate_from_frequencies(verbs)
+                wordcloud = wc.generate_from_frequencies(Counter([token.text for token in doc if token.pos_ == "VERB"]))
             elif cloud_type == 'Adjectives':
-                wordcloud = wc.generate_from_frequencies(adjectives)
+                wordcloud = wc.generate_from_frequencies(Counter([token.text for token in doc if token.pos_ == "ADJ"]))
             elif cloud_type == 'Adverbs':
-                wordcloud = wc.generate_from_frequencies(adverbs)
+                wordcloud = wc.generate_from_frequencies(Counter([token.text for token in doc if token.pos_ == "ADV"]))
             elif cloud_type == 'Numbers':
-                wordcloud = wc.generate_from_frequencies(numbers)
+                wordcloud = wc.generate_from_frequencies(Counter([token.text for token in doc if token.pos_ == "NUM"]))
             else: 
                 pass
             color = st.radio('Switch image colour:', ('Color', 'Black'))
