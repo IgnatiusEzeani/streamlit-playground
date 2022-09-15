@@ -80,7 +80,8 @@ def read_file(file_source='example'):
             data=data[selected_columns]
         else:
             return False, None, st.error(f"""**FileTypeError:** Unrecognised file format. Please ensure your file name has the extension `.txt`, `.xlsx`, `.xls`, `.tsv`.""", icon="🚨")
-        return True, fname, data
+        if 
+        return True, fname.split('/')[-1], data
     except Exception as err:
         return False, None, st.error(f"""**FileError:** `{err}`: '{fname}' may be invalid or empty. Use a valid non-empty file.""", icon="🚨")
 
