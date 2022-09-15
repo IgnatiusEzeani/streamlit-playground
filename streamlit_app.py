@@ -52,7 +52,7 @@ def read_file(file_source='example'):
     fname = ''
     try:
         if file_source=='example':
-            fname = st.sidebar.selectbox('Select example data file(s)', sorted([f for f in os.listdir(EXAMPLES_DIR) if f.startswith('Reviews')]))
+            fname = st.sidebar.multiselect('Select example data file(s)', sorted([f for f in os.listdir(EXAMPLES_DIR) if f.startswith('Reviews')]))
             fname = os.path.join(EXAMPLES_DIR, fname)
         elif file_source=='uploaded':
             uploaded_file = st.sidebar.file_uploader("Upload review data", type=['txt','tsv','xlsx', 'xls'])
@@ -80,7 +80,7 @@ def read_file(file_source='example'):
             data=data[selected_columns]
         else:
             return False, st.error(f"""**FileTypeError:** Unrecognised file format. Please ensure your file name has the extension `.txt`, `.xlsx`, `.xls`, `.tsv`.""", icon="🚨")
-        return True, data
+        return True, fname, data
     except Exception as err:
         return False, st.error(f"""**FileError:** `{err}`: '{fname}' may be invalid or empty. Use a valid non-empty file.""", icon="🚨")
 
@@ -174,31 +174,30 @@ elif option == MESSAGES[lang][2]: input_data = read_file(file_source='uploaded')
 else: pass
 
 status, data = input_data
-if status:
-    analysis1 = Analysis(data)
-    if 'feature_list' not in st.session_state.keys():
-        feature_list = ['View data', 'View WordCloud','View Collocation','View Keyword in Context', 'View Sentiments']
-        st.session_state['feature_list'] = feature_list
-    else:
-        feature_list = st.session_state['feature_list']
-    checkbox_container(feature_list)
-    feature_options = get_selected_checkboxes()
-    if not feature_options: st.info('Please select one or more actions from the sidebar checkboxes.', icon="ℹ️")
-    if 'View data' in feature_options: analysis1.show_reviews()
-    if 'View WordCloud' in feature_options: analysis1.get_wordcloud()
-    if 'View Collocation' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
-    if 'View Keyword in Context' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
-    if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
-    
-# 🏴󠁧󠁢󠁷󠁬󠁳󠁿🥸😎🤨🤔👍☑️👏🤝🏻
+analysis1 = Analysis(data)
 
+tab1, tab2, tab3 = st.tabs(['Input data', 'View Data', 'View WordCloud'])
+with tab1:
+    if status:
+        analysis1 = Analysis(data)
+        if 'feature_list' not in st.session_state.keys():
+            feature_list = ['View data', 'View WordCloud','View Collocation','View Keyword in Context', 'View Sentiments']
+            st.session_state['feature_list'] = feature_list
+        else:
+            feature_list = st.session_state['feature_list']
+        checkbox_container(feature_list)
+        feature_options = get_selected_checkboxes()
+        if not feature_options: st.info('Please select one or more actions from the sidebar checkboxes.', icon="ℹ️")
+        if 'View data' in feature_options: analysis1.show_reviews()
+        if 'View WordCloud' in feature_options: analysis1.get_wordcloud()
+        if 'View Collocation' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
+        if 'View Keyword in Context' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
+        if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
 
 # Insert containers separated into tabs:
-tab1, tab2, tab3 = st.tabs(['Input data', 'View Data', 'View WordCloud'])
+    # analysis1.show_reviews()
 
-analysis1 = Analysis(data)
-with tab1:
-    analysis1.show_reviews()
-
-with tab2:
-    analysis1.get_wordcloud()
+# with tab2:
+    # analysis1.get_wordcloud()
+  
+# 🏴󠁧󠁢󠁷󠁬󠁳󠁿🥸😎🤨🤔👍☑️👏🤝🏻
