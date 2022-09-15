@@ -194,7 +194,7 @@ if status:
 
 
 # Insert containers separated into tabs:
-tab1, tab2 = st.tabs(['Input data', 'View Data', 'View WordCloud'])
+tab1, tab2, tab3 = st.tabs(['Input data', 'View Data', 'View WordCloud'])
 
 analysis1 = Analysis(data)
 with tab1:
