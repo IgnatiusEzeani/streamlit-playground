@@ -28,9 +28,9 @@ PUNCS = '''!→()-[]{};:'"\,<>./?@#$%^&*_~'''
 lang='en'
 EXAMPLES_DIR = 'example_texts_pub'
 
-# ---------------Testing out options------------------
+# ---------------Checkbox options------------------
 def checkbox_container(data):
-    st.sidebar.write('What do you want to see')
+    st.sidebar.markdown('What do you want to do with the data?')
     layout = st.sidebar.columns(2)
     if layout[0].button('Select All'):
         for i in data:
@@ -44,7 +44,8 @@ def checkbox_container(data):
         st.sidebar.checkbox(i, key='dynamic_checkbox_' + i)
         
 def get_selected_checkboxes():
-    return [i.replace('dynamic_checkbox_','') for i in st.session_state.keys() if i.startswith('dynamic_checkbox_') and st.session_state[i]]
+    return [i.replace('dynamic_checkbox_','') for i in st.session_state.keys() if i.startswith('dynamic_checkbox_') and 
+    st.session_state[i]]
 
 # read example and uploaded files
 def read_file(file_source='example'):
@@ -75,6 +76,8 @@ def read_file(file_source='example'):
 
         elif fname.endswith('.tsv'):
             data = pd.read_csv(fname, sep='\t', encoding='cp1252') if file_source=='example' else pd.read_csv(uploaded_file, sep='\t', encoding='cp1252')
+            selected_columns = st.multiselect('Select columns to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box')
+            data=data[selected_columns]
         else:
             return False, st.error(f"""**FileTypeError:** Unrecognised file format. Please ensure your file name has the extension `.txt`, `.xlsx`, `.xls`, `.tsv`.""", icon="🚨")
         return True, data
@@ -86,7 +89,6 @@ def read_example_data():
     text = open(fname, 'r', encoding='cp1252').read()
     lines = st.text_area('Paste reviews (replace the example text) to analyze', text, height=150).split('\n')
     return True, pd.DataFrame.from_dict({i+1: lines[i] for i in range(len(lines))}, orient='index', columns = ['Reviews'])
-
 
 class Analysis:
     def __init__(self, reviews):
@@ -180,8 +182,8 @@ if status:
     else:
         feature_list = st.session_state['feature_list']
     checkbox_container(feature_list)
-    feature_options = get_selected_checkboxes() 
-
+    feature_options = get_selected_checkboxes()
+    if not feature_options: st.info('Please select one or more actions from the sidebar checkboxes.', icon="ℹ️")
     if 'View data' in feature_options: analysis1.show_reviews()
     if 'View WordCloud' in feature_options: analysis1.get_wordcloud()
     if 'View Collocation' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
