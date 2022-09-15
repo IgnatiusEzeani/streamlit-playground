@@ -95,7 +95,7 @@ class Analysis:
             st.markdown('''#### 📄 Review data''')
             st.dataframe(self.reviews)
             st.write('Total number of reviews: ', len(self.reviews))
-    
+            
     def get_wordcloud (self):
         cloud_columns = st.multiselect('Select your free text columns:', self.reviews.columns, list(self.reviews.columns), help='Select free text columns to view the word cloud')
         input_data = ' '.join([' '.join([str(t) for t in list(self.reviews[col]) if t not in STOPWORDS]) for col in cloud_columns])
@@ -103,6 +103,7 @@ class Analysis:
         
         input_bigrams = [' '.join(g) for g in nltk.ngrams(input_data.split(),2)]
         input_trigrams = [' '.join(g) for g in nltk.ngrams(input_data.split(),3)]
+        input_4grams = [' '.join(g) for g in nltk.ngrams(input_data.split(),4)]
         
         mask = np.array(Image.open('img/welsh_flag.png'))
         maxWords = st.number_input("Number of words:",
@@ -117,6 +118,7 @@ class Analysis:
         
         bigrams      = Counter(input_bigrams)
         trigrams     = Counter(input_trigrams)
+        fourgrams     = Counter(input_4grams)
         nouns        = Counter([token.text for token in doc if token.pos_ == "NOUN"])
         verbs        = Counter([token.text for token in doc if token.pos_ == "VERB"])
         proper_nouns = Counter([token.text for token in doc if token.pos_ == "PROPN"])
@@ -165,7 +167,7 @@ class Analysis:
             st.set_option('deprecation.showPyplotGlobalUse', False)
             st.pyplot()
         except ValueError as err:
-            st.error(f'ValueError: {err}', icon="🚨")
+            st.info(f'Oh oh..Please ensure that at least one free text column is chosen: {err}', icon="🤨")
 
 st.sidebar.markdown('''# 🌼 Free Text Visualizer''')
 option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2], MESSAGES[lang][3]))
@@ -190,3 +192,5 @@ if status:
     if 'View Collocation' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
     if 'View Keyword in Context' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
     if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
+    
+# 🏴󠁧󠁢󠁷󠁬󠁳󠁿🥸😎🤨🤔👍☑️👏🤝🏻
