@@ -82,13 +82,7 @@ def read_file(file_source='example'):
             return False, st.error(f"""**FileTypeError:** Unrecognised file format. Please ensure your file name has the extension `.txt`, `.xlsx`, `.xls`, `.tsv`.""", icon="🚨")
         return True, fname, data
     except Exception as err:
-        return False, _, st.error(f"""**FileError:** `{err}`: '{fname}' may be invalid or empty. Use a valid non-empty file.""", icon="🚨")
-
-def read_example_data():
-    fname = os.path.join(EXAMPLES_DIR, 'example_reviews.txt')
-    text = open(fname, 'r', encoding='cp1252').read()
-    lines = st.text_area('Paste reviews (replace the example text) to analyze', text, height=150).split('\n')
-    return True, pd.DataFrame.from_dict({i+1: lines[i] for i in range(len(lines))}, orient='index', columns = ['Reviews'])
+        return False, None, st.error(f"""**FileError:** `{err}`: '{fname}' may be invalid or empty. Use a valid non-empty file.""", icon="🚨")
 
 class Analysis:
     def __init__(self, reviews):
@@ -202,3 +196,9 @@ for tab in tabs:
     # analysis1.get_wordcloud()
   
 # 🏴󠁧󠁢󠁷󠁬󠁳󠁿🥸😎🤨🤔👍☑️👏🤝🏻
+
+# def read_example_data():
+    # fname = os.path.join(EXAMPLES_DIR, 'example_reviews.txt')
+    # text = open(fname, 'r', encoding='cp1252').read()
+    # lines = st.text_area('Paste reviews (replace the example text) to analyze', text, height=150).split('\n')
+    # return True, pd.DataFrame.from_dict({i+1: lines[i] for i in range(len(lines))}, orient='index', columns = ['Reviews'])
