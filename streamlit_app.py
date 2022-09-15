@@ -52,8 +52,13 @@ def read_file(file_source='example'):
     fname = ''
     try:
         if file_source=='example':
-            fname = st.sidebar.multiselect('Select example data file(s)', sorted([f for f in os.listdir(EXAMPLES_DIR) if f.startswith('Reviews')]))
-            fname = os.path.join(EXAMPLES_DIR, fname[0]) # Todo: Rewrite to process a list of files
+            example_files = sorted([f for f in os.listdir(EXAMPLES_DIR) if f.startswith('Reviews')])
+            fname = st.sidebar.multiselect('Select example data file(s)', example_files, example_files[0])
+            if fname:
+                fname = os.path.join(EXAMPLES_DIR, fname[0])
+            else:
+                return False, None, st.info('''**NoFileSelected:** Please select one or more example files from the sidebar list.''', icon="ℹ️")
+            
         elif file_source=='uploaded':
             uploaded_file = st.sidebar.file_uploader("Upload review data", type=['txt','tsv','xlsx', 'xls'])
             if uploaded_file:
