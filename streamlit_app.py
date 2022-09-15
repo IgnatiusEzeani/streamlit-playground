@@ -59,9 +59,9 @@ def read_file(file_source='example'):
             if uploaded_file:
                 fname = uploaded_file.name
             else:
-                return False, st.info('''**NoFileUploaded:** Please upload your file using the upload button or by dragging the file into the upload area. Acceptable file formats include `.txt`, `.xlsx`, `.xls`, `.tsv`.''', icon="ℹ️")
+                return False, None, st.info('''**NoFileUploaded:** Please upload your file using the upload button or by dragging the file into the upload area. Acceptable file formats include `.txt`, `.xlsx`, `.xls`, `.tsv`.''', icon="ℹ️")
         else:
-            return False, st.error(f"FileSourceError: '{file_source}'  may be invalid or empty. Use 'example' or 'uploaded' only.")
+            return False, None, st.error(f"FileSourceError: '{fname}'  may be invalid or empty. Use 'example' or 'uploaded' only.")
 
         if fname.endswith('.txt'):
             data = open(fname, 'r', encoding='cp1252').read().split('\n') if file_source=='example' else uploaded_file.read().decode('utf8').split('\n')
@@ -79,7 +79,7 @@ def read_file(file_source='example'):
             selected_columns = st.sidebar.multiselect('Select columns to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box')
             data=data[selected_columns]
         else:
-            return False, st.error(f"""**FileTypeError:** Unrecognised file format. Please ensure your file name has the extension `.txt`, `.xlsx`, `.xls`, `.tsv`.""", icon="🚨")
+            return False, None, st.error(f"""**FileTypeError:** Unrecognised file format. Please ensure your file name has the extension `.txt`, `.xlsx`, `.xls`, `.tsv`.""", icon="🚨")
         return True, fname, data
     except Exception as err:
         return False, None, st.error(f"""**FileError:** `{err}`: '{fname}' may be invalid or empty. Use a valid non-empty file.""", icon="🚨")
