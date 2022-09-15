@@ -194,7 +194,11 @@ if status:
 
 
 # Insert containers separated into tabs:
-tab1, tab2 = st.tabs(["Input data", "View Data"])
-# You can also use "with" notation:
+tab1, tab2 = st.tabs(['Input data', 'View Data', 'View WordCloud'])
+
+analysis1 = Analysis(data)
 with tab1:
-    st.radio('Select one:', [1, 2])
+    analysis1.show_reviews()
+
+with tab2:
+    analysis1.get_wordcloud()
