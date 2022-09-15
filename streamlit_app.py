@@ -167,10 +167,10 @@ class Analysis:
             st.info(f'Oh oh.. Please ensure that at least one free text column is chosen: {err}', icon="🤨")
 
 st.sidebar.markdown('''# 🌼 Free Text Visualizer''')
-option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2], MESSAGES[lang][3]))
+option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2])) #, MESSAGES[lang][3]))
 if   option == MESSAGES[lang][1]: input_data = read_file()
 elif option == MESSAGES[lang][2]: input_data = read_file(file_source='uploaded')
-elif option == MESSAGES[lang][3]: input_data = read_example_data()
+# elif option == MESSAGES[lang][3]: input_data = read_example_data()
 else: pass
 
 status, data = input_data
