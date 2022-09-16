@@ -95,12 +95,12 @@ class Analysis:
         self.reviews = reviews
 
     def show_reviews(self):
-        if status:
-            st.markdown('''#### 📄 Review data''')
-            st.dataframe(self.reviews)
-            st.write('Total number of reviews: ', len(self.reviews))
+        st.markdown('''📄 View data''')
+        st.dataframe(self.reviews)
+        st.write('Total number of reviews: ', len(self.reviews))
             
     def get_wordcloud (self):
+        st.markdown('''☁️ Word Cloud''')
         cloud_columns = st.multiselect('Select your free text columns:', self.reviews.columns, list(self.reviews.columns), help='Select free text columns to view the word cloud')
         input_data = ' '.join([' '.join([str(t) for t in list(self.reviews[col]) if t not in STOPWORDS]) for col in cloud_columns])
         for c in PUNCS: input_data = input_data.lower().replace(c,'')
@@ -173,7 +173,6 @@ elif option == MESSAGES[lang][2]: input_data = get_data(file_source='uploaded')
 # elif option == MESSAGES[lang][3]: input_data = read_example_data()
 else: pass
 
-st.markdown('''# 📉 Text Visualization''')
 status, data = input_data
 if status:
     if 'feature_list' not in st.session_state.keys():
