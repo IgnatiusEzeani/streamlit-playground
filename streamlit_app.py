@@ -176,11 +176,11 @@ else: pass
 status, data = input_data
 if status:
     tabs = st.tabs(data.keys())
-    st.write(dir(tabs))
+    # st.write(dir(tabs.index))
     for tab in tabs:
         with tab:
             # st.write(data.keys())
-            st.write(dir(tab))
+            st.write(dir(tabs.index))
             # if data[tab][0]: #Check whether file was read well okay
                 # analysis = Analysis(data)
                 # if 'feature_list' not in st.session_state.keys():
