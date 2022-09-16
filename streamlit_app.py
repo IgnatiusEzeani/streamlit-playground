@@ -179,6 +179,7 @@ if status:
     for tab in tabs:
         with tab:
             # st.write(data.keys())
+            st.write(dir(tab))
             st.write(tab.__dir__)
             # if data[tab][0]: #Check whether file was read well okay
                 # analysis = Analysis(data)
