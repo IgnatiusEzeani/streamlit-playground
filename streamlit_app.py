@@ -179,7 +179,7 @@ if status:
     for tab in tabs:
         with tab:
             # st.write(data.keys())
-            st.write(tab.__dict__)
+            st.write(tab.__dir__)
             # if data[tab][0]: #Check whether file was read well okay
                 # analysis = Analysis(data)
                 # if 'feature_list' not in st.session_state.keys():
