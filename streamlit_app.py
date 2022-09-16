@@ -55,12 +55,12 @@ def read_file(fname, file_source):
         data=data[selected_columns]
         
     elif fname.endswith(('.xls','.xlsx')):
-        data = pd.read_excel(pd.ExcelFile(fname)) if file_source=='example' else pd.read_excel(uploaded_file)
+        data = pd.read_excel(pd.ExcelFile(fname)) if file_source=='example' else pd.read_excel(fname)
         selected_columns = st.sidebar.multiselect('Select columns to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box')
         data=data[selected_columns]
 
     elif fname.endswith('.tsv'):
-        data = pd.read_csv(fname, sep='\t', encoding='cp1252') if file_source=='example' else pd.read_csv(uploaded_file, sep='\t', encoding='cp1252')
+        data = pd.read_csv(fname, sep='\t', encoding='cp1252') if file_source=='example' else pd.read_csv(fname, sep='\t', encoding='cp1252')
         selected_columns = st.sidebar.multiselect('Select columns to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box')
         data=data[selected_columns]
     else:
