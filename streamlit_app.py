@@ -180,7 +180,7 @@ if status:
         with tab:
             # st.write(data.keys())
             st.write(dir(tab))
-            st.write(tab.__getattr__)
+            st.write(tab.text)
             # if data[tab][0]: #Check whether file was read well okay
                 # analysis = Analysis(data)
                 # if 'feature_list' not in st.session_state.keys():
