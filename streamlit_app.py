@@ -173,36 +173,31 @@ elif option == MESSAGES[lang][2]: input_data = get_data(file_source='uploaded')
 # elif option == MESSAGES[lang][3]: input_data = read_example_data()
 else: pass
 
+st.markdown('''# 📉 Text Visualization''')
 status, data = input_data
 if status:
-    tabs = st.tabs(data.keys())
-    for i in range(len(data.keys())):
-        with tabs[i]:
-            i
-        # with tab:
-            # analysis = Analysis(data)
-            # if 'feature_list' not in st.session_state.keys():
-                # feature_list = ['View data', 'View WordCloud','View Collocation','View Keyword in Context', 'View Sentiments']
-                # st.session_state['feature_list'] = feature_list
-            # else:
-                # feature_list = st.session_state['feature_list']
-            # checkbox_container(feature_list)
-            # feature_options = get_selected_checkboxes()
-            # if not feature_options: st.info('Please select one or more actions from the sidebar checkboxes.', icon="ℹ️")
-            # if 'View data' in feature_options: analysis1.show_reviews()
-            # if 'View WordCloud' in feature_options: analysis1.get_wordcloud()
-            # if 'View Collocation' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
-            # if 'View Keyword in Context' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
-            # if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
-        # else:
-            # st.write("Put a suitable message")
-                
-# Insert containers separated into tabs:
-    # analysis1.show_reviews()
+    if 'feature_list' not in st.session_state.keys():
+        feature_list = ['View data', 'View WordCloud','View Collocation','View Keyword in Context', 'View Sentiments']
+        st.session_state['feature_list'] = feature_list
+    else:
+        feature_list = st.session_state['feature_list']
+    checkbox_container(feature_list)
+    feature_options = get_selected_checkboxes()
 
-# with tab2:
-    # analysis1.get_wordcloud()
-  
+    filenames = data.keys()
+    tabs = st.tabs(filenames)
+    for i in range(len(filenames)):
+        with tabs[i]:
+            analysis = Analysis(data[filenames[i]])
+            if not feature_options: st.info('Please select one or more actions from the sidebar checkboxes.', icon="ℹ️")
+            if 'View data' in feature_options: analysis.show_reviews()
+            if 'View WordCloud' in feature_options: analysis.get_wordcloud()
+            if 'View Collocation' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
+            if 'View Keyword in Context' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
+            if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
+        else:
+            st.write("Put a suitable message")
+
 # 🏴󠁧󠁢󠁷󠁬󠁳󠁿🥸😎🤨🤔👍☑️👏🤝🏻
 
 # def read_example_data():
