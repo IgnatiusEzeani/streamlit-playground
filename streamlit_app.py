@@ -184,7 +184,7 @@ if status:
     checkbox_container(feature_list)
     feature_options = get_selected_checkboxes()
 
-    filenames = data.keys()
+    filenames = list(data.keys())
     tabs = st.tabs(filenames)
     for i in range(len(filenames)):
         with tabs[i]:
