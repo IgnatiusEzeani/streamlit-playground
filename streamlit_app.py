@@ -52,7 +52,7 @@ def select_columns(data):
 
 # reading example and uploaded files
 def read_file(fname, file_source):
-    file_name = fname if file_source='example' else fname.name 
+    file_name = fname if file_source=='example' else fname.name 
     if file_name.endswith('.txt'):
         data = open(fname, 'r', encoding='cp1252').read().split('\n') if file_source=='example' else fname.read().decode('utf8').split('\n')
         data = pd.DataFrame.from_dict({i+1: data[i] for i in range(len(data))}, orient='index', columns = ['Reviews'])
