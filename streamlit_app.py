@@ -27,7 +27,6 @@ PUNCS = '''!→()-[]{};:'"\,<>./?@#$%^&*_~'''
 
 lang='en'
 EXAMPLES_DIR = 'example_texts_pub'
-
 # ---------------Checkbox options------------------
 def checkbox_container(data):
     st.sidebar.markdown('What do you want to do with the data?')
@@ -47,47 +46,47 @@ def get_selected_checkboxes():
     return [i.replace('dynamic_checkbox_','') for i in st.session_state.keys() if i.startswith('dynamic_checkbox_') and 
     st.session_state[i]]
 
-# read example and uploaded files
-def read_file(file_source='example'):
-    fname = ''
+# reading example and uploaded files
+def read_file(fname, file_source):
+    if fname.endswith('.txt'):
+        data = open(fname, 'r', encoding='cp1252').read().split('\n') if file_source=='example' else fname.read().decode('utf8').split('\n')
+        data = pd.DataFrame.from_dict({i+1: data[i] for i in range(len(data))}, orient='index', columns = ['Reviews'])
+        selected_columns = st.sidebar.multiselect('Select columns to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box')
+        data=data[selected_columns]
+        
+    elif fname.endswith(('.xls','.xlsx')):
+        data = pd.read_excel(pd.ExcelFile(fname)) if file_source=='example' else pd.read_excel(uploaded_file)
+        selected_columns = st.sidebar.multiselect('Select columns to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box')
+        data=data[selected_columns]
+
+    elif fname.endswith('.tsv'):
+        data = pd.read_csv(fname, sep='\t', encoding='cp1252') if file_source=='example' else pd.read_csv(uploaded_file, sep='\t', encoding='cp1252')
+        selected_columns = st.sidebar.multiselect('Select columns to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box')
+        data=data[selected_columns]
+    else:
+        return False, st.error(f"""**FileFormatError:** Unrecognised file format. Please ensure your file name has the extension `.txt`, `.xlsx`, `.xls`, `.tsv`.""", icon="🚨")
+    return True, data
+
+def get_data(file_source='example'):
     try:
         if file_source=='example':
             example_files = sorted([f for f in os.listdir(EXAMPLES_DIR) if f.startswith('Reviews')])
-            fname = st.sidebar.multiselect('Select example data file(s)', example_files, example_files[0])
-            if fname:
-                fname = os.path.join(EXAMPLES_DIR, fname[0])
+            fnames = st.sidebar.multiselect('Select example data file(s)', example_files, example_files[0])
+            if fnames:
+                return True, {fname:read_file(os.path.join(EXAMPLES_DIR, fname), file_source) for fname in fnames}
             else:
-                return False, None, st.info('''**NoFileSelected:** Please select one or more example files from the sidebar list.''', icon="ℹ️")
-            
-        elif file_source=='uploaded':
-            uploaded_file = st.sidebar.file_uploader("Upload review data", type=['txt','tsv','xlsx', 'xls'])
-            if uploaded_file:
-                fname = uploaded_file.name
+                return False, st.info('''**NoFileSelected:** Please select at least one file from the sidebar list.''', icon="ℹ️")
+        
+        elif file_source=='uploaded': # Todo: Consider a maximum number of files for memory management. 
+            uploaded_files = st.sidebar.file_uploader("Upload your data file(s)", accept_multiple_files=True, type=['txt','tsv','xlsx', 'xls'])
+            if uploaded_files:
+                return True, {uploaded_file.name:read_file(uploaded_file, file_source) for uploaded_file in uploaded_files}
             else:
-                return False, None, st.info('''**NoFileUploaded:** Please upload your file using the upload button or by dragging the file into the upload area. Acceptable file formats include `.txt`, `.xlsx`, `.xls`, `.tsv`.''', icon="ℹ️")
+                return False, st.info('''**NoFileUploaded:** Please upload files with the upload button or by dragging the file into the upload area. Acceptable file formats include `.txt`, `.xlsx`, `.xls`, `.tsv`.''', icon="ℹ️")
         else:
-            return False, None, st.error(f"FileSourceError: '{fname}'  may be invalid or empty. Use 'example' or 'uploaded' only.")
-
-        if fname.endswith('.txt'):
-            data = open(fname, 'r', encoding='cp1252').read().split('\n') if file_source=='example' else uploaded_file.read().decode('utf8').split('\n')
-            data = pd.DataFrame.from_dict({i+1: data[i] for i in range(len(data))}, orient='index', columns = ['Reviews'])
-            selected_columns = st.sidebar.multiselect('Select columns to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box')
-            data=data[selected_columns]
-            
-        elif fname.endswith(('.xls','.xlsx')):
-            data = pd.read_excel(pd.ExcelFile(fname)) if file_source=='example' else pd.read_excel(uploaded_file)
-            selected_columns = st.sidebar.multiselect('Select columns to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box')
-            data=data[selected_columns]
-
-        elif fname.endswith('.tsv'):
-            data = pd.read_csv(fname, sep='\t', encoding='cp1252') if file_source=='example' else pd.read_csv(uploaded_file, sep='\t', encoding='cp1252')
-            selected_columns = st.sidebar.multiselect('Select columns to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box')
-            data=data[selected_columns]
-        else:
-            return False, None, st.error(f"""**FileTypeError:** Unrecognised file format. Please ensure your file name has the extension `.txt`, `.xlsx`, `.xls`, `.tsv`.""", icon="🚨")
-        return True, fname.split('/')[-1], data
+            return False, st.error(f'''**UnexpectedFileError:** Some or all of your files may be empty or invalid. Acceptable file formats include `.txt`, `.xlsx`, `.xls`, `.tsv`.''', icon="🚨")
     except Exception as err:
-        return False, None, st.error(f"""**FileError:** `{err}`: '{fname}' may be invalid or empty. Use a valid non-empty file.""", icon="🚨")
+        return False, st.error(f'''**UnexpectedFileError:** Some or all of your files may be empty or invalid. Acceptable file formats include `.txt`, `.xlsx`, `.xls`, `.tsv`.''', icon="🚨")
 
 class Analysis:
     def __init__(self, reviews):
@@ -167,32 +166,34 @@ class Analysis:
 
 st.sidebar.markdown('''# 🌼 Free Text Visualizer''')
 option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2])) #, MESSAGES[lang][3]))
-if   option == MESSAGES[lang][1]: input_data = read_file()
-elif option == MESSAGES[lang][2]: input_data = read_file(file_source='uploaded')
+if   option == MESSAGES[lang][1]: input_data = get_data()
+elif option == MESSAGES[lang][2]: input_data = get_data(file_source='uploaded')
 # elif option == MESSAGES[lang][3]: input_data = read_example_data()
 else: pass
 
-status, filename, data = input_data
+status, data = input_data
 if status:
-    analysis1 = Analysis(data)
-    tabs = st.tabs([filename])
+    tabs = st.tabs(data.keys())
     for tab in tabs:
         with tab:
-            analysis1 = Analysis(data)
-            if 'feature_list' not in st.session_state.keys():
-                feature_list = ['View data', 'View WordCloud','View Collocation','View Keyword in Context', 'View Sentiments']
-                st.session_state['feature_list'] = feature_list
+            if data[tab][0] #Check whether file was read well okay
+                analysis = Analysis(data)
+                if 'feature_list' not in st.session_state.keys():
+                    feature_list = ['View data', 'View WordCloud','View Collocation','View Keyword in Context', 'View Sentiments']
+                    st.session_state['feature_list'] = feature_list
+                else:
+                    feature_list = st.session_state['feature_list']
+                checkbox_container(feature_list)
+                feature_options = get_selected_checkboxes()
+                if not feature_options: st.info('Please select one or more actions from the sidebar checkboxes.', icon="ℹ️")
+                if 'View data' in feature_options: analysis1.show_reviews()
+                if 'View WordCloud' in feature_options: analysis1.get_wordcloud()
+                if 'View Collocation' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
+                if 'View Keyword in Context' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
+                if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
             else:
-                feature_list = st.session_state['feature_list']
-            checkbox_container(feature_list)
-            feature_options = get_selected_checkboxes()
-            if not feature_options: st.info('Please select one or more actions from the sidebar checkboxes.', icon="ℹ️")
-            if 'View data' in feature_options: analysis1.show_reviews()
-            if 'View WordCloud' in feature_options: analysis1.get_wordcloud()
-            if 'View Collocation' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
-            if 'View Keyword in Context' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
-            if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
-
+                st.write("Put a suitable message")
+                
 # Insert containers separated into tabs:
     # analysis1.show_reviews()
 
