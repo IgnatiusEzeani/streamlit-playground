@@ -176,7 +176,7 @@ if status:
     tabs = st.tabs(data.keys())
     for tab in tabs:
         with tab:
-            if data[tab][0] #Check whether file was read well okay
+            if data[tab][0]: #Check whether file was read well okay
                 analysis = Analysis(data)
                 if 'feature_list' not in st.session_state.keys():
                     feature_list = ['View data', 'View WordCloud','View Collocation','View Keyword in Context', 'View Sentiments']
