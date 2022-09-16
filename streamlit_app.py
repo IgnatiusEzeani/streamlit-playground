@@ -67,7 +67,6 @@ def read_file(fname, file_source):
         # data = select_columns(data)
     else:
         return False, st.error(f"""**FileFormatError:** Unrecognised file format. Please ensure your file name has the extension `.txt`, `.xlsx`, `.xls`, `.tsv`.""", icon="🚨")
-    data = select_columns(data)
     return True, data
 
 def get_data(file_source='example'):
@@ -189,6 +188,7 @@ if status:
     for i in range(len(filenames)):
         with tabs[i]:
             _, df = data[filenames[i]]
+            df = select_columns(df)
             analysis = Analysis(df)
             if not feature_options: st.info('Please select one or more actions from the sidebar checkboxes.', icon="ℹ️")
             if 'View data' in feature_options: analysis.show_reviews()
