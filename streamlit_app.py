@@ -47,7 +47,7 @@ def get_selected_checkboxes():
     st.session_state[i]]
 
 def select_columns(data):
-    selected_columns = st.sidebar.multiselect('Select columns to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box')
+    selected_columns = st.multiselect('Select columns to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box')
     return data[selected_columns]
 
 # reading example and uploaded files
