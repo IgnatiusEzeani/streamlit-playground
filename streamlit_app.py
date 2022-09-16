@@ -52,20 +52,18 @@ def select_columns(data):
 
 # reading example and uploaded files
 def read_file(fname, file_source):
-    if file_source = 'uploaded':
-       uploadedfile = fname
-       fname = fname.name
-    if fname.endswith('.txt'):
-        data = open(fname, 'r', encoding='cp1252').read().split('\n') if file_source=='example' else uploadedfile.read().decode('utf8').split('\n')
+    file_name = fname if file_source='example' else fname.name 
+    if file_name.endswith('.txt'):
+        data = open(fname, 'r', encoding='cp1252').read().split('\n') if file_source=='example' else fname.read().decode('utf8').split('\n')
         data = pd.DataFrame.from_dict({i+1: data[i] for i in range(len(data))}, orient='index', columns = ['Reviews'])
         # data = select_columns(data)     
         
-    elif fname.endswith(('.xls','.xlsx')):
-        data = pd.read_excel(pd.ExcelFile(fname)) if file_source=='example' else pd.read_excel(uploadedfile)
+    elif file_name.endswith(('.xls','.xlsx')):
+        data = pd.read_excel(pd.ExcelFile(fname)) if file_source=='example' else pd.read_excel(fname)
         # data = select_columns(data)
 
-    elif fname.endswith('.tsv'):
-        data = pd.read_csv(fname, sep='\t', encoding='cp1252') if file_source=='example' else pd.read_csv(uploadedfile, sep='\t', encoding='cp1252')
+    elif file_name.endswith('.tsv'):
+        data = pd.read_csv(fname, sep='\t', encoding='cp1252') if file_source=='example' else pd.read_csv(fname, sep='\t', encoding='cp1252')
         # data = select_columns(data)
     else:
         return False, st.error(f"""**FileFormatError:** Unrecognised file format. Please ensure your file name has the extension `.txt`, `.xlsx`, `.xls`, `.tsv`.""", icon="🚨")
