@@ -176,7 +176,7 @@ else: pass
 status, data = input_data
 if status:
     tabs = st.tabs(data.keys())
-    dir(tab)
+    dir(tabs)
     for tab in tabs:
         with tab:
             # st.write(data.keys())
