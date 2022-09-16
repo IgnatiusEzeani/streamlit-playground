@@ -67,6 +67,7 @@ def read_file(fname, file_source):
         # data = select_columns(data)
     else:
         return False, st.error(f"""**FileFormatError:** Unrecognised file format. Please ensure your file name has the extension `.txt`, `.xlsx`, `.xls`, `.tsv`.""", icon="🚨")
+    data = select_columns(data)
     return True, data
 
 def get_data(file_source='example'):
@@ -187,7 +188,8 @@ if status:
     tabs = st.tabs(filenames)
     for i in range(len(filenames)):
         with tabs[i]:
-            analysis = Analysis(data[filenames[i]])
+            df = data[filenames[i]].convert_dtypes()
+            analysis = Analysis(df)
             if not feature_options: st.info('Please select one or more actions from the sidebar checkboxes.', icon="ℹ️")
             if 'View data' in feature_options: analysis.show_reviews()
             if 'View WordCloud' in feature_options: analysis.get_wordcloud()
@@ -202,3 +204,5 @@ if status:
     # text = open(fname, 'r', encoding='cp1252').read()
     # lines = st.text_area('Paste reviews (replace the example text) to analyze', text, height=150).split('\n')
     # return True, pd.DataFrame.from_dict({i+1: lines[i] for i in range(len(lines))}, orient='index', columns = ['Reviews'])
+    
+    # df = df.astype(dtype={'name': 'string'})
