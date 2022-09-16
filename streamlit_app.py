@@ -176,9 +176,9 @@ else: pass
 status, data = input_data
 if status:
     tabs = st.tabs(data.keys())
+    st.write(list(tabs))
     for tab in tabs:
         with tab:
-            st.write(tab.title)
             # st.write((tabs.__getitem__))
             # if data[tab][0]: #Check whether file was read well okay
                 # analysis = Analysis(data)
