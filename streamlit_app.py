@@ -179,7 +179,7 @@ if status:
     
     for tab in tabs:
         with tab:
-            st.write(list(tabs))
+            st.write(list(tabs).indexof(tab))
             # st.write((tabs.__getitem__))
             # if data[tab][0]: #Check whether file was read well okay
                 # analysis = Analysis(data)
