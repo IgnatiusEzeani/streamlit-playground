@@ -188,7 +188,7 @@ if status:
     tabs = st.tabs(filenames)
     for i in range(len(filenames)):
         with tabs[i]:
-            df = data[filenames[i]].convert_dtypes()
+            _, df = data[filenames[i]]
             analysis = Analysis(df)
             if not feature_options: st.info('Please select one or more actions from the sidebar checkboxes.', icon="ℹ️")
             if 'View data' in feature_options: analysis.show_reviews()
