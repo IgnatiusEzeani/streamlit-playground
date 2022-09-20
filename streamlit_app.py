@@ -46,25 +46,22 @@ def get_selected_checkboxes():
     return [i.replace('dynamic_checkbox_','') for i in st.session_state.keys() if i.startswith('dynamic_checkbox_') and 
     st.session_state[i]]
 
-def select_columns(data):
-    selected_columns = st.multiselect('Select columns to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box')
+def select_columns(data, key):
+    selected_columns = st.multiselect('Select columns to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box', key=key)
     return data[selected_columns]
 
 # reading example and uploaded files
 def read_file(fname, file_source):
-    file_name = fname if file_source=='example' else fname.name 
+    file_name = fname if file_source=='example' else fname.name
     if file_name.endswith('.txt'):
         data = open(fname, 'r', encoding='cp1252').read().split('\n') if file_source=='example' else fname.read().decode('utf8').split('\n')
         data = pd.DataFrame.from_dict({i+1: data[i] for i in range(len(data))}, orient='index', columns = ['Reviews'])
-        # data = select_columns(data)     
         
     elif file_name.endswith(('.xls','.xlsx')):
         data = pd.read_excel(pd.ExcelFile(fname)) if file_source=='example' else pd.read_excel(fname)
-        # data = select_columns(data)
 
     elif file_name.endswith('.tsv'):
         data = pd.read_csv(fname, sep='\t', encoding='cp1252') if file_source=='example' else pd.read_csv(fname, sep='\t', encoding='cp1252')
-        # data = select_columns(data)
     else:
         return False, st.error(f"""**FileFormatError:** Unrecognised file format. Please ensure your file name has the extension `.txt`, `.xlsx`, `.xls`, `.tsv`.""", icon="🚨")
     return True, data
@@ -101,7 +98,8 @@ class Analysis:
             
     def get_wordcloud (self):
         st.markdown('''☁️ Word Cloud''')
-        cloud_columns = st.multiselect('Select your free text columns:', self.reviews.columns, list(self.reviews.columns), help='Select free text columns to view the word cloud')
+        cloud_columns = st.multiselect(
+            'Select your free text columns:', self.reviews.columns, list(self.reviews.columns), help='Select free text columns to view the word cloud')
         input_data = ' '.join([' '.join([str(t) for t in list(self.reviews[col]) if t not in STOPWORDS]) for col in cloud_columns])
         for c in PUNCS: input_data = input_data.lower().replace(c,'')
         
@@ -188,7 +186,7 @@ if status:
     for i in range(len(filenames)):
         with tabs[i]:
             _, df = data[filenames[i]]
-            df = select_columns(df)
+            df = select_columns(df, key=i)
             analysis = Analysis(df)
             if not feature_options: st.info('Please select one or more actions from the sidebar checkboxes.', icon="ℹ️")
             if 'View data' in feature_options: analysis.show_reviews()
