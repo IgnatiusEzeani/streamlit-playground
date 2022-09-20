@@ -97,6 +97,7 @@ class Analysis:
         st.write('Total number of reviews: ', len(self.reviews))
             
     def get_wordcloud (self, key):
+        "key: ", key
         st.markdown('''☁️ Word Cloud''')
         cloud_columns = st.multiselect(
             'Select your free text columns:', self.reviews.columns, list(self.reviews.columns), help='Select free text columns to view the word cloud')
