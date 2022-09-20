@@ -88,19 +88,20 @@ def get_data(file_source='example'):
         return False, st.error(f'''**UnexpectedFileError:** {err} Some or all of your files may be empty or invalid. Acceptable file formats include `.txt`, `.xlsx`, `.xls`, `.tsv`.''', icon="🚨")
 
 class Analysis:
-    def __init__(self, reviews):
+    def __init__(self, reviews, key):
         self.reviews = reviews
+        self.key = key
 
     def show_reviews(self, fname):
         st.markdown(f'''📄 Viewing data: `{fname}`''')
         st.dataframe(self.reviews)
         st.write('Total number of reviews: ', len(self.reviews))
             
-    def get_wordcloud (self, key):
-        "key: ", key
+    def get_wordcloud (self):
+        st.write("key: ", self.key)
         st.markdown('''☁️ Word Cloud''')
         cloud_columns = st.multiselect(
-            'Select your free text columns:', self.reviews.columns, list(self.reviews.columns), help='Select free text columns to view the word cloud')
+            'Select your free text columns:', self.reviews.columns, list(self.reviews.columns), help='Select free text columns to view the word cloud', key=self.key)
         input_data = ' '.join([' '.join([str(t) for t in list(self.reviews[col]) if t not in STOPWORDS]) for col in cloud_columns])
         for c in PUNCS: input_data = input_data.lower().replace(c,'')
         
@@ -115,7 +116,7 @@ class Analysis:
             min_value=50,
             max_value=300,
             help='Maximum number of words featured in the cloud.',
-            key=key
+            key=self.key
             )
         nlp = spacy.load('en_core_web_sm')
         doc = nlp(input_data)
@@ -189,7 +190,7 @@ if status:
         with tabs[i]:
             _, df = data[filenames[i]]
             df = select_columns(df, key=i)
-            analysis = Analysis(df)
+            analysis = Analysis(df, key=i)
             if not feature_options: st.info('Please select one or more actions from the sidebar checkboxes.', icon="ℹ️")
             if 'View data' in feature_options: analysis.show_reviews(filenames[i])
             if 'View WordCloud' in feature_options: analysis.get_wordcloud(key=i)
