@@ -193,7 +193,7 @@ if status:
             analysis = Analysis(df, key=i)
             if not feature_options: st.info('Please select one or more actions from the sidebar checkboxes.', icon="ℹ️")
             if 'View data' in feature_options: analysis.show_reviews(filenames[i])
-            if 'View WordCloud' in feature_options: analysis.get_wordcloud(key=i)
+            if 'View WordCloud' in feature_options: analysis.get_wordcloud()
             if 'View Collocation' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
             if 'View Keyword in Context' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
             if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
