@@ -91,12 +91,12 @@ class Analysis:
     def __init__(self, reviews):
         self.reviews = reviews
 
-    def show_reviews(self):
-        st.markdown('''📄 View data''')
+    def show_reviews(self, fname):
+        st.markdown(f'''📄 Viewing data: `{fname}`''')
         st.dataframe(self.reviews)
         st.write('Total number of reviews: ', len(self.reviews))
             
-    def get_wordcloud (self):
+    def get_wordcloud (self, key):
         st.markdown('''☁️ Word Cloud''')
         cloud_columns = st.multiselect(
             'Select your free text columns:', self.reviews.columns, list(self.reviews.columns), help='Select free text columns to view the word cloud')
@@ -113,7 +113,8 @@ class Analysis:
             step=50,
             min_value=50,
             max_value=300,
-            help='Maximum number of words featured in the cloud.'
+            help='Maximum number of words featured in the cloud.',
+            key=key
             )
         nlp = spacy.load('en_core_web_sm')
         doc = nlp(input_data)
@@ -182,15 +183,15 @@ if status:
     feature_options = get_selected_checkboxes()
 
     filenames = list(data.keys())
-    tabs = st.tabs(filenames)
-    for i in range(len(filenames)):
+    tabs = st.tabs([f"Analysis-{i}" for i in range(len(filenames))])
+    for i in range(len(tabs)):
         with tabs[i]:
             _, df = data[filenames[i]]
             df = select_columns(df, key=i)
             analysis = Analysis(df)
             if not feature_options: st.info('Please select one or more actions from the sidebar checkboxes.', icon="ℹ️")
-            if 'View data' in feature_options: analysis.show_reviews()
-            if 'View WordCloud' in feature_options: analysis.get_wordcloud()
+            if 'View data' in feature_options: analysis.show_reviews(filenames[i])
+            if 'View WordCloud' in feature_options: analysis.get_wordcloud(key=i)
             if 'View Collocation' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
             if 'View Keyword in Context' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
             if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
