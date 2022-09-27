@@ -47,7 +47,8 @@ def get_selected_checkboxes():
     st.session_state[i]]
 
 def select_columns(data, key):
-    selected_columns = st.multiselect('Select columns to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box', key=key)
+    # selected_columns = st.multiselect('Select column(s) below to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box', key=key)
+    selected_columns = st.multiselect('Select column(s) below to analyse', data.columns, help='Select columns you are interested in with this selection box', key=key)
     return data[selected_columns]
 
 def get_wordcloud (data, fname):
