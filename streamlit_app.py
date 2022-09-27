@@ -186,6 +186,8 @@ if status:
         feature_list = st.session_state['feature_list']
     checkbox_container(feature_list)
     feature_options = get_selected_checkboxes()
+    
+    st.session_state
 
 # With tabbed multiselect
     filenames = list(data.keys())
