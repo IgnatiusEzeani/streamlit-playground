@@ -191,7 +191,8 @@ if status:
 
 # With tabbed multiselect
     filenames = list(data.keys())
-    tabs = st.tabs([f"Analysis-{i}" for i in range(len(filenames))])
+    tab_titles= [f"Analysis-{i}" for i in range(len(filenames))]
+    tabs = st.tabs(tab_titles)
     for i in range(len(tabs)):
         with tabs[i]:
             _, df = data[filenames[i]]
@@ -199,7 +200,7 @@ if status:
             analysis = Analysis(df)
             if not feature_options: st.info('Please select one or more actions from the sidebar checkboxes.', icon="ℹ️")
             if 'View data' in feature_options: analysis.show_reviews(filenames[i])
-            if 'View WordCloud' in feature_options: analysis.show_wordcloud(filenames[i])
+            if 'View WordCloud' in feature_options: analysis.show_wordcloud(filenames[i]+tab_titles[i])
             if 'View Collocation' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
             if 'View Keyword in Context' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
             if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
