@@ -50,6 +50,74 @@ def select_columns(data, key):
     selected_columns = st.multiselect('Select columns to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box', key=key)
     return data[selected_columns]
 
+def get_wordcloud (data, fname):
+    st.markdown('''☁️ Word Cloud''')
+    cloud_columns = st.multiselect(
+        'Select your free text columns:', data.columns, list(data.columns), help='Select free text columns to view the word cloud', key=key)
+    input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in cloud_columns])
+    for c in PUNCS: input_data = input_data.lower().replace(c,'')
+    
+    input_bigrams = [' '.join(g) for g in nltk.ngrams(input_data.split(),2)]
+    input_trigrams = [' '.join(g) for g in nltk.ngrams(input_data.split(),3)]
+    input_4grams = [' '.join(g) for g in nltk.ngrams(input_data.split(),4)]
+    
+    mask = np.array(Image.open('img/welsh_flag.png'))
+    maxWords = st.number_input("Number of words:",
+        value=300,
+        step=50,
+        min_value=50,
+        max_value=300,
+        help='Maximum number of words featured in the cloud.'
+        )
+    nlp = spacy.load('en_core_web_sm')
+    doc = nlp(input_data)
+
+    try:
+        #creating wordcloud
+        wc = WordCloud(
+            max_words=maxWords,
+            stopwords=STOPWORDS,
+            width=2000, height=1000,
+            relative_scaling = 0,
+            mask=mask,
+            background_color="white",
+            font_path='font/Ubuntu-B.ttf'
+        ).generate(input_data)
+            
+        cloud_type = st.selectbox('Choose cloud category:',
+            ['All words', 'Bigrams', 'Trigrams', '4-grams', 'Nouns', 'Proper nouns', 'Verbs', 'Adjectives', 'Adverbs', 'Numbers'])
+        if cloud_type == 'All words':
+            wordcloud = wc.generate(input_data)        
+        elif cloud_type == 'Bigrams':
+            wordcloud = wc.generate_from_frequencies(Counter(input_bigrams))        
+        elif cloud_type == 'Trigrams':
+            wordcloud = wc.generate_from_frequencies(Counter(input_trigrams))        
+        elif cloud_type == '4-grams':
+            wordcloud = wc.generate_from_frequencies(Counter(input_4grams))        
+        elif cloud_type == 'Nouns':
+            wordcloud = wc.generate_from_frequencies(Counter([token.text for token in doc if token.pos_ == "NOUN"]))        
+        elif cloud_type == 'Proper nouns':
+            wordcloud = wc.generate_from_frequencies(Counter([token.text for token in doc if token.pos_ == "PROPN"]))        
+        elif cloud_type == 'Verbs':
+            wordcloud = wc.generate_from_frequencies(Counter([token.text for token in doc if token.pos_ == "VERB"]))
+        elif cloud_type == 'Adjectives':
+            wordcloud = wc.generate_from_frequencies(Counter([token.text for token in doc if token.pos_ == "ADJ"]))
+        elif cloud_type == 'Adverbs':
+            wordcloud = wc.generate_from_frequencies(Counter([token.text for token in doc if token.pos_ == "ADV"]))
+        elif cloud_type == 'Numbers':
+            wordcloud = wc.generate_from_frequencies(Counter([token.text for token in doc if token.pos_ == "NUM"]))
+        else: 
+            pass
+        color = st.radio('Switch image colour:', ('Color', 'Black'))
+        img_cols = ImageColorGenerator(mask) if color == 'Black' else None
+        plt.figure(figsize=[20,15])
+        plt.imshow(wordcloud.recolor(color_func=img_cols), interpolation="bilinear")
+        plt.axis("off")
+        st.set_option('deprecation.showPyplotGlobalUse', False)
+        st.pyplot()
+    except ValueError as err:
+        st.info(f'Oh oh.. Please ensure that at least one free text column is chosen: {err}', icon="🤨")
+
 # reading example and uploaded files
 def read_file(fname, file_source):
     file_name = fname if file_source=='example' else fname.name
@@ -88,84 +156,16 @@ def get_data(file_source='example'):
         return False, st.error(f'''**UnexpectedFileError:** {err} Some or all of your files may be empty or invalid. Acceptable file formats include `.txt`, `.xlsx`, `.xls`, `.tsv`.''', icon="🚨")
 
 class Analysis:
-    def __init__(self, reviews, key):
+    def __init__(self, reviews):
         self.reviews = reviews
-        self.key = key
 
     def show_reviews(self, fname):
         st.markdown(f'''📄 Viewing data: `{fname}`''')
         st.dataframe(self.reviews)
         st.write('Total number of reviews: ', len(self.reviews))
-            
-    def get_wordcloud (self):
-        st.write("key: ", self.key)
-        st.markdown('''☁️ Word Cloud''')
-        cloud_columns = st.multiselect(
-            'Select your free text columns:', self.reviews.columns, list(self.reviews.columns), help='Select free text columns to view the word cloud', key=self.key)
-        input_data = ' '.join([' '.join([str(t) for t in list(self.reviews[col]) if t not in STOPWORDS]) for col in cloud_columns])
-        for c in PUNCS: input_data = input_data.lower().replace(c,'')
         
-        input_bigrams = [' '.join(g) for g in nltk.ngrams(input_data.split(),2)]
-        input_trigrams = [' '.join(g) for g in nltk.ngrams(input_data.split(),3)]
-        input_4grams = [' '.join(g) for g in nltk.ngrams(input_data.split(),4)]
-        
-        mask = np.array(Image.open('img/welsh_flag.png'))
-        maxWords = st.number_input("Number of words:",
-            value=300,
-            step=50,
-            min_value=50,
-            max_value=300,
-            help='Maximum number of words featured in the cloud.',
-            key=self.key
-            )
-        nlp = spacy.load('en_core_web_sm')
-        doc = nlp(input_data)
-
-        try:
-            #creating wordcloud
-            wc = WordCloud(
-                max_words=maxWords,
-                stopwords=STOPWORDS,
-                width=2000, height=1000,
-                relative_scaling = 0,
-                mask=mask,
-                background_color="white",
-                font_path='font/Ubuntu-B.ttf'
-            ).generate(input_data)
-                
-            cloud_type = st.selectbox('Choose cloud category:',
-                ['All words', 'Bigrams', 'Trigrams', '4-grams', 'Nouns', 'Proper nouns', 'Verbs', 'Adjectives', 'Adverbs', 'Numbers'])
-            if cloud_type == 'All words':
-                wordcloud = wc.generate(input_data)        
-            elif cloud_type == 'Bigrams':
-                wordcloud = wc.generate_from_frequencies(Counter(input_bigrams))        
-            elif cloud_type == 'Trigrams':
-                wordcloud = wc.generate_from_frequencies(Counter(input_trigrams))        
-            elif cloud_type == '4-grams':
-                wordcloud = wc.generate_from_frequencies(Counter(input_4grams))        
-            elif cloud_type == 'Nouns':
-                wordcloud = wc.generate_from_frequencies(Counter([token.text for token in doc if token.pos_ == "NOUN"]))        
-            elif cloud_type == 'Proper nouns':
-                wordcloud = wc.generate_from_frequencies(Counter([token.text for token in doc if token.pos_ == "PROPN"]))        
-            elif cloud_type == 'Verbs':
-                wordcloud = wc.generate_from_frequencies(Counter([token.text for token in doc if token.pos_ == "VERB"]))
-            elif cloud_type == 'Adjectives':
-                wordcloud = wc.generate_from_frequencies(Counter([token.text for token in doc if token.pos_ == "ADJ"]))
-            elif cloud_type == 'Adverbs':
-                wordcloud = wc.generate_from_frequencies(Counter([token.text for token in doc if token.pos_ == "ADV"]))
-            elif cloud_type == 'Numbers':
-                wordcloud = wc.generate_from_frequencies(Counter([token.text for token in doc if token.pos_ == "NUM"]))
-            else: 
-                pass
-            color = st.radio('Switch image colour:', ('Color', 'Black'))
-            img_cols = ImageColorGenerator(mask) if color == 'Black' else None
-            plt.figure(figsize=[20,15])
-            plt.imshow(wordcloud.recolor(color_func=img_cols), interpolation="bilinear")
-            plt.axis("off")
-            st.set_option('deprecation.showPyplotGlobalUse', False)
-            st.pyplot()
-        except ValueError as err:
-            st.info(f'Oh oh.. Please ensure that at least one free text column is chosen: {err}', icon="🤨")
+    def show_wordcloud(self, key):
+        pass
 
 st.sidebar.markdown('''# 🌼 Free Text Visualizer''')
 option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2])) #, MESSAGES[lang][3]))
@@ -190,10 +190,10 @@ if status:
         with tabs[i]:
             _, df = data[filenames[i]]
             df = select_columns(df, key=i)
-            analysis = Analysis(df, key=i)
+            analysis = Analysis(df)
             if not feature_options: st.info('Please select one or more actions from the sidebar checkboxes.', icon="ℹ️")
             if 'View data' in feature_options: analysis.show_reviews(filenames[i])
-            if 'View WordCloud' in feature_options: analysis.get_wordcloud()
+            if 'View WordCloud' in feature_options: analysis.show_wordcloud()
             if 'View Collocation' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
             if 'View Keyword in Context' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
             if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
