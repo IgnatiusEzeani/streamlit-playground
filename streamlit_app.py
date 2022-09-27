@@ -67,7 +67,7 @@ def get_wordcloud (data, fname):
         step=50,
         min_value=50,
         max_value=300,
-        help='Maximum number of words featured in the cloud.'
+        help='Maximum number of words featured in the cloud.',
         key=fname
         )
     nlp = spacy.load('en_core_web_sm')
