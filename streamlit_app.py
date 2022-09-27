@@ -49,14 +49,14 @@ def get_selected_checkboxes():
 
 def select_columns(data, key):
     # selected_columns = st.multiselect('Select column(s) below to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box', key=key)
-    if f"{key}_cols" in session_state.keys():
+    if f"{key}_cols" in st.session_state.keys():
         del st.session_state[f"{key}_cols"]
     selected_columns = st.multiselect('Select column(s) below to analyse', data.columns, help='Select columns you are interested in with this selection box', key=f"{key}_cols")
     return data[selected_columns]
 
 def get_wordcloud (data, key):
     st.markdown('''☁️ Word Cloud''')
-    if f"{key}_cloud" in session_state.keys():
+    if f"{key}_cloud" in st.session_state.keys():
         del st.session_state[f"{key}_cloud"]
     cloud_columns = st.multiselect(
         'Select your free text columns:', data.columns, list(data.columns), help='Select free text columns to view the word cloud', key=f"{key}_cloud")
