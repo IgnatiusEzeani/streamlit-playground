@@ -53,7 +53,7 @@ def select_columns(data, key):
 def get_wordcloud (data, fname):
     st.markdown('''☁️ Word Cloud''')
     cloud_columns = st.multiselect(
-        'Select your free text columns:', data.columns, list(data.columns), help='Select free text columns to view the word cloud', key=key)
+        'Select your free text columns:', data.columns, list(data.columns), help='Select free text columns to view the word cloud', key=fname)
     input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in cloud_columns])
     for c in PUNCS: input_data = input_data.lower().replace(c,'')
     
@@ -164,8 +164,8 @@ class Analysis:
         st.dataframe(self.reviews)
         st.write('Total number of reviews: ', len(self.reviews))
         
-    def show_wordcloud(self, key):
-        pass
+    def show_wordcloud(self, fname):
+        get_wordcloud(self.reviews, fname)
 
 st.sidebar.markdown('''# 🌼 Free Text Visualizer''')
 option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2])) #, MESSAGES[lang][3]))
@@ -193,7 +193,7 @@ if status:
             analysis = Analysis(df)
             if not feature_options: st.info('Please select one or more actions from the sidebar checkboxes.', icon="ℹ️")
             if 'View data' in feature_options: analysis.show_reviews(filenames[i])
-            if 'View WordCloud' in feature_options: analysis.show_wordcloud()
+            if 'View WordCloud' in feature_options: analysis.show_wordcloud(filenames[i])
             if 'View Collocation' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
             if 'View Keyword in Context' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
             if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
