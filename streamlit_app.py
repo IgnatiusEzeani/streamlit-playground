@@ -49,13 +49,13 @@ def get_selected_checkboxes():
 
 def select_columns(data, key):
     # selected_columns = st.multiselect('Select column(s) below to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box', key=key)
-    selected_columns = st.multiselect('Select column(s) below to analyse', data.columns, help='Select columns you are interested in with this selection box', key=key)
+    selected_columns = st.multiselect('Select column(s) below to analyse', data.columns, help='Select columns you are interested in with this selection box', key=f"{key} cols")
     return data[selected_columns]
 
-def get_wordcloud (data, fname):
+def get_wordcloud (data, key):
     st.markdown('''☁️ Word Cloud''')
     cloud_columns = st.multiselect(
-        'Select your free text columns:', data.columns, list(data.columns), help='Select free text columns to view the word cloud', key=fname)
+        'Select your free text columns:', data.columns, list(data.columns), help='Select free text columns to view the word cloud', key=f"{key} cols")
     input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in cloud_columns])
     for c in PUNCS: input_data = input_data.lower().replace(c,'')
     
@@ -187,6 +187,7 @@ if status:
     checkbox_container(feature_list)
     feature_options = get_selected_checkboxes()
 
+# With tabbed multiselect
     filenames = list(data.keys())
     tabs = st.tabs([f"Analysis-{i}" for i in range(len(filenames))])
     for i in range(len(tabs)):
