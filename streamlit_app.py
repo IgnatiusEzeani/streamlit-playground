@@ -51,7 +51,7 @@ def select_columns(data, key):
     # selected_columns = st.multiselect('Select column(s) below to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box', key=key)
     # if f"{key}_cols" in st.session_state.keys():
         # del st.session_state[f"{key}_cols"]
-    selected_columns = st.multiselect('Select column(s) below to analyse', data.columns, help='Select columns you are interested in with this selection box', key=f"{key}_cols")
+    selected_columns = st.multiselect('Select column(s) below to analyse', data.columns, help='Select columns you are interested in with this selection box', key= f"{key}_cols_multiselect")
     return data[selected_columns]
 
 def get_wordcloud (data, key):
@@ -59,7 +59,7 @@ def get_wordcloud (data, key):
     # if f"{key}_cloud" in st.session_state.keys():
         # del st.session_state[f"{key}_cloud"]
     cloud_columns = st.multiselect(
-        'Select your free text columns:', data.columns, list(data.columns), help='Select free text columns to view the word cloud', key=f"{key}_cloud")
+        'Select your free text columns:', data.columns, list(data.columns), help='Select free text columns to view the word cloud', key=f"{key}_cloud_multiselect")
     input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in cloud_columns])
     for c in PUNCS: input_data = input_data.lower().replace(c,'')
     
@@ -92,7 +92,7 @@ def get_wordcloud (data, key):
         ).generate(input_data)
             
         cloud_type = st.selectbox('Choose cloud category:',
-            ['All words', 'Bigrams', 'Trigrams', '4-grams', 'Nouns', 'Proper nouns', 'Verbs', 'Adjectives', 'Adverbs', 'Numbers'], key=f"{key}_cloud")
+            ['All words', 'Bigrams', 'Trigrams', '4-grams', 'Nouns', 'Proper nouns', 'Verbs', 'Adjectives', 'Adverbs', 'Numbers'], key= f"{key}_cloud_select")
         if cloud_type == 'All words':
             wordcloud = wc.generate(input_data)        
         elif cloud_type == 'Bigrams':
