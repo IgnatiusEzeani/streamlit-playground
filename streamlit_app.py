@@ -64,21 +64,21 @@ def get_wordcloud (data, fname):
     input_4grams = [' '.join(g) for g in nltk.ngrams(input_data.split(),4)]
     
     mask = np.array(Image.open('img/welsh_flag.png'))
-    maxWords = st.number_input("Number of words:",
-        value=300,
-        step=50,
-        min_value=50,
-        max_value=300,
-        help='Maximum number of words featured in the cloud.',
-        key=fname
-        )
+    # maxWords = st.number_input("Number of words:",
+        # value=300,
+        # step=50,
+        # min_value=50,
+        # max_value=300,
+        # help='Maximum number of words featured in the cloud.',
+        # key=fname
+        # )
     nlp = spacy.load('en_core_web_sm')
     doc = nlp(input_data)
 
     try:
         #creating wordcloud
         wc = WordCloud(
-            max_words=maxWords,
+            # max_words=maxWords,
             stopwords=STOPWORDS,
             width=2000, height=1000,
             relative_scaling = 0,
