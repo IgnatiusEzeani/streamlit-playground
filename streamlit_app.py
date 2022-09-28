@@ -419,7 +419,7 @@ elif task == '🎲 Sentiment Analyzer':
                 if df.empty:
                     st.info('''**NoColumnSelected 🤨**: Please select one or more columns to analyse.''', icon="ℹ️")
                 else:
-                    input_text = '\n'.join(['\n'.join([str(t) for t in list(df[col]) if t not in STOPWORDS]) for col in df])
+                    input_text = '\n'.join(['\n'.join([str(t) for t in list(df[col]) if t not in STOPWORDS and t not in PUNCS]) for col in df])
                     text = process_sentiments(input_text)
                     if option == '3 Class Sentiments':
                         plot_sentiments(text[1], fine_grained=False)
