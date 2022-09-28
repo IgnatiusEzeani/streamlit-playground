@@ -201,7 +201,7 @@ def plot_kwic(data, key):
         window_size = st.slider('Select the window size:', 1, 10, 2)
         maxInsts = st.slider('Maximum number of instances:', 5, 50, 10, 5)
         col2_lcase = st.checkbox("Lowercase?", key='col2_checkbox')
-        kwic_instances = get_kwic(input_text, keyword, window_size, maxInsts, col2_lcase)
+        kwic_instances = get_kwic(input_data, keyword, window_size, maxInsts, col2_lcase)
 
         keyword_analysis = st.radio('Anaysis:', ('Keyword in context', 'Collocation'))
         if keyword_analysis == 'Keyword in context':
