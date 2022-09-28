@@ -420,8 +420,8 @@ elif task == '🎲 Sentiment Analyzer':
                     st.info('''**NoColumnSelected 🤨**: Please select one or more columns to analyse.''', icon="ℹ️")
                 else:
                     df
-                    # input_text
-                    # input_text = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in df])
+                    input_text = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in df])
+                    input_text
                     # data = process_sentiments(input_text)
                     # if option == '3 Class Sentiments':
                         # plot_sentiments(data[1], fine_grained=False)
