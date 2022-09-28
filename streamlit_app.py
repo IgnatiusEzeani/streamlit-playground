@@ -125,6 +125,103 @@ def get_wordcloud (data, key):
     except ValueError as err:
         st.info(f'Oh oh.. Please ensure that at least one free text column is chosen: {err}', icon="🤨")
 
+#--------------Get Top n most_common words plus counts---------------
+def getTopNWords(text, topn=5, removeStops=False):
+    text = text.translate(text.maketrans("", "", string.punctuation))
+    text = [word for word in text.lower().split()
+                if word not in STOPWORDS] if removeStops else text.lower().split()
+    return Counter(text).most_common(topn)        
+
+#---------------------keyword in context ----------------------------
+def get_kwic(text, keyword, window_size=1, maxInstances=10, lower_case=False):
+    text = text.translate(text.maketrans("", "", string.punctuation))
+    if lower_case:
+        text = text.lower()
+        keyword = keyword.lower()
+    kwic_insts = []
+    tokens = text.split()
+    keyword_indexes = [i for i in range(len(tokens)) if tokens[i].lower() == keyword.lower()]
+    for index in keyword_indexes[:maxInstances]:
+        left_context = ' '.join(tokens[index-window_size:index])
+        target_word = tokens[index]
+        right_context = ' '.join(tokens[index+1:index+window_size+1])
+        kwic_insts.append((left_context, target_word, right_context))
+    return kwic_insts
+
+#---------- get collocation ------------------------
+def get_collocs(kwic_insts, topn=10):
+    words=[]
+    for l, t, r in kwic_insts:
+        words += l.split() + r.split()
+    all_words = [word for word in words if word not in STOPWORDS]
+    return Counter(all_words).most_common(topn)
+
+#----------- plot collocation ------------------------
+def plot_collocation(keyword, collocs):
+    words, counts = zip(*collocs)
+    N, total = len(counts), sum(counts)
+    plt.figure(figsize=(8,8))
+    plt.xlim([-0.5, 0.5])
+    plt.ylim([-0.5, 0.5])
+    plt.plot([0],[0], '-o', color='blue',  markersize=25, alpha=0.7)
+    plt.text(0,0, keyword, color='red', fontsize=14)
+    for i in range(N):
+        x, y = random.uniform((i+1)/(2*N),(i+1.5)/(2*N)), random.uniform((i+1)/(2*N), (i+1.5)/(2*N)) 
+        x = x if random.choice((True, False)) else -x
+        y = y if random.choice((True, False)) else -y
+        plt.plot(x, y, '-og', markersize=counts[i]*10, alpha=0.3)
+        plt.text(x, y, words[i], fontsize=12)
+    st.set_option('deprecation.showPyplotGlobalUse', False)
+    st.pyplot()
+
+#-------------------------- N-gram Generator ---------------------------
+def gen_ngram(text, _ngrams=2, topn=10):
+    if _ngrams==1:
+        return getTopNWords(text, topn)
+    ngram_list=[]
+    for sent in sent_tokenize(text):
+        for char in sent:
+            if char in PUNCS: sent = sent.replace(char, "")
+        ngram_list += ngrams(word_tokenize(sent), _ngrams)
+    ngram_counts = Counter(ngram_list).most_common(topn)
+    sum_ngram_counts = sum([c for _, c in ngram_counts])
+    return [(f"{' '.join(ng):27s}", f"{c:10d}", f"{c/sum_ngram_counts:.2f}%")
+            for ng, c in ngram_counts]
+
+def plot_kwic(data, key):
+    st.markdown('''☁️ Key Word in Context''')
+    cloud_columns = st.multiselect(
+        'Select your free text columns:', data.columns, list(data.columns), help='Select free text columns to view the word cloud', key=f"{key}_cloud_multiselect")
+    input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in cloud_columns], key=f"{key}_kwic_multiselect")
+    for c in PUNCS: input_data = input_data.lower().replace(c,'')
+    
+    try:
+        topwords = [f"{w} ({c})" for w, c in getTopNWords(input_data, removeStops=True)]
+        keyword = st.selectbox('Select a keyword:', topwords).split('(',1)[0].strip()
+        window_size = st.slider('Select the window size:', 1, 10, 2)
+        maxInsts = st.slider('Maximum number of instances:', 5, 50, 10, 5)
+        col2_lcase = st.checkbox("Lowercase?", key='col2_checkbox')
+        kwic_instances = get_kwic(input_text, keyword, window_size, maxInsts, col2_lcase)
+
+        keyword_analysis = st.radio('Anaysis:', ('Keyword in context', 'Collocation'))
+        if keyword_analysis == 'Keyword in context':
+            kwic_instances_df = pd.DataFrame(kwic_instances,
+                columns =['Left context', 'Keyword', 'Right context'])
+            kwic_instances_df.style.set_properties(column='Left context', align = 'right')
+            # subset=['Left context', 'Keyword', 'Right context'],
+            # kwic_instances_df
+            st.dataframe(kwic_instances_df)
+            
+        else: #Could you replace with NLTK concordance later?
+            # keyword = st.text_input('Enter a keyword:','staff')
+            collocs = get_collocs(kwic_instances) #TODO: Modify to accept 'topn'               
+            colloc_str = ', '.join([f"{w}[{c}]" for w, c in collocs])
+            st.write(f"Collocations for '{keyword}':\n{colloc_str}")
+            plot_collocation(keyword, collocs)
+    except ValueError as err:
+        st.info(f'Oh oh.. Please ensure that at least one free text column is chosen: {err}', icon="🤨")
+
+
 # reading example and uploaded files
 def read_file(fname, file_source):
     file_name = fname if file_source=='example' else fname.name
@@ -191,8 +288,6 @@ if status:
     checkbox_container(feature_list)
     feature_options = get_selected_checkboxes()
     
-    # st.session_state
-
 # With tabbed multiselect
     filenames = list(data.keys())
     tab_titles= [f"Analysis-{i}" for i in range(len(filenames))]
