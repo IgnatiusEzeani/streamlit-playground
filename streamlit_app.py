@@ -50,11 +50,8 @@ def get_selected_checkboxes():
     st.session_state[i]]
 
 def select_columns(data, key):
-    # selected_columns = st.multiselect('Select column(s) below to analyse', data.columns, list(data.columns)[:5], help='Select columns you are interested in with this selection box', key=key)
-    # if f"{key}_cols" in st.session_state.keys():
-        # del st.session_state[f"{key}_cols"]
     selected_columns = st.multiselect('Select column(s) below to analyse', data.columns, help='Select columns you are interested in with this selection box', key= f"{key}_cols_multiselect")
-    return data[selected_columns]
+    return data[selected_columns] if select_columns else "Null"
 
 def get_wordcloud (data, key):
     st.markdown('''☁️ Word Cloud''')
@@ -302,13 +299,15 @@ if status:
         with tabs[i]:
             _, df = data[filenames[i]]
             df = select_columns(df, key=i)
-            analysis = Analysis(df)
-            if not feature_options: st.info('Please select one or more actions from the sidebar checkboxes.', icon="ℹ️")
-            if 'Data View' in feature_options: analysis.show_reviews(filenames[i])
-            if 'WordCloud' in feature_options: analysis.show_wordcloud(filenames[i])
-            if 'Keyword and Collocation' in feature_options: analysis.show_kwic(filenames[i])
-            # st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
-            if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
+            if df=="Null":
+                st.info('''**NoDataColumnSelected🤨**: Please select one or more columns to analyse.''', icon="ℹ️")
+            else:
+                analysis = Analysis(df)
+                if not feature_options: st.info('Please select one or more actions from the sidebar checkboxes.', icon="ℹ️")
+                if 'Data View' in feature_options: analysis.show_reviews(filenames[i])
+                if 'WordCloud' in feature_options: analysis.show_wordcloud(filenames[i])
+                if 'Keyword and Collocation' in feature_options: analysis.show_kwic(filenames[i])
+                if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
 
 # 🏴󠁧󠁢󠁷󠁬󠁳󠁿🥸😎🤨🤔👍☑️👏🤝🏻
 
