@@ -34,11 +34,11 @@ EXAMPLES_DIR = 'example_texts_pub'
 def checkbox_container(data, key):
     st.sidebar.markdown('What do you want to do with the data?')
     layout = st.sidebar.columns(2)
-    if layout[0].button('Select All', key=f"{key}_btnAll"):
+    if layout[0].button('Select All', key=f"{key}_btnSelAll"):
         for i in data:
             st.session_state['dynamic_checkbox_' + i] = True
         st.experimental_rerun()
-    if layout[1].button('UnSelect All',key=f"{key}_btnAll"):
+    if layout[1].button('UnSelect All',key=f"{key}_btnUnSelAll"):
         for i in data:
             st.session_state['dynamic_checkbox_' + i] = False
         st.experimental_rerun()
