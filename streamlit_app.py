@@ -189,7 +189,7 @@ def gen_ngram(text, _ngrams=2, topn=10):
             for ng, c in ngram_counts]
 
 def plot_kwic(data, key):
-    st.markdown('''☁️ Key Word in Context''')
+    st.markdown('''💬 '\U0001f44d' Key Word in Context''')
     cloud_columns = st.multiselect(
         'Select your free text columns:', data.columns, list(data.columns), help='Select free text columns to view the word cloud', key=f"{key}_cloud_multiselect")
     input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in cloud_columns], key=f"{key}_kwic_multiselect")
@@ -270,6 +270,9 @@ class Analysis:
         
     def show_wordcloud(self, fname):
         get_wordcloud(self.reviews, fname)
+    
+    def show_kwic(self, fname):
+        plot_kwic(self.reviews, fname)
 
 st.sidebar.markdown('''# 🌼 Free Text Visualizer''')
 option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2])) #, MESSAGES[lang][3]))
@@ -301,7 +304,8 @@ if status:
             if 'View data' in feature_options: analysis.show_reviews(filenames[i])
             if 'View WordCloud' in feature_options: analysis.show_wordcloud(filenames[i])
             if 'View Collocation' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
-            if 'View Keyword in Context' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
+            if 'View Keyword in Context' in feature_options: analysis.show_kwic(filenames[i])
+            # st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
             if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
 
 # 🏴󠁧󠁢󠁷󠁬󠁳󠁿🥸😎🤨🤔👍☑️👏🤝🏻
