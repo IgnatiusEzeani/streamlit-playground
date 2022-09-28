@@ -258,6 +258,84 @@ def get_data(file_source='example'):
             return False, st.error(f'''**UnexpectedFileError:** Some or all of your files may be empty or invalid. Acceptable file formats include `.txt`, `.xlsx`, `.xls`, `.tsv`.''', icon="🚨")
     except Exception as err:
         return False, st.error(f'''**UnexpectedFileError:** {err} Some or all of your files may be empty or invalid. Acceptable file formats include `.txt`, `.xlsx`, `.xls`, `.tsv`.''', icon="🚨")
+# --------------------Sentiments-----------------------
+
+#---Polarity score
+def get_sentiment(polarity):
+  return 'Very Positive' if polarity >= 0.5 else 'Positive' if (
+    0.5 > polarity > 0.0) else 'Negative' if (0.0 > polarity >= -0.5
+    ) else 'Very Negative' if -0.5 > polarity else 'Neutral'
+
+#---Subjectivity score
+def get_subjectivity(subjectivity):
+  return 'SUBJECTIVE' if subjectivity > 0.5 else 'OBJECTIVE'
+#---Subjectivity distribution
+@st.cache
+def get_subjectivity_distribution(scores, sentiment_class):
+  count = Counter([b for _, _, a, _, b in scores if a==sentiment_class])
+  return count['OBJECTIVE'], count['SUBJECTIVE']
+
+def plotfunc(pct, data):
+  absolute = int(np.round(pct/100.*np.sum([sum(d) for d in data])))
+  return "{:.1f}%\n({:d} reviews)".format(pct, absolute)
+# ---------------------
+def process_sentiments(text):
+  # all_reviews = sent_tokenize(text)
+  all_reviews = text.split('\n')
+  # -------------------
+  sentiment_scores = []
+  # -------------------
+  sentiments_list = []
+  subjectivity_list = []
+
+  #-------------------
+  for review in all_reviews:
+    blob = TextBlob(review)
+    polarity, subjectivity = blob.sentiment
+    sentiment_class, subjectivity_category = get_sentiment(polarity), get_subjectivity(subjectivity)
+    sentiments_list.append(sentiment_class)
+    subjectivity_list.append(subjectivity_category)
+    sentiment_scores.append((review, polarity, sentiment_class, subjectivity, subjectivity_category))
+  # -------------------
+  very_positive = get_subjectivity_distribution(sentiment_scores,'Very Positive')
+  positive = get_subjectivity_distribution(sentiment_scores,'Positive')
+  neutral = get_subjectivity_distribution(sentiment_scores,'Neutral')
+  negative = get_subjectivity_distribution(sentiment_scores,'Negative')
+  very_negative = get_subjectivity_distribution(sentiment_scores,'Very Negative')
+  return sentiment_scores, (very_positive, positive, neutral, negative, very_negative)
+  
+# ---------------------
+def plot_sentiments(data, fine_grained=True):
+  fig, ax = plt.subplots(figsize=(5,5))
+  size = 0.7 
+  cmap = plt.get_cmap("tab20c")
+
+  if not fine_grained:
+    new_pos = tuple(map(lambda x, y: x + y, data[0], data[1]))
+    new_neg = tuple(map(lambda x, y: x + y, data[3], data[4]))
+    data = new_pos, data[2], new_neg
+    color_code = [8, 3, 4]
+    labels = ["Positive", "Neutral", "Negative"]
+  else:
+    color_code =  [8, 10, 3, 5, 4]
+    labels = ["Very Positive", "Positive", "Neutral", "Negative", "Very Negative"]
+
+  vals = np.array(data)
+  outer_colors =  cmap(np.array(color_code)) # cmap(np.arange(5))
+  # inner_colors = cmap(np.arange(10)) # cmap(np.array([1, 2, 3, 4, 5, 6, 7,8, 9, 10]))
+
+  wedges, texts, autotexts = ax.pie(vals.sum(axis=1), radius=1,
+        autopct=lambda pct: plotfunc(pct, data),
+        colors=outer_colors, wedgeprops=dict(width=size, edgecolor='w'),
+        pctdistance=0.60, textprops=dict(color="w", weight="bold", size=8))
+
+  # ax.set_title("Sentiment Chart")
+  
+  ax.legend(wedges, labels, title="Sentiment classes", title_fontsize='small', loc="center left", fontsize=8,
+            bbox_to_anchor=(1, 0, 0.5, 1))
+
+  st.set_option('deprecation.showPyplotGlobalUse', False)
+  st.pyplot()
 
 class Analysis:
     def __init__(self, reviews):
@@ -274,7 +352,6 @@ class Analysis:
     def show_kwic(self, fname):
         plot_kwic(self.reviews, fname)
 
-# st.sidebar.markdown('''# 🌼 Free Text Visualizer''')
 #📃📌📈📈📉⛱🏓🏆🎲 
 
 st.sidebar.markdown('# 🌼 Welsh FreeTxt')
@@ -282,6 +359,7 @@ task = st.sidebar.radio("Select a task", ('🔍 Visualizer', '📃 Summarizer', 
 
 if task == '🔍 Visualizer':
     # run_visualizer()
+    st.markdown('''#### 🔍 Free Text Visualizer''')
     option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2])) #, MESSAGES[lang][3]))
     if option == MESSAGES[lang][1]: input_data = get_data()
     elif option == MESSAGES[lang][2]: input_data = get_data(file_source='uploaded')
@@ -291,7 +369,7 @@ if task == '🔍 Visualizer':
     status, data = input_data
     if status:
         if 'feature_list' not in st.session_state.keys():
-            feature_list = ['Data View', 'WordCloud','Keyword and Collocation', 'View Sentiments']
+            feature_list = ['Data View', 'WordCloud','Keyword and Collocation']
             st.session_state['feature_list'] = feature_list
         else:
             feature_list = st.session_state['feature_list']
@@ -315,18 +393,38 @@ if task == '🔍 Visualizer':
                     if 'WordCloud' in feature_options: analysis.show_wordcloud(filenames[i])
                     if 'Keyword and Collocation' in feature_options: analysis.show_kwic(filenames[i])
                     if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
-                    
 elif task == '📃 Summarizer':
     # run_summarizer()
     pass
 elif task == '🎲 Sentiment Analyzer':
     # run_sentiments()
-    pass
+    st.markdown('''#### 🎲 Sentiment Analyzer''')
+    option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2]))
+    if option == MESSAGES[lang][1]: input_data = get_data()
+    elif option == MESSAGES[lang][2]: input_data = get_data(file_source='uploaded')
+    # elif option == MESSAGES[lang][3]: input_data = read_example_data()
+    else: pass
+    status, data = input_data
+    
+    if status:
+        option = st.radio('How do you want to categorize the sentiments?', ('3 Class Sentiments', '5 Class Sentiments'))
+    
+        input_text = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in cloud_columns])
+
+        data = process_sentiments(input_text)
+        if option == '3 Class Sentiments':
+            plot_sentiments(data[1], fine_grained=False)
+        else:
+            plot_sentiments(data[1])
+        num_examples = st.slider('Number of example [5 to 20%]',  min_value=5, max_value=20, step=5)
+        df = pd.DataFrame(data[0], columns =['Review','Polarity', 'Sentiment', 'Subjectivity', 'Category'])
+        df = df[['Review','Polarity', 'Sentiment']]
+        df.index = np.arange(1, len(df) + 1)
+        st.dataframe(df.head(num_examples))
 else:
     st.write(task, 'is under construction...')
 
 # 🏴󠁧󠁢󠁷󠁬󠁳󠁿🥸😎🤨🤔👍☑️👏🤝🏻
-
 # def read_example_data():
     # fname = os.path.join(EXAMPLES_DIR, 'example_reviews.txt')
     # text = open(fname, 'r', encoding='cp1252').read()
