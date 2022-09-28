@@ -31,20 +31,20 @@ pd.set_option('display.max_colwidth',None)
 lang='en'
 EXAMPLES_DIR = 'example_texts_pub'
 # ---------------Checkbox options------------------
-def checkbox_container(data, key):
+def checkbox_container(data):
     st.sidebar.markdown('What do you want to do with the data?')
     layout = st.sidebar.columns(2)
-    if layout[0].button('Select All', key=f"{key}_btnSelAll"):
+    if layout[0].button('Select All'):
         for i in data:
             st.session_state['dynamic_checkbox_' + i] = True
         st.experimental_rerun()
-    if layout[1].button('UnSelect All',key=f"{key}_btnUnSelAll"):
+    if layout[1].button('UnSelect All'):
         for i in data:
             st.session_state['dynamic_checkbox_' + i] = False
         st.experimental_rerun()
     for i in data:
         st.sidebar.checkbox(i, key='dynamic_checkbox_' + i)
-
+        
 def get_selected_checkboxes():
     return [i.replace('dynamic_checkbox_','') for i in st.session_state.keys() if i.startswith('dynamic_checkbox_') and 
     st.session_state[i]]
@@ -288,6 +288,8 @@ if status:
         st.session_state['feature_list'] = feature_list
     else:
         feature_list = st.session_state['feature_list']
+    checkbox_container(feature_list)
+    feature_options = get_selected_checkboxes()
     
 # With tabbed multiselect
     filenames = list(data.keys())
@@ -300,8 +302,6 @@ if status:
             if df.empty:
                 st.info('''**NoColumnSelected 🤨**: Please select one or more columns to analyse.''', icon="ℹ️")
             else:
-                checkbox_container(feature_list, key=i)
-                feature_options = get_selected_checkboxes()
                 analysis = Analysis(df)
                 if not feature_options: st.info('''**NoActionSelected☑️** Select one or more actions from the sidebar checkboxes.''', icon="ℹ️")
                 if 'Data View' in feature_options: analysis.show_reviews(filenames[i])
