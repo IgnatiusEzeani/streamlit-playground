@@ -408,19 +408,28 @@ elif task == '🎲 Sentiment Analyzer':
     
     if status:
         option = st.radio('How do you want to categorize the sentiments?', ('3 Class Sentiments', '5 Class Sentiments'))
-    
-        input_text = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in cloud_columns])
-
-        data = process_sentiments(input_text)
-        if option == '3 Class Sentiments':
-            plot_sentiments(data[1], fine_grained=False)
-        else:
-            plot_sentiments(data[1])
-        num_examples = st.slider('Number of example [5 to 20%]',  min_value=5, max_value=20, step=5)
-        df = pd.DataFrame(data[0], columns =['Review','Polarity', 'Sentiment', 'Subjectivity', 'Category'])
-        df = df[['Review','Polarity', 'Sentiment']]
-        df.index = np.arange(1, len(df) + 1)
-        st.dataframe(df.head(num_examples))
+        # With tabbed multiselect
+        filenames = list(data.keys())
+        tab_titles= [f"File-{i+1}" for i in range(len(filenames))]
+        tabs = st.tabs(tab_titles)
+        for i in range(len(tabs)):
+            with tabs[i]:
+                _, df = data[filenames[i]]
+                df = select_columns(df, key=i)
+                if df.empty:
+                    st.info('''**NoColumnSelected 🤨**: Please select one or more columns to analyse.''', icon="ℹ️")
+                else:
+                    input_text = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in df])
+                    data = process_sentiments(input_text)
+                    if option == '3 Class Sentiments':
+                        plot_sentiments(data[1], fine_grained=False)
+                    else:
+                        plot_sentiments(data[1])
+                    num_examples = st.slider('Number of example [5 to 20%]',  min_value=5, max_value=20, step=5)
+                    df = pd.DataFrame(data[0], columns =['Review','Polarity', 'Sentiment', 'Subjectivity', 'Category'])
+                    df = df[['Review','Polarity', 'Sentiment']]
+                    df.index = np.arange(1, len(df) + 1)
+                    st.dataframe(df.head(num_examples))
 else:
     st.write(task, 'is under construction...')
 
