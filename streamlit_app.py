@@ -189,10 +189,11 @@ def gen_ngram(text, _ngrams=2, topn=10):
             for ng, c in ngram_counts]
 
 def plot_kwic(data, key):
-    st.markdown('''💬 '\U0001f44d' Key Word in Context''')
+    st.markdown('''💬 \U0001f44d Key Word in Context''')
     cloud_columns = st.multiselect(
-        'Select your free text columns:', data.columns, list(data.columns), help='Select free text columns to view the word cloud', key=f"{key}_cloud_multiselect")
-    input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in cloud_columns], key=f"{key}_kwic_multiselect")
+        'Select your free text columns:', data.columns, list(data.columns), help='Select free text columns to view the word cloud', key=f"{key}_kwic_multiselect")
+        
+    input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in cloud_columns])
     for c in PUNCS: input_data = input_data.lower().replace(c,'')
     
     try:
