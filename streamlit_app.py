@@ -299,7 +299,7 @@ if status:
         with tabs[i]:
             _, df = data[filenames[i]]
             df = select_columns(df, key=i)
-            if df.empty():
+            if df.empty:
                 st.info('''**NoDataColumnSelected🤨**: Please select one or more columns to analyse.''', icon="ℹ️")
             else:
                 analysis = Analysis(df)
