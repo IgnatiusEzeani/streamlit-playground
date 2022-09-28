@@ -31,14 +31,14 @@ pd.set_option('display.max_colwidth',None)
 lang='en'
 EXAMPLES_DIR = 'example_texts_pub'
 # ---------------Checkbox options------------------
-def checkbox_container(data):
+def checkbox_container(data, key):
     st.sidebar.markdown('What do you want to do with the data?')
     layout = st.sidebar.columns(2)
-    if layout[0].button('Select All'):
+    if layout[0].button('Select All', key=f"{key}_btnAll"):
         for i in data:
             st.session_state['dynamic_checkbox_' + i] = True
         st.experimental_rerun()
-    if layout[1].button('UnSelect All'):
+    if layout[1].button('UnSelect All',key=f"{key}_btnAll"):
         for i in data:
             st.session_state['dynamic_checkbox_' + i] = False
         st.experimental_rerun()
@@ -300,7 +300,7 @@ if status:
             if df.empty:
                 st.info('''**NoColumnSelected 🤨**: Please select one or more columns to analyse.''', icon="ℹ️")
             else:
-                checkbox_container(feature_list)
+                checkbox_container(feature_list, key=i)
                 feature_options = get_selected_checkboxes()
                 analysis = Analysis(df)
                 if not feature_options: st.info('''**NoActionSelected☑️** Select one or more actions from the sidebar checkboxes.''', icon="ℹ️")
