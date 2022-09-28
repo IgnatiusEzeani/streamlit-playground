@@ -320,7 +320,7 @@ elif task == '📃 Summarizer':
     # run_summarizer()
     pass
 elif task == '🎲 Sentiment Analyzer':
-    run_sentiments()
+    # run_sentiments()
     pass
 else:
     st.write(task, 'is under construction...')
