@@ -55,10 +55,10 @@ def select_columns(data, key):
 
 def get_wordcloud (data, key):
     st.markdown('''☁️ Word Cloud''')
-    # cloud_columns = st.multiselect(
-        # 'Select your free text columns:', data.columns, list(data.columns), help='Select free text columns to view the word cloud', key=f"{key}_cloud_multiselect")
-    # input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in cloud_columns])
-    input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in data])
+    cloud_columns = st.multiselect(
+        'Which column do you wish to view the word cloud from?', data.columns, list(data.columns), help='Select free text columns to view the word cloud', key=f"{key}_cloud_multiselect")
+    input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in cloud_columns])
+    # input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in data])
     for c in PUNCS: input_data = input_data.lower().replace(c,'')
     
     input_bigrams = [' '.join(g) for g in nltk.ngrams(input_data.split(),2)]
@@ -300,7 +300,7 @@ if task == '🔍 Visualizer':
         
     # With tabbed multiselect
         filenames = list(data.keys())
-        tab_titles= [f"Analysis-{i}" for i in range(len(filenames))]
+        tab_titles= [f"File-{i+1}" for i in range(len(filenames))]
         tabs = st.tabs(tab_titles)
         for i in range(len(tabs)):
             with tabs[i]:
@@ -325,8 +325,6 @@ elif task == '🎲 Sentiment Analyzer':
 else:
     st.write(task, 'is under construction...')
 
-
-
 # 🏴󠁧󠁢󠁷󠁬󠁳󠁿🥸😎🤨🤔👍☑️👏🤝🏻
 
 # def read_example_data():
@@ -334,5 +332,4 @@ else:
     # text = open(fname, 'r', encoding='cp1252').read()
     # lines = st.text_area('Paste reviews (replace the example text) to analyze', text, height=150).split('\n')
     # return True, pd.DataFrame.from_dict({i+1: lines[i] for i in range(len(lines))}, orient='index', columns = ['Reviews'])
-    
     # df = df.astype(dtype={'name': 'string'})
