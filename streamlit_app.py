@@ -425,7 +425,7 @@ elif task == '🎲 Sentiment Analyzer':
                         plot_sentiments(text[1], fine_grained=False)
                     else:
                         plot_sentiments(text[1])
-                    num_examples = st.slider('Number of example [5 to 20%]',  min_value=5, max_value=20, step=5)
+                    num_examples = st.slider('Number of example [5 to 20%]',  min_value=5, max_value=20, step=5, key=i)
                     df = pd.DataFrame(text[0], columns =['Review','Polarity', 'Sentiment', 'Subjectivity', 'Category'])
                     df = df[['Review','Polarity', 'Sentiment']]
                     df.index = np.arange(1, len(df) + 1)
