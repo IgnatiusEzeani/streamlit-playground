@@ -51,7 +51,7 @@ def get_selected_checkboxes():
 
 def select_columns(data, key):
     selected_columns = st.multiselect('Select column(s) below to analyse', data.columns, help='Select columns you are interested in with this selection box', key= f"{key}_cols_multiselect")
-    return data[selected_columns] if select_columns else "Null"
+    return data[selected_columns]
 
 def get_wordcloud (data, key):
     st.markdown('''☁️ Word Cloud''')
@@ -299,7 +299,7 @@ if status:
         with tabs[i]:
             _, df = data[filenames[i]]
             df = select_columns(df, key=i)
-            if df=="Null":
+            if df.empty():
                 st.info('''**NoDataColumnSelected🤨**: Please select one or more columns to analyse.''', icon="ℹ️")
             else:
                 analysis = Analysis(df)
