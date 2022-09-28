@@ -44,7 +44,7 @@ def checkbox_container(data):
         st.experimental_rerun()
     for i in data:
         st.sidebar.checkbox(i, key='dynamic_checkbox_' + i)
-        
+
 def get_selected_checkboxes():
     return [i.replace('dynamic_checkbox_','') for i in st.session_state.keys() if i.startswith('dynamic_checkbox_') and 
     st.session_state[i]]
@@ -288,8 +288,6 @@ if status:
         st.session_state['feature_list'] = feature_list
     else:
         feature_list = st.session_state['feature_list']
-    checkbox_container(feature_list)
-    feature_options = get_selected_checkboxes()
     
 # With tabbed multiselect
     filenames = list(data.keys())
@@ -300,10 +298,12 @@ if status:
             _, df = data[filenames[i]]
             df = select_columns(df, key=i)
             if df.empty:
-                st.info('''**NoDataColumnSelected🤨**: Please select one or more columns to analyse.''', icon="ℹ️")
+                st.info('''**NoColumnSelected 🤨**: Please select one or more columns to analyse.''', icon="ℹ️")
             else:
+                checkbox_container(feature_list)
+                feature_options = get_selected_checkboxes()
                 analysis = Analysis(df)
-                if not feature_options: st.info('Please select one or more actions from the sidebar checkboxes.', icon="ℹ️")
+                if not feature_options: st.info('''**NoActionSelected☑️** Select one or more actions from the sidebar checkboxes.''', icon="ℹ️")
                 if 'Data View' in feature_options: analysis.show_reviews(filenames[i])
                 if 'WordCloud' in feature_options: analysis.show_wordcloud(filenames[i])
                 if 'Keyword and Collocation' in feature_options: analysis.show_kwic(filenames[i])
