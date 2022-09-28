@@ -287,7 +287,7 @@ else: pass
 status, data = input_data
 if status:
     if 'feature_list' not in st.session_state.keys():
-        feature_list = ['Data View', 'WordCloud','Keyword and Collocation','View Keyword in Context', 'View Sentiments']
+        feature_list = ['Data View', 'WordCloud','Keyword and Collocation', 'View Sentiments']
         st.session_state['feature_list'] = feature_list
     else:
         feature_list = st.session_state['feature_list']
