@@ -420,13 +420,13 @@ elif task == '🎲 Sentiment Analyzer':
                     st.info('''**NoColumnSelected 🤨**: Please select one or more columns to analyse.''', icon="ℹ️")
                 else:
                     input_text = '\n'.join(['\n'.join([str(t) for t in list(df[col]) if t not in STOPWORDS]) for col in df])
-                    data = process_sentiments(input_text)
+                    text = process_sentiments(input_text)
                     if option == '3 Class Sentiments':
-                        plot_sentiments(data[1], fine_grained=False)
+                        plot_sentiments(text[1], fine_grained=False)
                     else:
-                        plot_sentiments(data[1])
+                        plot_sentiments(text[1])
                     num_examples = st.slider('Number of example [5 to 20%]',  min_value=5, max_value=20, step=5)
-                    df = pd.DataFrame(data[0], columns =['Review','Polarity', 'Sentiment', 'Subjectivity', 'Category'])
+                    df = pd.DataFrame(text[0], columns =['Review','Polarity', 'Sentiment', 'Subjectivity', 'Category'])
                     df = df[['Review','Polarity', 'Sentiment']]
                     df.index = np.arange(1, len(df) + 1)
                     st.dataframe(df.head(num_examples))
