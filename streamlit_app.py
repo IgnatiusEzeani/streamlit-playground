@@ -359,7 +359,7 @@ task = st.sidebar.radio("Select a task", ('🔍 Visualizer', '📃 Summarizer', 
 
 if task == '🔍 Visualizer':
     # run_visualizer()
-    st.markdown('''#### 🔍 Free Text Visualizer''')
+    st.markdown('''🔍 Free Text Visualizer''')
     option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2])) #, MESSAGES[lang][3]))
     if option == MESSAGES[lang][1]: input_data = get_data()
     elif option == MESSAGES[lang][2]: input_data = get_data(file_source='uploaded')
@@ -398,7 +398,7 @@ elif task == '📃 Summarizer':
     pass
 elif task == '🎲 Sentiment Analyzer':
     # run_sentiments()
-    st.markdown('''#### 🎲 Sentiment Analyzer''')
+    st.markdown('''🎲 Sentiment Analyzer''')
     option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2]))
     if option == MESSAGES[lang][1]: input_data = get_data()
     elif option == MESSAGES[lang][2]: input_data = get_data(file_source='uploaded')
