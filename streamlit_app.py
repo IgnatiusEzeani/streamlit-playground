@@ -1,4 +1,5 @@
 import os
+import string
 import pandas as pd
 import numpy as np
 import streamlit as st
@@ -56,8 +57,6 @@ def select_columns(data, key):
 
 def get_wordcloud (data, key):
     st.markdown('''☁️ Word Cloud''')
-    # if f"{key}_cloud" in st.session_state.keys():
-        # del st.session_state[f"{key}_cloud"]
     cloud_columns = st.multiselect(
         'Select your free text columns:', data.columns, list(data.columns), help='Select free text columns to view the word cloud', key=f"{key}_cloud_multiselect")
     input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in cloud_columns])
