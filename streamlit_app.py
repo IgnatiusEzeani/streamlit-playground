@@ -58,9 +58,10 @@ def select_columns(data, key):
 
 def get_wordcloud (data, key):
     st.markdown('''☁️ Word Cloud''')
-    cloud_columns = st.multiselect(
-        'Select your free text columns:', data.columns, list(data.columns), help='Select free text columns to view the word cloud', key=f"{key}_cloud_multiselect")
-    input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in cloud_columns])
+    # cloud_columns = st.multiselect(
+        # 'Select your free text columns:', data.columns, list(data.columns), help='Select free text columns to view the word cloud', key=f"{key}_cloud_multiselect")
+    # input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in cloud_columns])
+    input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in data])
     for c in PUNCS: input_data = input_data.lower().replace(c,'')
     
     input_bigrams = [' '.join(g) for g in nltk.ngrams(input_data.split(),2)]
@@ -189,11 +190,12 @@ def gen_ngram(text, _ngrams=2, topn=10):
             for ng, c in ngram_counts]
 
 def plot_kwic(data, key):
-    st.markdown('''💬 \U0001f44d Key Word in Context''')
-    cloud_columns = st.multiselect(
-        'Select your free text columns:', data.columns, list(data.columns), help='Select free text columns to view the word cloud', key=f"{key}_kwic_multiselect")
+    st.markdown('''💬 Key Word in Context''')
+    # cloud_columns = st.multiselect(
+        # 'Select your free text columns:', data.columns, list(data.columns), help='Select free text columns to view the word cloud', key=f"{key}_kwic_multiselect")
         
-    input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in cloud_columns])
+    # input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in cloud_columns])
+    input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in data])
     for c in PUNCS: input_data = input_data.lower().replace(c,'')
     
     try:
@@ -285,7 +287,7 @@ else: pass
 status, data = input_data
 if status:
     if 'feature_list' not in st.session_state.keys():
-        feature_list = ['View data', 'View WordCloud','View Collocation','View Keyword in Context', 'View Sentiments']
+        feature_list = ['Data View', 'WordCloud','Keyword and Collocation','View Keyword in Context', 'View Sentiments']
         st.session_state['feature_list'] = feature_list
     else:
         feature_list = st.session_state['feature_list']
@@ -302,10 +304,9 @@ if status:
             df = select_columns(df, key=i)
             analysis = Analysis(df)
             if not feature_options: st.info('Please select one or more actions from the sidebar checkboxes.', icon="ℹ️")
-            if 'View data' in feature_options: analysis.show_reviews(filenames[i])
-            if 'View WordCloud' in feature_options: analysis.show_wordcloud(filenames[i])
-            if 'View Collocation' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
-            if 'View Keyword in Context' in feature_options: analysis.show_kwic(filenames[i])
+            if 'Data View' in feature_options: analysis.show_reviews(filenames[i])
+            if 'WordCloud' in feature_options: analysis.show_wordcloud(filenames[i])
+            if 'Keyword and Collocation' in feature_options: analysis.show_kwic(filenames[i])
             # st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
             if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
 
