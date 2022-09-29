@@ -262,13 +262,14 @@ def get_data(file_source='example'):
 
 #---Polarity score
 def get_sentiment(polarity):
-  return 'Very Positive' if polarity >= 0.5 else 'Positive' if (
-    0.5 > polarity > 0.0) else 'Negative' if (0.0 > polarity >= -0.5
-    ) else 'Very Negative' if -0.5 > polarity else 'Neutral'
+  return 'Very Positive' if polarity > 0.6 else 'Positive' if (
+    0.6 >= polarity > 0.2) else 'Neutral' if (0.2 >= polarity >= -0.2
+    ) else 'Negative' if -0.2 > polarity >= -0.6 else 'Very Negative'
 
 #---Subjectivity score
 def get_subjectivity(subjectivity):
   return 'SUBJECTIVE' if subjectivity > 0.5 else 'OBJECTIVE'
+  
 #---Subjectivity distribution
 @st.cache
 def get_subjectivity_distribution(scores, sentiment_class):
