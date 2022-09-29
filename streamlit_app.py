@@ -430,8 +430,21 @@ elif task == '📃 Text Summarizer':
     elif option == MESSAGES[lang][2]: input_data = get_data(file_source='uploaded')
     # elif option == MESSAGES[lang][3]: input_data = read_example_data()
     else: pass
-
-    run_summarizer()
+    status, data = input_data
+    
+    if status:
+        filenames = list(data.keys())
+        tab_titles= [f"File-{i+1}" for i in range(len(filenames))]
+        tabs = st.tabs(tab_titles)
+        for i in range(len(tabs)):
+            with tabs[i]:
+                _, df = data[filenames[i]]
+                df = select_columns(df, key=i)
+                if df.empty:
+                    st.info('''**NoColumnSelected 🤨**: Please select one or more columns to analyse.''', icon="ℹ️")
+                else:
+                    input_text = '\n'.join(['\n'.join([str(t) for t in list(df[col]) if str(t) not in PUNCS]) for col in df])
+                    run_summarizer(input_text)
 elif task == '🎲 Sentiment Analyzer':
     # run_sentiments()
     st.markdown('''🎲 Sentiment Analyzer''')
