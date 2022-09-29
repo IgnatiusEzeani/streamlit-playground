@@ -11,3 +11,4 @@ spacytextblob
 seaborn
 textblob
 openpyxl
+summa

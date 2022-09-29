@@ -17,6 +17,8 @@ from nltk import word_tokenize, sent_tokenize, ngrams
 from wordcloud import WordCloud, ImageColorGenerator
 from nltk.corpus import stopwords
 from labels import MESSAGES
+from summarizer_labels import SUM_MESSAGES
+from summa.summarizer import summarize as summa_summarizer
 nltk.download('punkt') # one time execution
 nltk.download('stopwords')
 nltk.download('averaged_perceptron_tagger')
@@ -258,6 +260,33 @@ def get_data(file_source='example'):
             return False, st.error(f'''**UnexpectedFileError:** Some or all of your files may be empty or invalid. Acceptable file formats include `.txt`, `.xlsx`, `.xls`, `.tsv`.''', icon="🚨")
     except Exception as err:
         return False, st.error(f'''**UnexpectedFileError:** {err} Some or all of your files may be empty or invalid. Acceptable file formats include `.txt`, `.xlsx`, `.xls`, `.tsv`.''', icon="🚨")
+
+# text_rank
+def text_rank_summarize(article, ratio):
+  return summa_summarizer(article, ratio=ratio)
+
+# ------------------Summarizer--------------
+def run_summarizer(input_text, lang='en'):
+    language = st.sidebar.selectbox('Newid iaith (Change language):', ['English', 'Cymraeg'])
+    lang = 'cy' if language == 'Cymraeg' else 'en'
+    st.markdown(SUM_MESSAGES[f'{lang}.ext.md'])
+    with st.expander(SUM_MESSAGES[f'{lang}.info.title'], expanded=False):
+        st.markdown(SUM_MESSAGES[f'{lang}.md'])
+    option = st.sidebar.radio(SUM_MESSAGES[lang][7], (SUM_MESSAGES[lang][8], SUM_MESSAGES[lang][9], SUM_MESSAGES[lang][10]))
+    # input_text = get_input_text(option, lang=lang)
+    chosen_ratio = st.sidebar.slider(SUM_MESSAGES[f'{lang}.sb.sl'], min_value=10, max_value=50, step=10)/100
+
+    if st.button(SUM_MESSAGES[f'{lang}.button']):
+        if input_text and input_text!='<Rhowch eich testun (Please enter your text...)>':
+            summary = text_rank_summarize(input_text, ratio=chosen_ratio)
+            if summary:
+                st.write(text_rank_summarize(input_text, ratio=chosen_ratio))
+            else:
+                st.write(sent_tokenize(text_rank_summarize(input_text, ratio=0.5))[0])
+        else:
+            st.write("Rhowch eich testun...(Please enter your text...)")
+
+
 # --------------------Sentiments-----------------------
 
 #---Polarity score
@@ -352,12 +381,13 @@ class Analysis:
     def show_kwic(self, fname):
         plot_kwic(self.reviews, fname)
 
+
 #📃📌📈📈📉⛱🏓🏆🎲 
 
 st.sidebar.markdown('# 🌼 Welsh FreeTxt')
-task = st.sidebar.radio("Select a task", ('🔍 Visualizer', '📃 Summarizer', '🎲 Sentiment Analyzer')) #, '📉 Analyzer', '📌 Annotator', '📉 Keyphrase Extractor',))
+task = st.sidebar.radio("Select a task", ('🔍 Data Visualizer', '📃 Text Summarizer', '🎲 Sentiment Analyzer')) #, '📉 Analyzer', '📌 Annotator', '📉 Keyphrase Extractor',))
 
-if task == '🔍 Visualizer':
+if task == '🔍 Data Visualizer':
     # run_visualizer()
     st.markdown('''🔍 Free Text Visualizer''')
     option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2])) #, MESSAGES[lang][3]))
@@ -393,9 +423,15 @@ if task == '🔍 Visualizer':
                     if 'WordCloud' in feature_options: analysis.show_wordcloud(filenames[i])
                     if 'Keyword and Collocation' in feature_options: analysis.show_kwic(filenames[i])
                     if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
-elif task == '📃 Summarizer':
-    # run_summarizer()
-    pass
+elif task == '📃 Text Summarizer':
+    st.markdown('''📃 Text Summarizer''')
+    option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2])) #, MESSAGES[lang][3]))
+    if option == MESSAGES[lang][1]: input_data = get_data()
+    elif option == MESSAGES[lang][2]: input_data = get_data(file_source='uploaded')
+    # elif option == MESSAGES[lang][3]: input_data = read_example_data()
+    else: pass
+
+    run_summarizer()
 elif task == '🎲 Sentiment Analyzer':
     # run_sentiments()
     st.markdown('''🎲 Sentiment Analyzer''')
