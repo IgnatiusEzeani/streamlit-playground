@@ -24,7 +24,7 @@ nltk.download('averaged_perceptron_tagger')
 # Update with the Welsh stopwords (source: https://github.com/techiaith/ataleiriau)
 en_stopwords = list(stopwords.words('english'))
 cy_stopwords = open('welsh_stopwords.txt', 'r', encoding='iso-8859-1').read().split('\n') # replaced 'utf8' with 'iso-8859-1'
-STOPWORDS = set(en_stopwords + cy_stopwords).update(['nan'])
+STOPWORDS = set(en_stopwords + cy_stopwords)
 PUNCS = '''!→()-[]{};:'"\,<>./?@#$%^&*_~'''
 pd.set_option('display.max_colwidth',None)
 
