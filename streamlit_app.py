@@ -53,8 +53,10 @@ def get_selected_checkboxes():
 
 def select_columns(data, key):
     selected_columns = st.multiselect('Select column(s) below to analyse', data.columns, help='Select columns you are interested in with this selection box', key= f"{key}_cols_multiselect")
-    layout = st.columns(2)
-    start_row = layout[0].number_input('Choose start row', value=0, min_value=0, max_value=5)
+    layout = st.columns([3, 1, 3, 1, 3])
+    start_row = layout[0].number_input('Choose start row:', value=0, min_value=0, max_value=5)
+    # start_row = layout[2].number_input('Choose start row', value=0, min_value=0, max_value=5)
+    # start_row = layout[4].number_input('Choose start row', value=0, min_value=0, max_value=5)
     
     return data[selected_columns][start_row:].dropna(how='all')
 
