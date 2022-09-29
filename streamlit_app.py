@@ -267,12 +267,12 @@ def text_rank_summarize(article, ratio):
 
 # ------------------Summarizer--------------
 def run_summarizer(input_text, lang='en'):
-    language = st.sidebar.selectbox('Newid iaith (Change language):', ['English', 'Cymraeg'])
-    lang = 'cy' if language == 'Cymraeg' else 'en'
-    st.markdown(SUM_MESSAGES[f'{lang}.ext.md'])
-    with st.expander(SUM_MESSAGES[f'{lang}.info.title'], expanded=False):
-        st.markdown(SUM_MESSAGES[f'{lang}.md'])
-    option = st.sidebar.radio(SUM_MESSAGES[lang][7], (SUM_MESSAGES[lang][8], SUM_MESSAGES[lang][9], SUM_MESSAGES[lang][10]))
+    # language = st.sidebar.selectbox('Newid iaith (Change language):', ['English', 'Cymraeg'])
+    # lang = 'cy' if language == 'Cymraeg' else 'en'
+    # st.markdown(SUM_MESSAGES[f'{lang}.ext.md'])
+    # with st.expander(SUM_MESSAGES[f'{lang}.info.title'], expanded=False):
+        # st.markdown(SUM_MESSAGES[f'{lang}.md'])
+    # option = st.sidebar.radio(SUM_MESSAGES[lang][7], (SUM_MESSAGES[lang][8], SUM_MESSAGES[lang][9], SUM_MESSAGES[lang][10]))
     # input_text = get_input_text(option, lang=lang)
     chosen_ratio = st.sidebar.slider(SUM_MESSAGES[f'{lang}.sb.sl'], min_value=10, max_value=50, step=10)/100
 
