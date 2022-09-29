@@ -381,7 +381,18 @@ class Analysis:
     def show_kwic(self, fname):
         plot_kwic(self.reviews, fname)
 
-
+# ----------------
+st.set_page_config(
+     page_title='Welsh Free Text Tool',
+     page_icon='🌼',
+     layout="wide",
+     initial_sidebar_state="expanded",
+     menu_items={
+         'Get Help': "https://ucrel.lancs.ac.uk/freetxt/",
+         'Report a bug': "https://github.com/UCREL/welsh-freetxt-app/issues",
+         'About': '''## The FreeTxt tool supports bilingual (English and Welsh) free text data analysis of surveys and questionnaire responses'''
+     }
+ )
 #📃📌📈📈📉⛱🏓🏆🎲 
 
 st.sidebar.markdown('# 🌼 Welsh FreeTxt')
@@ -399,7 +410,7 @@ if task == '🔍 Data Visualizer':
     status, data = input_data
     if status:
         if 'feature_list' not in st.session_state.keys():
-            feature_list = ['Data View', 'WordCloud','Keyword and Collocation']
+            feature_list = ['Data View', 'WordCloud', 'Keyword in Context & Collocation']
             st.session_state['feature_list'] = feature_list
         else:
             feature_list = st.session_state['feature_list']
@@ -413,7 +424,7 @@ if task == '🔍 Data Visualizer':
         for i in range(len(tabs)):
             with tabs[i]:
                 _, df = data[filenames[i]]
-                df = select_columns(df, key=i)
+                df = select_columns(df, key=i).astype(str)
                 if df.empty:
                     st.info('''**NoColumnSelected 🤨**: Please select one or more columns to analyse.''', icon="ℹ️")
                 else:
@@ -421,8 +432,8 @@ if task == '🔍 Data Visualizer':
                     if not feature_options: st.info('''**NoActionSelected☑️** Select one or more actions from the sidebar checkboxes.''', icon="ℹ️")
                     if 'Data View' in feature_options: analysis.show_reviews(filenames[i])
                     if 'WordCloud' in feature_options: analysis.show_wordcloud(filenames[i])
-                    if 'Keyword and Collocation' in feature_options: analysis.show_kwic(filenames[i])
-                    if 'View Sentiments' in feature_options: st.info('Sorry, this feature is being updated. Call back later.', icon="ℹ️")
+                    if 'Keyword in Context & Collocation' in feature_options: analysis.show_kwic(filenames[i])
+
 elif task == '📃 Text Summarizer':
     st.markdown('''📃 Text Summarizer''')
     option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2])) #, MESSAGES[lang][3]))
@@ -439,19 +450,18 @@ elif task == '📃 Text Summarizer':
         for i in range(len(tabs)):
             with tabs[i]:
                 _, df = data[filenames[i]]
-                df = select_columns(df, key=i)
+                df = select_columns(df, key=i).astype(str)
                 if df.empty:
                     st.info('''**NoColumnSelected 🤨**: Please select one or more columns to analyse.''', icon="ℹ️")
                 else:
                     input_text = '\n'.join(['\n'.join([str(t) for t in list(df[col]) if str(t) not in PUNCS]) for col in df])
-                    run_summarizer(input_text)
+                    run_summarizer(input_text[:2000])
 elif task == '🎲 Sentiment Analyzer':
     # run_sentiments()
     st.markdown('''🎲 Sentiment Analyzer''')
     option = st.sidebar.radio(MESSAGES[lang][0], (MESSAGES[lang][1], MESSAGES[lang][2]))
     if option == MESSAGES[lang][1]: input_data = get_data()
     elif option == MESSAGES[lang][2]: input_data = get_data(file_source='uploaded')
-    # elif option == MESSAGES[lang][3]: input_data = read_example_data()
     else: pass
     status, data = input_data
     
@@ -464,7 +474,7 @@ elif task == '🎲 Sentiment Analyzer':
         for i in range(len(tabs)):
             with tabs[i]:
                 _, df = data[filenames[i]]
-                df = select_columns(df, key=i)
+                df = select_columns(df, key=i).astype(str)
                 if df.empty:
                     st.info('''**NoColumnSelected 🤨**: Please select one or more columns to analyse.''', icon="ℹ️")
                 else:
