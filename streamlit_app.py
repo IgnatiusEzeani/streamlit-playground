@@ -57,10 +57,12 @@ def select_columns(data, key):
     start_row = layout[0].number_input('Choose start row:', value=0, min_value=0, max_value=5)
     if len(select_columns)>2:
         filter_column = layout[2].selectbox('Select filter column', select_columns)
-        if filter_column: filter_key = layout[4].selectbox('Select filter key', select_columns)
+        if filter_column: 
+            filter_key = layout[4].selectbox('Select filter key', set(data[filter_column]))
             data = data[selected_columns][start_row:].dropna(how='all')
             return data.loc[data[filter_column] == filter_key]
-    return data[selected_columns][start_row:].dropna(how='all')
+    else:
+        return data[selected_columns][start_row:].dropna(how='all')
 
 def get_wordcloud (data, key):
     st.markdown('''☁️ Word Cloud''')
