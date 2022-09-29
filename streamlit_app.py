@@ -54,7 +54,7 @@ def get_selected_checkboxes():
 def select_columns(data, key):
     selected_columns = st.multiselect('Select column(s) below to analyse', data.columns, help='Select columns you are interested in with this selection box', key= f"{key}_cols_multiselect")
     layout = st.columns([3, 1, 3, 1, 3])
-    start_row = layout[0].number_input('Choose start row:', value=0, min_value=0, max_value=5)
+    if selected_columns: start_row = layout[0].number_input('Choose start row:', value=0, min_value=0, max_value=5)
     if len(selected_columns)>2:
         filter_column = layout[2].selectbox('Select filter column', select_columns)
         if filter_column: 
