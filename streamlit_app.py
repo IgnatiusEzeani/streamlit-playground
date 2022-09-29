@@ -53,7 +53,8 @@ def get_selected_checkboxes():
 
 def select_columns(data, key):
     selected_columns = st.multiselect('Select column(s) below to analyse', data.columns, help='Select columns you are interested in with this selection box', key= f"{key}_cols_multiselect")
-    return data[selected_columns].dropna(how='all')
+    start_row = st.number_input('Choose start row', min_value=0, min_value=5)
+    return data[selected_columns][start_row:].dropna(how='all')
 
 def get_wordcloud (data, key):
     st.markdown('''☁️ Word Cloud''')
@@ -267,15 +268,7 @@ def text_rank_summarize(article, ratio):
 
 # ------------------Summarizer--------------
 def run_summarizer(input_text, lang='en'):
-    # language = st.sidebar.selectbox('Newid iaith (Change language):', ['English', 'Cymraeg'])
-    # lang = 'cy' if language == 'Cymraeg' else 'en'
-    # st.markdown(SUM_MESSAGES[f'{lang}.ext.md'])
-    # with st.expander(SUM_MESSAGES[f'{lang}.info.title'], expanded=False):
-        # st.markdown(SUM_MESSAGES[f'{lang}.md'])
-    # option = st.sidebar.radio(SUM_MESSAGES[lang][7], (SUM_MESSAGES[lang][8], SUM_MESSAGES[lang][9], SUM_MESSAGES[lang][10]))
-    # input_text = get_input_text(option, lang=lang)
     chosen_ratio = st.sidebar.slider(SUM_MESSAGES[f'{lang}.sb.sl'], min_value=10, max_value=50, step=10)/100
-
     if st.button(SUM_MESSAGES[f'{lang}.button']):
         if input_text and input_text!='<Rhowch eich testun (Please enter your text...)>':
             summary = text_rank_summarize(input_text, ratio=chosen_ratio)
