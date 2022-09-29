@@ -65,8 +65,8 @@ def select_columns(data, key):
     else:
         return data[selected_columns][start_row:].dropna(how='all')
         
-for i in len(data):
-    data = data.drop(data[(df[data.score < 50) & (df.score > 20)].index)
+# for i in len(data):
+    # data = data.drop(data[(df[data.score < 50) & (df.score > 20)].index)
 
 
 
