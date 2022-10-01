@@ -383,7 +383,9 @@ class Analysis:
     def show_reviews(self, fname):
         st.markdown(f'''
         ---
+        
         📄 Viewing data: `{fname}`
+        
         ---
         ''')
         st.dataframe(self.reviews)
