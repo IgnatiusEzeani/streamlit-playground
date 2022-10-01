@@ -54,7 +54,6 @@ def get_selected_checkboxes():
 def select_columns(data, key):
     layout = st.columns([7, 0.5, 3, 0.5, 3, 0.5, 3])
     selected_columns = layout[0].multiselect('Select column(s) below to analyse', data.columns, help='Select columns you are interested in with this selection box', key= f"{key}_cols_multiselect")
-    # layout = st.columns([3, 1, 3, 1, 3, 1, 3])
     start_row=0
     if selected_columns: start_row = layout[2].number_input('Choose start row:', value=0, min_value=0, max_value=5)
     if len(selected_columns)>=2:
@@ -67,7 +66,14 @@ def select_columns(data, key):
         return data[selected_columns][start_row:].dropna(how='all').drop_duplicates()
 
 def get_wordcloud (data, key):
-    st.markdown('''☁️ Word Cloud''')
+    st.markdown('''
+    ---
+    
+    ☁️ Word Cloud
+    
+    ---
+    ''')
+    
     layout = st.columns([7, 1, 4])
     cloud_columns = layout[0].multiselect(
         'Which column do you wish to view the word cloud from?', data.columns, list(data.columns), help='Select free text columns to view the word cloud', key=f"{key}_cloud_multiselect")
