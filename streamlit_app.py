@@ -381,7 +381,11 @@ class Analysis:
         self.reviews = reviews
 
     def show_reviews(self, fname):
-        st.markdown(f'''📄 Viewing data: `{fname}`''')
+        st.markdown(f'''
+        ---
+        📄 Viewing data: `{fname}`
+        ---
+        ''')
         st.dataframe(self.reviews)
         st.write('Total number of reviews: ', len(self.reviews))
         
