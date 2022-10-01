@@ -61,14 +61,9 @@ def select_columns(data, key):
         if filter_column: 
             filter_key = layout[4].selectbox('Select filter key', set(data[filter_column]))
             data = data[selected_columns][start_row:].dropna(how='all')
-            return data.loc[data[filter_column] == filter_key]
+            return data.loc[data[filter_column] == filter_key].drop_duplicates()
     else:
-        return data[selected_columns][start_row:].dropna(how='all')
-        
-# for i in len(data):
-    # data = data.drop(data[(df[data.score < 50) & (df.score > 20)].index)
-
-
+        return data[selected_columns][start_row:].dropna(how='all').drop_duplicates()
 
 def get_wordcloud (data, key):
     st.markdown('''☁️ Word Cloud''')
