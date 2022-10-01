@@ -52,7 +52,7 @@ def get_selected_checkboxes():
     st.session_state[i]]
 
 def select_columns(data, key):
-    layout = st.columns([3, 1, 3, 1, 3, 1, 3])
+    layout = st.columns([7, 0.5, 3, 0.5, 3, 0.5, 3])
     selected_columns = layout[0].multiselect('Select column(s) below to analyse', data.columns, help='Select columns you are interested in with this selection box', key= f"{key}_cols_multiselect")
     # layout = st.columns([3, 1, 3, 1, 3, 1, 3])
     start_row=0
@@ -68,7 +68,8 @@ def select_columns(data, key):
 
 def get_wordcloud (data, key):
     st.markdown('''☁️ Word Cloud''')
-    cloud_columns = st.multiselect(
+    layout = st.columns([7, 1, 4])
+    cloud_columns = layout[0].multiselect(
         'Which column do you wish to view the word cloud from?', data.columns, list(data.columns), help='Select free text columns to view the word cloud', key=f"{key}_cloud_multiselect")
     input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in cloud_columns])
     # input_data = ' '.join([' '.join([str(t) for t in list(data[col]) if t not in STOPWORDS]) for col in data])
@@ -126,13 +127,13 @@ def get_wordcloud (data, key):
             wordcloud = wc.generate_from_frequencies(Counter([token.text for token in doc if token.pos_ == "NUM"]))
         else: 
             pass
-        color = st.radio('Switch image colour:', ('Color', 'Black'), key=f"{key}_cloud_radio")
+        color = layout[0].radio('Switch image colour:', ('Color', 'Black'), key=f"{key}_cloud_radio")
         img_cols = ImageColorGenerator(mask) if color == 'Black' else None
         plt.figure(figsize=[20,15])
         plt.imshow(wordcloud.recolor(color_func=img_cols), interpolation="bilinear")
         plt.axis("off")
         st.set_option('deprecation.showPyplotGlobalUse', False)
-        st.pyplot()
+        layout[0].pyplot()
     except ValueError as err:
         st.info(f'Oh oh.. Please ensure that at least one free text column is chosen: {err}', icon="🤨")
 
