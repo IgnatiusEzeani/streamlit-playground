@@ -52,14 +52,15 @@ def get_selected_checkboxes():
     st.session_state[i]]
 
 def select_columns(data, key):
-    layout = st.columns([7, 0.5, 3, 0.5, 3, 0.5, 3])
+    layout = st.columns([7, 0.2, 2, 0.2, 2, 0.2 3, 0.2, 3])
     selected_columns = layout[0].multiselect('Select column(s) below to analyse', data.columns, help='Select columns you are interested in with this selection box', key= f"{key}_cols_multiselect")
     start_row=0
     if selected_columns: start_row = layout[2].number_input('Choose start row:', value=0, min_value=0, max_value=5)
-    if len(selected_columns)>=2:
-        filter_column = layout[4].selectbox('Select filter column', selected_columns)
+    
+    if len(selected_columns)>=2 and layout[4].checkbox('Filter rows?'):
+        filter_column = layout[6].selectbox('Select filter column', selected_columns)
         if filter_column: 
-            filter_key = layout[6].selectbox('Select filter key', set(data[filter_column]))
+            filter_key = layout[8].selectbox('Select filter key', set(data[filter_column]))
             data = data[selected_columns][start_row:].dropna(how='all')
             return data.loc[data[filter_column] == filter_key].drop_duplicates()
     else:
