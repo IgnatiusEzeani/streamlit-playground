@@ -52,7 +52,7 @@ def get_selected_checkboxes():
     st.session_state[i]]
 
 def select_columns(data, key):
-    layout = st.columns([7, 0.2, 2, 0.2, 2, 0.2 3, 0.2, 3])
+    layout = st.columns([7, 0.2, 2, 0.2, 2, 0.2, 3, 0.2, 3])
     selected_columns = layout[0].multiselect('Select column(s) below to analyse', data.columns, help='Select columns you are interested in with this selection box', key= f"{key}_cols_multiselect")
     start_row=0
     if selected_columns: start_row = layout[2].number_input('Choose start row:', value=0, min_value=0, max_value=5)
