@@ -103,7 +103,7 @@ def get_wordcloud (data, key):
             font_path='font/Ubuntu-B.ttf'
         ).generate(input_data)
             
-        cloud_type = st.selectbox('Choose cloud category:',
+        cloud_type = layout[0].selectbox('Choose cloud category:',
             ['All words', 'Bigrams', 'Trigrams', '4-grams', 'Nouns', 'Proper nouns', 'Verbs', 'Adjectives', 'Adverbs', 'Numbers'], key= f"{key}_cloud_select")
         if cloud_type == 'All words':
             wordcloud = wc.generate(input_data)        
