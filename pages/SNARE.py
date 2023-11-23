@@ -9,4 +9,4 @@ sac.buttons([
     sac.ButtonsItem(label='link', icon='share-fill', href='https://ant.design/components/button'),
 ], position='left', format_func='title', align='center')
 
-text_data = st.text_area(, 'Copy and paste your data from other applications or websites. You can use tabular (TSV, CSV, DSV) or JSON data.', height=200)
+text_data = st.text_area('','Copy and paste your data from other applications or websites. You can use tabular (TSV, CSV, DSV) or JSON data.', height=200)
