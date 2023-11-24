@@ -2,12 +2,11 @@ import streamlit as st
 import streamlit_antd_components as sac
 
 sac.buttons([
-    sac.ButtonsItem(label='Paste your corpus', icon='copy', color='#b9ebe2'),
-    sac.ButtonsItem(label='Upload your corpus', icon='upload', color='#b9ebe2'),
-    sac.ButtonsItem(label='Run SPARQL Query', color='#b9ebe2'),
-    sac.ButtonsItem(label='Use Sample Corpus', disabled=True, color='#b9ebe2'),
-    sac.ButtonsItem(label='Open Existing Project', icon='paste', color='#b9ebe2'),
-#    sac.ButtonsItem(label='Use Sample Corpus', disabled=True, color='#b9ebe2'),
+    sac.ButtonsItem(label= 'Open Existing Project', icon='paste', color='#b9ebe2'sac.ButtonsItem(label= 'Paste your corpus', icon='copy', color='#b9ebe2'),
+    sac.ButtonsItem(label= 'Upload your corpus', icon='upload', color='#b9ebe2'),
+    sac.ButtonsItem(label= 'Use Sample Corpus', color='#b9ebe2'),
+    sac.ButtonsItem(label= 'Run SPARQL Query', disabled=True, color='#b9ebe2'),
+    ),
 #    sac.ButtonsItem(label='Open an existing project', icon='share-fill', href='https://ant.design/components/button'),
 ], position='left', format_func='title', align='center')
 
