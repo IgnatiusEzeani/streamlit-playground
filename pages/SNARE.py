@@ -1,8 +1,8 @@
 import streamlit as st
 import streamlit_antd_components as sac
-from PIL import Image
-image = Image.open('img/snare.png')
-st.image(image)
+# from PIL import Image
+# image = Image.open('img/snare.png')
+# st.image(image)
 
 sac.buttons([
     sac.ButtonsItem(label='Open Existing Project', icon='folder2-open',color='#b9ebe2'),
