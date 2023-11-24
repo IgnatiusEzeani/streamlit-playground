@@ -5,8 +5,8 @@ import streamlit_antd_components as sac
 # st.image(image)
 
 sac.buttons([
-    sac.ButtonsItem(label='Open Existing Project', icon='folder2-open',color='#b9ebe2'),
     sac.ButtonsItem(label='Paste your corpus', icon='clipboard', color='#b9ebe2'),
+    sac.ButtonsItem(label='Open Existing Project', icon='folder2-open',color='#b9ebe2'),
     sac.ButtonsItem(label='Upload your corpus', icon='upload', color='#b9ebe2'),
     sac.ButtonsItem(label='Use Sample Corpus', icon='gift', color='#b9ebe2'),
     sac.ButtonsItem(label='Run SPARQL Query', icon='cloud', disabled=True, color='#b9ebe2'),
