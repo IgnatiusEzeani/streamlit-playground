@@ -19,6 +19,8 @@ sac.buttons([
 
 text_data = st.text_area('', placeholder='Copy and paste your data from other applications or websites. You can use tabular (TSV, CSV, DSV) or JSON data.', height=200, )
 
+st.write()
+
 sac.buttons([
     sac.ButtonsItem(label='NEXT', color='#b9ebe2'),
 ], format_func='title', align='end')
