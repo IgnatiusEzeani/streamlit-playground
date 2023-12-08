@@ -4,6 +4,10 @@ import streamlit_antd_components as sac
 # image = Image.open('img/snare.png')
 # st.image(image)
 
+def do_stuff_on_page_load():
+    st.set_page_config(layout="wide")
+
+do_stuff_on_page_load()
 sac.buttons([
     sac.ButtonsItem(label='Paste your corpus', icon='clipboard', color='#b9ebe2'),
     sac.ButtonsItem(label='Open Existing Project', icon='folder2-open',color='#b9ebe2'),
