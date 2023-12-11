@@ -58,5 +58,7 @@ elif button=='Upload your corpus':
         # Can be used wherever a "file-like" object is accepted:
         dataframe = pd.read_csv(uploaded_file)
         st.write(dataframe)
+elif button=='Use Sample Corpus':
+    st.info(f'''**Under Construction**:This page is still being developed.''', icon="🚧")
 else:
     pass
