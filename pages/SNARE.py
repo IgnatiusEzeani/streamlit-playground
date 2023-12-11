@@ -12,12 +12,13 @@ def do_stuff_on_page_load():
 
 do_stuff_on_page_load()
 
-st.markdown('''<style> ul{list-style-type: none; padding: 0; margin:0; background-color: #d5dade;}
+st.markdown('''<style> ul{list-style-type: none; padding: 1px 1px; margin:0; background-color: #d5dade;}
             li {margin: 0; display: inline; padding: 10px;}
             li.left {float: left;} li.right {float: right;} li a:hover {background-color: #111; } </style>''', unsafe_allow_html=True)
 
-# padding: 1px 1px; margin: 0; overflow: hidden; 
+# padding: 1px 1px; margin: 0; overflow: hidden;
 # display: block; color: white; text-align: center; text-decoration: none;
+
 st.markdown("""<ul><li class='left'><b>📑SNARE 1.0</b> Spatial Narrative Representation Environment</li>
             <li class='right'><a href="#SNARE">About</a></li> 
             <li class='right'><a href="#ADVANCED">Advanced</a></li></ul>""", unsafe_allow_html=True)
