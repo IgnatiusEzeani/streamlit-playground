@@ -12,6 +12,16 @@ def do_stuff_on_page_load():
     )
 
 do_stuff_on_page_load()
+
+
+st.markdown('''<style> ul {list-style-type: none; margin: 0; padding: 0; overflow: hidden; background-color: #adb5ba;}
+            li {float: left;} li a {display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none;}
+            li a:hover {background-color: #111; } </style>''', unsafe_allow_html=True)
+
+st.markdown(""" <ul>
+        <li>SNARE 1.0 Spatial Narrative Representation Environment</li>
+        </ul>""", unsafe_allow_html=True)
+
 button = sac.buttons([
     sac.ButtonsItem(label='Use Sample Corpus', icon='gift', color='#b9ebe2'),
     sac.ButtonsItem(label='Upload your corpus', icon='upload', color='#b9ebe2'),
@@ -21,18 +31,6 @@ button = sac.buttons([
     # sac.ButtonsItem(label='Open an existing project', icon='share-fill', href='https://ant.design/components/button'),
     ], position='left', format_func='title', align='center')
 
-st.markdown('''<style> ul {list-style-type: none; margin: 0; padding: 0; overflow: hidden; background-color: #333;}
-            li {float: left;} li a {display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none;}
-            li a:hover {background-color: #111; } </style>''', unsafe_allow_html=True)
-
-st.markdown("""
-    <ul>
-    <li><a href="default.asp">Home</a></li>
-    <li><a href="news.asp">News</a></li>
-    <li><a href="contact.asp">Contact</a></li>
-    <li><a href="about.asp">About</a></li>
-    </ul>
-""", unsafe_allow_html=True)
 
 if button=='Paste your corpus':
     text_data = st.text_area('', placeholder='Copy and paste your data from other applications or websites. You can use tabular (TSV, CSV, DSV) or JSON data.', height=200, )
