@@ -32,12 +32,12 @@ if button=='Paste your corpus':
         ], format_func='title', align='end')
 elif button=='Open Existing Project':
     sac.tree(items=[
-        sac.TreeItem('CLDW: Corpus of Lake District Writings', 
+        sac.TreeItem('CLDW', 
                      icon="book",
                     #  tag=sac.Tag('tag', color='red', bordered=False), 
                      tooltip="Dataset of Corpus of Lake District Writings"),
 
-        sac.TreeItem("HST: Holocaust Survivors' Testmonies", 
+        sac.TreeItem('HST', 
                      icon='chat-text', 
                      tooltip="Dataset of Holocaust Survivors' Testmonies")])
 else:
