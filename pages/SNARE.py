@@ -1,4 +1,6 @@
 import streamlit as st
+import pandas as pd
+from io import StringIO
 import streamlit_antd_components as sac
 # from PIL import Image
 # image = Image.open('img/snare.png')
@@ -32,13 +34,29 @@ if button=='Paste your corpus':
         ], format_func='title', align='end')
 elif button=='Open Existing Project':
     sac.tree(items=[
-        sac.TreeItem('CLDW', 
-                     icon="book",
+        sac.TreeItem('CLDW', icon="book",
                     #  tag=sac.Tag('tag', color='red', bordered=False), 
                      tooltip="Dataset of Corpus of Lake District Writings"),
 
-        sac.TreeItem('HST', 
-                     icon='chat-text', 
+        sac.TreeItem('HST',  icon='chat-text', 
                      tooltip="Dataset of Holocaust Survivors' Testmonies")])
+elif button=='Upload your corpus':
+    uploaded_file = st.file_uploader("Choose a file")
+    if uploaded_file is not None:
+        # To read file as bytes:
+        bytes_data = uploaded_file.getvalue()
+        st.write(bytes_data)
+
+        # To convert to a string based IO:
+        stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
+        st.write(stringio)
+
+        # To read file as string:
+        string_data = stringio.read()
+        st.write(string_data)
+
+        # Can be used wherever a "file-like" object is accepted:
+        dataframe = pd.read_csv(uploaded_file)
+        st.write(dataframe)
 else:
     pass
