@@ -13,19 +13,18 @@ def do_stuff_on_page_load():
 
 do_stuff_on_page_load()
 
-
 # st.markdown('''<style> ul {list-style-type: none; margin: 0; padding: 1; overflow: hidden; background-color: #adb5ba;}
 #             li {float: left;} li a {display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none;}
 #             li a:hover {background-color: #111; } </style>''', unsafe_allow_html=True)
+
+
+st.write(open("https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css").read())
 
 st.markdown('''<style> ul {list-style-type: none; margin: 0; padding: 1; overflow: hidden; background-color: #adb5ba;}
             #leftbox {float: left;} #rightbox {float: right;} li a {display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none;}
             li a:hover {background-color: #111; } </style>''', unsafe_allow_html=True)
 
-st.markdown("""<div id="leftbox"> <ul> <li><b>SNARE 1.0</b> Spatial Narrative Representation Environment</li> </ul> <div id="rightbox"> <li>Advanced About</li> <div> <div>
-             
-            ### 1. Load your corpus""",
-            unsafe_allow_html=True)
+st.markdown("""<li><b>SNARE 1.0</b> Spatial Narrative Representation Environment</li>""", unsafe_allow_html=True)
 
 # st.markdown('### 1. Load your corpus')
 
@@ -40,7 +39,7 @@ button = sac.buttons([
 
 
 if button=='Paste your corpus':
-    text_data = st.text_area('', placeholder='Copy and paste your data from other applications or websites. You can use tabular (TSV, CSV, DSV) or JSON data.', height=200, )
+    text_data = st.text_area('', placeholder='Copy and paste your data from other applications or websites. You can use tabular (TSV, CSV, DSV) or JSON data.', height=250)
     sac.buttons([
         sac.ButtonsItem(label='NEXT', color='#b9ebe2'),
         ], format_func='title', align='end')
