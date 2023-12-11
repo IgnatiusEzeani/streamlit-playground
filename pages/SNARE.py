@@ -1,6 +1,4 @@
 import streamlit as st
-import pandas as pd
-from io import StringIO
 import streamlit_antd_components as sac
 
 
@@ -68,3 +66,5 @@ elif button=='Use Sample Corpus':
     st.info(f'''**Under Construction:** This page is still being developed.''', icon="🚧")
 else:
     pass
+
+st.markdown("""<ul><li class='left'><b>SNARE 1.0</b> Spatial Narrative Representation Environment</li>""", unsafe_allow_html=True)
