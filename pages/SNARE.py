@@ -20,8 +20,8 @@ st.markdown("""<ul><li class='left'><b>📑SNARE 1.0</b> Spatial Narrative Repre
             <li class='right'><a href="#SNARE">About</a></li> 
             <li class='right'><a href="#ADVANCED">Advanced</a></li></ul>""", unsafe_allow_html=True)
 
-
-# st.markdown('### 1. Load your corpus')
+with st.container(key=0):
+    st.markdown('### 1. Load your corpus')
 
 button = sac.buttons([
     sac.ButtonsItem(label='Use Sample Corpus', icon='gift', color='#b9ebe2'),
@@ -32,7 +32,7 @@ button = sac.buttons([
     # sac.ButtonsItem(label='Open an existing project', icon='share-fill', href='https://ant.design/components/button'),
     ], position='left', format_func='title', align='center')
 
-with st.container():
+with st.container(key=1):
     if button=='Paste your corpus':
         text_data = st.text_area('', placeholder='Copy and paste your data from other applications or websites. You can use tabular (TSV, CSV, DSV) or JSON data.', height=250)
         sac.buttons([
