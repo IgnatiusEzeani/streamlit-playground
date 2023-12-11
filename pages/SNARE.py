@@ -12,7 +12,7 @@ def do_stuff_on_page_load():
 
 do_stuff_on_page_load()
 
-st.markdown('''<style> ul {list-style-type: none; bottom:0; margin: 0; padding: 12px 12px; overflow: hidden; background-color: #adb5ba;}
+st.markdown('''<style> ul {list-style-type: none; margin: 0; overflow: hidden; background-color: #adb5ba;}
             li.left {float: left;} li.right {float: right;} li a {display: block; color: white; text-align: center; text-decoration: none;}
             li a:hover {background-color: #111; } </style>''', unsafe_allow_html=True)
 
