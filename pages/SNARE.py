@@ -26,9 +26,8 @@ st.markdown("""<ul>
             <div id="leftbox">
                 <li><b>SNARE 1.0</b> Spatial Narrative Representation Environment</li>
             <div>
-            <div id="rightbox">s
-                <li>Advanced</li>
-                <li>About</li>
+            <div id="rightbox">
+                <li>Advanced About</li>
             <div>
             </ul>
             1. Load your corpus""", 
