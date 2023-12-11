@@ -69,4 +69,4 @@ elif button=='Use Sample Corpus':
 else:
     pass
 
-st.markdown("""<ul padding=14px 14px><li class='left'><b>SNARE 1.0</b> Spatial Narrative Representation Environment</li>""", unsafe_allow_html=True)
+st.markdown("""<ul padding=10px 10px><li class='left'><b>SNARE 1.0</b> Spatial Narrative Representation Environment</li>""", unsafe_allow_html=True)
