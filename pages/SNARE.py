@@ -21,24 +21,17 @@ button = sac.buttons([
     # sac.ButtonsItem(label='Open an existing project', icon='share-fill', href='https://ant.design/components/button'),
     ], position='left', format_func='title', align='center')
 
-st.markdown('''<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
-            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">''', unsafe_allow_html=True)
+st.markdown('''<style> ul {list-style-type: none; margin: 0; padding: 0; overflow: hidden; background-color: #333;}
+            li {float: left;} li a {display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none;}
+            li a:hover {background-color: #111; } </style>''', unsafe_allow_html=True)
 
 st.markdown("""
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #adb5ba;"> 
-  <a class="navbar-brand" </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
     <ul>
     <li><a href="default.asp">Home</a></li>
     <li><a href="news.asp">News</a></li>
     <li><a href="contact.asp">Contact</a></li>
     <li><a href="about.asp">About</a></li>
     </ul>
-  </div>
-</nav>
 """, unsafe_allow_html=True)
 
 if button=='Paste your corpus':
