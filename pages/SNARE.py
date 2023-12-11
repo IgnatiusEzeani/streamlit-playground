@@ -28,7 +28,7 @@ with st.container():
 
 button='Paste your corpus'
 
-col1,_,col2,_,col3,_,col4 = st.columns([3, 0.5 ,3, 0.5,3, 0.5,3])
+col1,_,col2,_,col3,_,col4_,col5 = st.columns([2.5, 0.2, 2.5, 0.2, 2.5, 0.2, 2.5, 0.2, 2.5])
 
 with col1:
     sac.buttons([sac.ButtonsItem(label='Use Sample Corpus', icon='gift', color='#b9ebe2')], align='center')
@@ -42,7 +42,7 @@ with col3:
 with col4:
     sac.buttons([sac.ButtonsItem(label='Open Existing Project', icon='folder2-open',color='#b9ebe2')], align='center')
 
-with col4:
+with col5:
     sac.buttons([sac.ButtonsItem(label='Run SPARQL Query', icon='cloud', color='#b9ebe2', disabled=True)], align='center')
 
 
