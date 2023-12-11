@@ -19,7 +19,7 @@ st.markdown('''<style> ul {list-style-type: none; margin: 0; padding: 0; overflo
             li a:hover {background-color: #111; } </style>''', unsafe_allow_html=True)
 
 st.markdown(""" <ul>
-        <li>SNARE 1.0 Spatial Narrative Representation Environment</li>
+        <li>**SNARE 1.0** Spatial Narrative Representation Environment</li>
         </ul>""", unsafe_allow_html=True)
 
 button = sac.buttons([
