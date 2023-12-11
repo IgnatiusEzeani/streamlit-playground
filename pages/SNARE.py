@@ -16,7 +16,7 @@ st.markdown('''<style> ul {list-style-type: none; bottom:0; margin: 0; padding: 
             li.left {float: left;} li.right {float: right;} li a {display: block; color: white; text-align: center; padding: 14x 14px; text-decoration: none;}
             li a:hover {background-color: #111; } </style>''', unsafe_allow_html=True)
 
-st.markdown("""<ul><li class='left'><b>SNARE 1.0</b> Spatial Narrative Representation Environment</li>
+st.markdown("""<ul><li class='left'><b>📑SNARE 1.0</b> Spatial Narrative Representation Environment</li>
             <li class='right'><a href="#SNARE">About</a></li> 
             <li class='right'><a href="#ADVANCED">Advanced</a></li></ul>""", unsafe_allow_html=True)
 
@@ -69,4 +69,4 @@ elif button=='Use Sample Corpus':
 else:
     pass
 
-st.markdown("""<ul padding=10px 10px><li class='left'; padding=10px 10px><b>SNARE 1.0</b> Spatial Narrative Representation Environment</li>""", unsafe_allow_html=True)
+st.markdown("""<ul> <li class='left'><b>📑 SNARE 1.0</b> Spatial Narrative Representation Environment</li>""", unsafe_allow_html=True)
