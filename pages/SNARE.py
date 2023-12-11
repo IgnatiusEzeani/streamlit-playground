@@ -26,7 +26,7 @@ with st.container():
     st.markdown('### 1. Load your corpus')
 
 
-button=='Paste your corpus'
+button='Paste your corpus'
 
 col1,_,col2,_,col3,_,col4 = st.columns([3, 0.5 ,3, 0.5,3, 0.5,3])
 
