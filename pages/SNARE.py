@@ -35,6 +35,9 @@ st.markdown("""
       <li class="nav-item active">
         <a class="nav-link disabled" href="#">SNARE 1.0 <span class="sr-only">(current)</span></a>
       </li>
+      <li class="nav-item active">
+        <a class="nav-link disabled" href="#">SNARE 1.0 <span class="sr-only">(current)</span></a>
+      </li>
     </ul>
   </div>
 </nav>
