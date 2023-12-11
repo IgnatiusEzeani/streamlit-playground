@@ -22,6 +22,8 @@ st.markdown(""" <ul>
         <li><b>SNARE 1.0</b> Spatial Narrative Representation Environment</li>
         </ul>""", unsafe_allow_html=True)
 
+st.markdown('# 1. Load your corpus')
+
 button = sac.buttons([
     sac.ButtonsItem(label='Use Sample Corpus', icon='gift', color='#b9ebe2'),
     sac.ButtonsItem(label='Upload your corpus', icon='upload', color='#b9ebe2'),
