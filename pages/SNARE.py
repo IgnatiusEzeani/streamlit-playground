@@ -30,8 +30,9 @@ st.markdown("""<ul>
                 <li>Advanced</li>
                 <li>About</li>
             <div>
-            </ul>""", 
-            '### 1. Load your corpus',
+            </ul>
+            1. Load your corpus""", 
+        
             unsafe_allow_html=True)
 
 # st.markdown('### 1. Load your corpus')
