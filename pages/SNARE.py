@@ -14,15 +14,27 @@ def do_stuff_on_page_load():
 do_stuff_on_page_load()
 
 
+# st.markdown('''<style> ul {list-style-type: none; margin: 0; padding: 1; overflow: hidden; background-color: #adb5ba;}
+#             li {float: left;} li a {display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none;}
+#             li a:hover {background-color: #111; } </style>''', unsafe_allow_html=True)
+
 st.markdown('''<style> ul {list-style-type: none; margin: 0; padding: 1; overflow: hidden; background-color: #adb5ba;}
-            li {float: left;} li a {display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none;}
+            #leftbox {float: left;} #rightbox {float: right;} li a {display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none;}
             li a:hover {background-color: #111; } </style>''', unsafe_allow_html=True)
 
-st.markdown(""" <ul>
-        <li><b>SNARE 1.0</b> Spatial Narrative Representation Environment</li>
-        </ul>""", unsafe_allow_html=True)
+st.markdown("""<ul>
+            <div id="leftbox">
+                <li><b>SNARE 1.0</b> Spatial Narrative Representation Environment</li>
+            <div>
+            <div id="rightbox">s
+                <li>Advanced</li>
+                <li>About</li>
+            <div>
+            </ul>""", 
+            '### 1. Load your corpus',
+            unsafe_allow_html=True)
 
-st.markdown('# 1. Load your corpus')
+# st.markdown('### 1. Load your corpus')
 
 button = sac.buttons([
     sac.ButtonsItem(label='Use Sample Corpus', icon='gift', color='#b9ebe2'),
