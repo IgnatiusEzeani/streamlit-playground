@@ -13,7 +13,6 @@ def do_stuff_on_page_load():
 do_stuff_on_page_load()
 
 st.markdown('''<style> ul{list-style-type: none; padding: 1px 1px; margin:0; background-color: #d5dade;}
-            li {margin: 0; display: inline; padding: 10px;}
             li.left {float: left;} li.right {float: right;} li a:hover {background-color: #111; } </style>''', unsafe_allow_html=True)
 
 # padding: 1px 1px; margin: 0; overflow: hidden;
