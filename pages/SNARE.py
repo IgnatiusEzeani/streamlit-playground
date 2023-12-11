@@ -69,4 +69,6 @@ with st.container():
     else:
         pass
 
-st.markdown("""<ul bottom=0><li class='left'><b>📑 SNARE 1.0</b> Spatial Narrative Representation Environment</li>""", unsafe_allow_html=True)
+# st.markdown("""<ul bottom=0><li class='left'><b>📑 SNARE 1.0</b> Spatial Narrative Representation Environment</li>""", unsafe_allow_html=True)
+st.markdown("""<ul padding: 0><li class='left'><b>📑 SNARE 1.0</b> Spatial Narrative Representation Environment</li>""", unsafe_allow_html=True)
+#  padding: 12px 12px;
