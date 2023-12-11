@@ -28,7 +28,7 @@ with st.container():
 
 button='Paste your corpus'
 
-col1,_,col2,_,col3,_,col4,_,col5 = st.columns([2.5, 0.2, 2.5, 0.2, 2.5, 0.2, 2.5, 0.2, 2.5])
+col1,_,col2,_,col3,_,col4,_,col5 = st.columns([2.8, 0.2, 2.8, 0.2, 2.8, 0.2, 2.8, 0.2, 2.8])
 
 with col1:
     sac.buttons([sac.ButtonsItem(label='Use Sample Corpus', icon='gift', color='#b9ebe2')], align='center')
