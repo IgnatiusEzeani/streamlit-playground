@@ -22,14 +22,9 @@ st.markdown('''<style> ul {list-style-type: none; margin: 0; padding: 1; overflo
             #leftbox {float: left;} #rightbox {float: right;} li a {display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none;}
             li a:hover {background-color: #111; } </style>''', unsafe_allow_html=True)
 
-st.markdown("""<ul>
-
-            <div id="rightbox">
-                <li>Advanced About</li>
-            <div>
-            </ul>
-            ### 1. Load your corpus""", 
-        
+st.markdown("""<ul> <div id="leftbox"> <li><b>SNARE 1.0</b> Spatial Narrative Representation Environment</li> <div>
+            <div id="rightbox"> <li>Advanced About</li> <div> </ul>
+            ### 1. Load your corpus""",
             unsafe_allow_html=True)
 
 # st.markdown('### 1. Load your corpus')
