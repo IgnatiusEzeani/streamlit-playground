@@ -26,8 +26,19 @@ button = sac.buttons([
     ], position='left', format_func='title', align='center')
 
 if button=='Paste your corpus':
-    st.write("The selected button label is: "+ button)
     text_data = st.text_area('', placeholder='Copy and paste your data from other applications or websites. You can use tabular (TSV, CSV, DSV) or JSON data.', height=200, )
     sac.buttons([
         sac.ButtonsItem(label='NEXT', color='#b9ebe2'),
         ], format_func='title', align='end')
+elif button=='Open Existing Project':
+    sac.tree(items=[
+        sac.TreeItem('CLDW: Corpus of Lake District Writings', 
+                     icon="book",
+                    #  tag=sac.Tag('tag', color='red', bordered=False), 
+                     tooltip="Dataset of Corpus of Lake District Writings"),
+
+        sac.TreeItem("HST: Holocaust Survivors' Testmonies", 
+                     icon='chat-text', 
+                     tooltip="Dataset of Holocaust Survivors' Testmonies")])
+else:
+    pass
