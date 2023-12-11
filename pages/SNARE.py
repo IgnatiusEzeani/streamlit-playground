@@ -59,6 +59,6 @@ elif button=='Upload your corpus':
         dataframe = pd.read_csv(uploaded_file)
         st.write(dataframe)
 elif button=='Use Sample Corpus':
-    st.info(f'''**Under Construction**:This page is still being developed.''', icon="🚧")
+    st.info(f'''**Under Construction:** This page is still being developed.''', icon="🚧")
 else:
     pass
