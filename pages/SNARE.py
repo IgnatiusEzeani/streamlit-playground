@@ -12,7 +12,7 @@ def do_stuff_on_page_load():
 
 do_stuff_on_page_load()
 
-st.markdown('''<style> ul {list-style-type: none; padding: 10px 10px; margin: 0; overflow: hidden; background-color: #adb5ba;}
+st.markdown('''<style> ul {list-style-type: none; padding: 10px 10px; margin: 0; overflow: hidden; background-color: #d5dade;}
             li.left {float: left;} li.right {float: right;} li a {display: block; color: white; text-align: center; text-decoration: none;}
             li a:hover {background-color: #111; } </style>''', unsafe_allow_html=True)
 
@@ -69,6 +69,6 @@ with st.container():
     else:
         pass
 
-# st.markdown("""<ul bottom=0><li class='left'><b>📑 SNARE 1.0</b> Spatial Narrative Representation Environment</li>""", unsafe_allow_html=True)
-st.markdown("""<ul padding: 0,0><li class='left'><b>📑 SNARE 1.0</b> Spatial Narrative Representation Environment</li>""", unsafe_allow_html=True)
+st.markdown("""<b>📑 SNARE 1.0</b> Spatial Narrative Representation Environment""", unsafe_allow_html=True)
+# st.markdown("""<ul padding: 0,0><li class='left'><b>📑 SNARE 1.0</b> Spatial Narrative Representation Environment</li>""", unsafe_allow_html=True)
 #  padding: 12px 12px;
