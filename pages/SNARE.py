@@ -22,28 +22,7 @@ st.markdown("""<ul><li class='left'><b>📑SNARE 1.0</b> Spatial Narrative Repre
             <li class='right'><a href="#SNARE">About</a></li> 
             <li class='right'><a href="#ADVANCED">Advanced</a></li></ul>""", unsafe_allow_html=True)
 
-with st.container():
-    st.markdown('### 1. Load your corpus')
-
-
-# button='Paste your corpus'
-
-# col1,_,col2,_,col3,_,col4,_,col5 = st.columns([2.8, 0.1, 2.8, 0.1, 2.8, 0.1, 2.8, 0.1, 2.8])
-
-# with col1:
-#     sac.buttons([sac.ButtonsItem(label='Use Sample Corpus', icon='gift', color='#b9ebe2')], align='center')
-
-# with col2:
-#     sac.buttons([sac.ButtonsItem(label='Upload your corpus', icon='upload', color='#b9ebe2')], align='center')
-
-# with col3:
-#     sac.buttons([sac.ButtonsItem(label='Paste your corpus', icon='clipboard', color='#b9ebe2')], align='center')
-
-# with col4:
-#     sac.buttons([sac.ButtonsItem(label='Open Existing Project', icon='folder2-open',color='#b9ebe2')], align='center')
-
-# with col5:
-#     sac.buttons([sac.ButtonsItem(label='Run SPARQL Query', icon='cloud', color='#b9ebe2', disabled=True)], align='center')
+st.markdown("<h3 style='text-align: center; color: red;'>1. Load your corpus</h3>", unsafe_allow_html=True)
 
 
 button = sac.buttons([
