@@ -13,34 +13,11 @@ def do_stuff_on_page_load():
 
 do_stuff_on_page_load()
 
-# st.markdown('''<style> ul {list-style-type: none; margin: 0; padding: 1; overflow: hidden; background-color: #adb5ba;}
-#             li {float: left;} li a {display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none;}
-#             li a:hover {background-color: #111; } </style>''', unsafe_allow_html=True)
+st.markdown('''<style> ul {list-style-type: none; margin: 0; padding: 1; overflow: hidden; background-color: #adb5ba;}
+            li {float: left;} li a {display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none;}
+            li a:hover {background-color: #111; } </style>''', unsafe_allow_html=True)
 
-
-st.markdown("""<script "https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
-            crossorigin="anonymous"></script>""", unsafe_allow_html=True)
-
-st.markdown('''<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-          <a class="nav-link" href="#">About</a>
-          <a class="nav-link" href="#">Team</a>
-          <a class="nav-link" href="#">Contact Us</a>
-        </div>
-      </div>
-    </div>
-  </nav>''', unsafe_allow_html=True)
-
-# st.markdown("""<li><b>SNARE 1.0</b> Spatial Narrative Representation Environment</li>""", unsafe_allow_html=True)
+st.markdown("""<li><b>SNARE 1.0</b> Spatial Narrative Representation Environment</li>""", unsafe_allow_html=True)
 
 # st.markdown('### 1. Load your corpus')
 
