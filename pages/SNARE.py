@@ -26,19 +26,24 @@ with st.container():
     st.markdown('### 1. Load your corpus')
 
 
+button=='Paste your corpus'
+
 col1,_,col2,_,col3,_,col4 = st.columns([3, 0.5 ,3, 0.5,3, 0.5,3])
 
 with col1:
-    button = sac.buttons([sac.ButtonsItem(label='Use Sample Corpus', icon='gift', color='#b9ebe2')], align='center')
+    sac.buttons([sac.ButtonsItem(label='Use Sample Corpus', icon='gift', color='#b9ebe2')], align='center')
 
 with col2:
-    button = sac.buttons([sac.ButtonsItem(label='Upload your corpus', icon='upload', color='#b9ebe2')], align='center')
+    sac.buttons([sac.ButtonsItem(label='Upload your corpus', icon='upload', color='#b9ebe2')], align='center')
 
 with col3:
-    button = sac.buttons([sac.ButtonsItem(label='Paste your corpus', icon='clipboard', color='#b9ebe2')], align='center')
+    sac.buttons([sac.ButtonsItem(label='Paste your corpus', icon='clipboard', color='#b9ebe2')], align='center')
 
 with col4:
-    button = sac.buttons([sac.ButtonsItem(label='Open Existing Project', icon='folder2-open',color='#b9ebe2')], align='center')
+    sac.buttons([sac.ButtonsItem(label='Open Existing Project', icon='folder2-open',color='#b9ebe2')], align='center')
+
+with col4:
+    sac.buttons([sac.ButtonsItem(label='Run SPARQL Query', icon='cloud', color='#b9ebe2', disabled=True)], align='center')
 
 
 # button = sac.buttons([
@@ -49,6 +54,7 @@ with col4:
 #     # sac.ButtonsItem(label='Run SPARQL Query', icon='cloud', color='#b9ebe2', disabled=True),
 #     # sac.ButtonsItem(label='Open an existing project', icon='share-fill', href='https://ant.design/components/button'),
 #     ], position='left', format_func='title', align='center')
+
 
 
 with st.container():
