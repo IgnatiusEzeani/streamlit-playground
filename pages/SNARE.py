@@ -71,9 +71,7 @@ elif button=='Use Sample Corpus':
 else:
     pass
 
-# st.markdown("""<b>📑 SNARE 1.0</b> Spatial Narrative Representation Environment""", unsafe_allow_html=True)
-st.markdown("""<html style="background-color:#d5dade;"><b>📑 SNARE 1.0</b> Spatial Narrative Representation Environment</html>""", unsafe_allow_html=True)
-# st.markdown("<h4 style='text-align: center; color: #0c0d0c;'>1. Load your corpus</h4>", unsafe_allow_html=True)
+st.markdown("""<b>📑 SNARE 1.0</b> Spatial Narrative Representation Environment""", unsafe_allow_html=True)
 
 
 # st.markdown("""<ul padding: 0,0><li class='left'><b>📑 SNARE 1.0</b> Spatial Narrative Representation Environment</li>""", unsafe_allow_html=True)
