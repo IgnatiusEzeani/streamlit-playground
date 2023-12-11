@@ -26,7 +26,7 @@ with st.container():
     st.markdown('### 1. Load your corpus')
 
 
-col1,_,col2,_,col3,_,col4 = st.columns([3, 0.5 ,3, 0.5,3, 0.5,3, 0.5,3])
+col1,_,col2,_,col3,_,col4 = st.columns([3, 0.5 ,3, 0.5,3, 0.5,3])
 
 with col1:
     button = sac.buttons([sac.ButtonsItem(label='Use Sample Corpus', icon='gift', color='#b9ebe2')], align='center')
