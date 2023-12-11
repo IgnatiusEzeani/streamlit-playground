@@ -22,7 +22,7 @@ st.markdown("""<ul><li class='left'><b>📑SNARE 1.0</b> Spatial Narrative Repre
             <li class='right'><a href="#SNARE">About</a></li> 
             <li class='right'><a href="#ADVANCED">Advanced</a></li></ul>""", unsafe_allow_html=True)
 
-st.markdown("<h4 style='text-align: center; color: #232624;'>1. Load your corpus</h4>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: center; color: #0c0d0c;'>1. Load your corpus</h4>", unsafe_allow_html=True)
 
 
 button = sac.buttons([
