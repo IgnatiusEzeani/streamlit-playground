@@ -5,15 +5,15 @@ import streamlit_antd_components as sac
 # st.image(image)
 
 def do_stuff_on_page_load():
-    st.set_page_config(layout="wide")
-    st.set_page_config(initial_sidebar_state="collapsed")
-    # st.markdown(
-    #     """<style>
-    #         [data-testid="collapsedControl"] {
-    #         display: none}
-    #     </style>""",
-    #     unsafe_allow_html=True,
-    # )
+    st.set_page_config(layout="wide",
+                       initial_sidebar_state="collapsed")
+    st.markdown(
+        """<style>
+            [data-testid="collapsedControl"] {
+            display: none}
+        </style>""",
+        unsafe_allow_html=True,
+    )
 
 do_stuff_on_page_load()
 sac.buttons([
