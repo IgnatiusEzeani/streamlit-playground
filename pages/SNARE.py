@@ -18,7 +18,7 @@ st.markdown('''<style> ul {list-style-type: none; margin: 0; padding: 10px 16px;
             li a:hover {background-color: #111; } </style>''', unsafe_allow_html=True)
 
 st.markdown("""<ul><li class='left'><b>SNARE 1.0</b> Spatial Narrative Representation Environment</li>
-            <li class='right'><a href="#SNARE">About</a></li><\ul> <li class='right'><a href="#ADVANCED">Advanced</a></li>""", unsafe_allow_html=True)
+            <li class='right'><a href="#SNARE">About</a></li> <li class='right'><a href="#ADVANCED">Advanced</a></li><\ul>""", unsafe_allow_html=True)
 
 # st.markdown('### 1. Load your corpus')
 
