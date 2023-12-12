@@ -74,11 +74,7 @@ else:
 st.markdown("""<html> <body> <p style="background-color:#d5dade; padding:10x">📑 <b>SNARE 1.0</b> Spatial Narrative Representation Environment</p>
 </body> </html>""", unsafe_allow_html=True)
 
-st.markdown("""
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
+st.markdown("""<style>
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -117,8 +113,6 @@ body {
   margin-bottom: 30px;
 }
 </style>
-</head>
-<body>
 
 <div class="navbar">
   <a href="#home" class="active">Home</a>
@@ -129,7 +123,4 @@ body {
 <div class="main">
   <p>Some text some text some text.</p>
 </div>
-
-</body>
-</html>
 """, unsafe_allow_html=True)
