@@ -13,9 +13,9 @@ def do_stuff_on_page_load():
 do_stuff_on_page_load()
 
 st.markdown("""<style> ul{list-style-type: none; padding: 10px 10px; margin:0; overflow: hidden; background-color: #d5dade;}
-            li.left {float: left;} li.right {float: right;} li a:hover {background-color: #111; } </style>
-            
-            <ul><li class='left'><b>📑SNARE 1.0</b> Spatial Narrative Representation Environment</li>
+            li.left {float: left;} li.right {float: right;} li a:hover {background-color: #111; } </style>""", unsafe_allow_html=True)
+
+st.markdown("""<ul><li class='left'><b>📑SNARE 1.0</b> Spatial Narrative Representation Environment</li>
             <li class='right'><a href="#SNARE">About</a></li> 
             <li class='right'><a href="#ADVANCED">Advanced</a></li></ul>""", unsafe_allow_html=True)
 
@@ -110,8 +110,9 @@ body {
   margin-bottom: 30px;
 }
 </style>
+""", unsafe_allow_html=True)
 
-<div class="navbar">
+st.markdown("""<div class="navbar">
   <a href="#home" class="active">Home</a>
   <a href="#news">News</a>
   <a href="#contact">Contact</a>
@@ -119,5 +120,4 @@ body {
 
 <div class="main">
   <p>Some text some text some text.</p>
-</div>
-""", unsafe_allow_html=True)
+</div>""", unsafe_allow_html=True)
