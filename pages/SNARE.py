@@ -13,7 +13,7 @@ def do_stuff_on_page_load():
 
 do_stuff_on_page_load()
 
-st.markdown("""<style> ul{list-style-type: none; padding: 10px 10px; margin:0; overflow: hidden; background-color: #d5dade;}
+st.markdown("""<style> ul{list-style-type: none; padding: 10px 10px; top:0; margin:0; overflow: hidden; background-color: #d5dade;}
             li.left {float: left;} li.right {float: right;} li a:hover {background-color: #111; } </style>""", unsafe_allow_html=True)
 
 st.markdown("""<ul><li class='left'><b>📑SNARE 1.0</b> Spatial Narrative Representation Environment</li>
@@ -73,7 +73,7 @@ st.markdown("""<style>
   .footer {
     background-color: #a5a9b0;
     position: fixed;
-    top: 0;
+    bottom: 0;
     width: 100%;
     display:inline-block;
     table-layout: fixed;
