@@ -73,7 +73,7 @@ st.markdown("""<html> <body> <p style="background-color:#d5dade; padding:10x 10x
 
 st.markdown("""<style>
 .navbar {
-  background-color: #d5dade;
+  background-color: #363a40;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -85,17 +85,10 @@ st.markdown("""<style>
 st.markdown("""
 <table class="navbar">
   <tr>
-    <td style="background-color:#d5dade; padding:10x 10x">📑 <b>SNARE 1.0</b> Spatial Narrative Representation Environment</td>
+    <td colspan="3" style="background-color:#d5dade; padding:10x 10x">📑 <b>SNARE 1.0</b> Spatial Narrative Representation Environment</td>
   </tr>
   <tr>
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-  </tr>
-  <tr>
-    <td>Centro comercial Moctezuma</td>
-    <td>Francisco Chang</td>
-    <td>Mexico</td>
+    <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
   </tr>
 </table>
 """, unsafe_allow_html=True)
