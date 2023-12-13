@@ -82,17 +82,10 @@ st.markdown("""<style>
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown("""<div class="navbar">
-  London is the capital city of England.
-  Oslo is the capital city of Norway.
-  Rome is the capital city of Italy.
-</div>
-
+st.markdown("""
 <table class="navbar">
   <tr>
-    <th>Company</th>
-    <th>Contact</th>
-    <th>Country</th>
+    <td style="background-color:#d5dade; padding:10x 10x">📑 <b>SNARE 1.0</b> Spatial Narrative Representation Environment</td>
   </tr>
   <tr>
     <td>Alfreds Futterkiste</td>
