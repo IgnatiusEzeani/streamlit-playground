@@ -24,11 +24,11 @@ st.markdown("<h4 style='text-align: center; color: #0c0d0c;'>1. Load your corpus
 
 
 button = sac.buttons([
-    sac.ButtonsItem(label='Use Sample Corpus', icon='gift', color='#b9ebe2'),
-    sac.ButtonsItem(label='Upload your corpus', icon='upload', color='#b9ebe2'),
-    sac.ButtonsItem(label='Paste your corpus', icon='clipboard', color='#b9ebe2'),
-    sac.ButtonsItem(label='Open Existing Project', icon='folder2-open',color='#b9ebe2'),
-    sac.ButtonsItem(label='Run SPARQL Query', icon='cloud', color='#b9ebe2', disabled=True),
+    sac.ButtonsItem(label='Use Sample Corpus',    icon='gift',          color='#b9ebe2'),
+    sac.ButtonsItem(label='Upload your corpus',   icon='upload',        color='#b9ebe2'),
+    sac.ButtonsItem(label='Paste your corpus',    icon='clipboard',     color='#b9ebe2'),
+    sac.ButtonsItem(label='Open Existing Project',icon='folder2-open',  color='#b9ebe2'),
+    sac.ButtonsItem(label='Run SPARQL Query',     icon='cloud',         color='#b9ebe2', disabled=True),
     # sac.ButtonsItem(label='Open an existing project', icon='share-fill', href='https://ant.design/components/button'),
     ], position='left', format_func='title', align='center', )
 
@@ -39,13 +39,13 @@ if button=='Paste your corpus':
         sac.ButtonsItem(label='NEXT', color='#b9ebe2'),
         ], format_func='title', align='end')
 elif button=='Open Existing Project':
-    sac.tree(items=[
-        sac.TreeItem('CLDW', icon="book",
-                    #  tag=sac.Tag('tag', color='red', bordered=False), 
-                    tooltip="Dataset of Corpus of Lake District Writings"),
-
-        sac.TreeItem('HST',  icon='chat-text', 
-                    tooltip="Dataset of Holocaust Survivors' Testmonies")])
+    sac.tree(
+        items=[
+            sac.TreeItem('CLDW', icon="book", tooltip="Dataset of Corpus of Lake District Writings"),
+            sac.TreeItem('HST',  icon='chat-text', tooltip="Dataset of Holocaust Survivors' Testmonies")
+            ]
+            )
+    
 elif button=='Upload your corpus':
     uploaded_file = st.file_uploader("Choose a file")
     if uploaded_file is not None:
@@ -70,33 +70,29 @@ else:
     pass
 
 st.markdown("""<style>
-.footer {
-  background-color: #a5a9b0;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  display:inline-block;
-  table-layout: fixed;
-}
-.footer td {
-  word-wrap: break-word
-}         
+  .footer {
+    background-color: #a5a9b0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display:inline-block;
+    table-layout: fixed;
+  }
+  .footer td {
+    word-wrap: break-word
+  }
+</style>""", unsafe_allow_html=True)
 
-</style>
-""", unsafe_allow_html=True)
-
-st.markdown("""
-<table class="footer">
+st.markdown("""<table class="footer">
   <tr>
     <td  colspan="4"; style="background-color:#d5dade; padding:10x 10x">📑 <b>SNARE 1.0</b> Spatial Narrative Representation Environment</td>
   </tr>
   <tr>
-    <td><image src='STNlogo.png' alt='STNLogo' height=10 width=30></image></td>
+    <td><image src="STNlogo.png" alt="STNLogo" height=10 width=30></image></td>
     <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
     <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
     <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
   </tr>
-</table>
-""", unsafe_allow_html=True)
+</table>""", unsafe_allow_html=True)
 
 st.write(os.listdir())
