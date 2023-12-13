@@ -78,7 +78,7 @@ st.markdown("""<style>
     position: fixed;
     bottom: 0;
     left:0;
-    width: 85%;
+    width: 100%;
     display:inline-block;
     table-layout: fixed;
   }
