@@ -68,41 +68,17 @@ elif button=='Use Sample Corpus':
 else:
     pass
 
-st.markdown("""<html> <body> <p style="background-color:#d5dade; padding:10x">📑 <b>SNARE 1.0</b> Spatial Narrative Representation Environment</p>
+st.markdown("""<html> <body> <p style="background-color:#d5dade; padding:10x 10x">📑 <b>SNARE 1.0</b> Spatial Narrative Representation Environment</p>
 </body> </html>""", unsafe_allow_html=True)
 
 st.markdown("""<style>
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
 
 .navbar {
   overflow: hidden;
-  background-color: #333;
+  background-color: #d5dade;
   position: fixed;
   bottom: 0;
   width: 100%;
-}
-
-.navbar a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.navbar a:hover {
-  background: #f1f1f1;
-  color: black;
-}
-
-.navbar a.active {
-  background-color: #04AA6D;
-  color: white;
 }
 
 .main {
@@ -113,11 +89,35 @@ body {
 """, unsafe_allow_html=True)
 
 st.markdown("""<div class="navbar">
-  <a href="#home" class="active">Home</a>
-  <a href="#news">News</a>
-  <a href="#contact">Contact</a>
-</div>
 
-<div class="main">
-  <p>Some text some text some text.</p>
-</div>""", unsafe_allow_html=True)
+</div>
+""", unsafe_allow_html=True)
+
+
+# .navbar a:hover {
+#   background: #f1f1f1;
+#   color: black;
+# }
+
+# .navbar a.active {
+#   background-color: #04AA6D;
+#   color: white;
+# }
+
+# .navbar a {
+#   float: left;
+#   display: block;
+#   color: #f2f2f2;
+#   text-align: center;
+#   padding: 14px 16px;
+#   text-decoration: none;
+#   font-size: 17px;
+# }
+#   <a href="#home" class="active">Home</a>
+#   <a href="#news">News</a>
+#   <a href="#contact">Contact</a>
+#   font-family: Arial, Helvetica, sans-serif;
+
+# body {
+#   margin: 0;
+# }
