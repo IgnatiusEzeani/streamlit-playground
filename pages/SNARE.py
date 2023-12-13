@@ -89,7 +89,9 @@ st.markdown("""<style>
 """, unsafe_allow_html=True)
 
 st.markdown("""<div class="navbar">
-
+Home
+News
+Contact
 </div>
 """, unsafe_allow_html=True)
 
