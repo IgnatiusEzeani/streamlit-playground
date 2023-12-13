@@ -92,7 +92,7 @@ st.markdown("""<table class="footer">
     <td colspan="5"; style="background-color:#d5dade; padding:10x 10x">📑 <b>Company</b> Some company tagline</td>
   </tr>
   <tr>
-    <td><image src="https://github.com/SpaceTimeNarratives/spacetimenarratives.github.io/blob/master/assets/images/STNlogo.png?raw=true" alt="STNLogo" height=10 width=30></image></td>
+    <td><image src="https://github.com/SpaceTimeNarratives/spacetimenarratives.github.io/blob/master/assets/images/STNlogo.png?raw=true" alt="STNLogo" height=30 width=30></image></td>
     <td>This is some chunk of introductory code explaining the project aims and objectives</td>
     <td>Logo for a partner organisation 1</td>
     <td>Logo for a partner organisation 2</td>
