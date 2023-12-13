@@ -91,14 +91,13 @@ st.markdown("""<style>
 st.markdown("""
 <table class="footer">
   <tr>
-    <td  colspan="3"; style="background-color:#d5dade; padding:10x 10x">📑 <b>SNARE 1.0</b> Spatial Narrative Representation Environment</td>
+    <td  colspan="2"; style="background-color:#d5dade; padding:10x 10x">📑 <b>SNARE 1.0</b> Spatial Narrative Representation Environment</td>
   </tr>
   <tr>
     <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
   </tr>
 </table>
 """, unsafe_allow_html=True)
-
 
 # st.markdown("""<style>
 # .navbar {
@@ -121,7 +120,6 @@ st.markdown("""
 # Contact
 # </div>
 # """, unsafe_allow_html=True)
-
 
 # .navbar a:hover {
 #   background: #f1f1f1;
