@@ -89,27 +89,17 @@ st.markdown("""<style>
 
 st.markdown("""<table class="footer">
   <tr>
-    <td colspan="5"; style="background-color:#d5dade; padding:10x 10x">📑 <b>Company</b> Some company tagline</td>
+    <td  colspan="4"; style="background-color:#d5dade; padding:10x 10x">📑 <b>SNARE 1.0</b> Spatial Narrative Representation Environment</td>
   </tr>
   <tr>
-    <td><image src="https://github.com/SpaceTimeNarratives/spacetimenarratives.github.io/blob/master/assets/images/STNlogo.png?raw=true" alt="STNLogo" height=30 width=30></image></td>
-    <td>This is some chunk of introductory code explaining the project aims and objectives</td>
-    <td>Logo for a partner organisation 1</td>
-    <td>Logo for a partner organisation 2</td>
-    <td>Logo for a partner organisation 3</td>
+    <td><image src="STNlogo.png?raw=true" alt="STNLogo" height=5 width=30></image></td>
+    <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
+    <td></td>
+    <td><image src="Leeds_logo.png?raw=true" alt="Leeds Logo" height=5 width=30></image></td>
+    <td><image src="Lancs_logo.png?raw=true" alt="Lancs Logo" height=5 width=30></image></td>
+    <td><image src="Stanford logo.png?raw=true" alt="Stanford logo.png" height=5 width=30></image></td>
+    <td><image src="Manchester Logo.png?raw=true" alt="Manchester Logo" height=5 width=30></image></td>
   </tr>
 </table>""", unsafe_allow_html=True)
-
-# st.markdown("""<table class="footer">
-#   <tr>
-#     <td  colspan="4"; style="background-color:#d5dade; padding:10x 10x">📑 <b>SNARE 1.0</b> Spatial Narrative Representation Environment</td>
-#   </tr>
-#   <tr>
-#     <td><image src="STNlogo.png" alt="STNLogo" height=10 width=30></image></td>
-#     <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
-#     <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
-#     <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
-#   </tr>
-# </table>""", unsafe_allow_html=True)
 
 st.write(os.listdir())
