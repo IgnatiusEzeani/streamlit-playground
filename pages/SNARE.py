@@ -90,63 +90,13 @@ st.markdown("""<style>
 st.markdown("""
 <table class="footer">
   <tr>
-    <td  colspan="3"; style="background-color:#d5dade; padding:10x 10x">📑 <b>SNARE 1.0</b> Spatial Narrative Representation Environment</td>
+    <td  colspan="10"; style="background-color:#d5dade; padding:10x 10x">📑 <b>SNARE 1.0</b> Spatial Narrative Representation Environment</td>
   </tr>
   <tr>
+    <td><img src="https://github.com/SpaceTimeNarratives/spacetimenarratives.github.io/blob/master/assets/images/STNlogo.png" alt="" border=3 height=100 width=300></img></td>
     <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
     <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
     <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
   </tr>
 </table>
 """, unsafe_allow_html=True)
-
-# st.markdown("""<style>
-# .navbar {
-#   background-color: #d5dade;
-#   position: fixed;
-#   bottom: 0;
-#   width: 100%;
-#   display:inline-block;
-# }
-
-# .main {
-#   padding: 16px;
-# }
-# </style>
-# """, unsafe_allow_html=True)
-
-# st.markdown("""<div class="navbar">
-# Home
-# News
-# Contact
-# </div>
-# """, unsafe_allow_html=True)
-
-# .navbar a:hover {
-#   background: #f1f1f1;
-#   color: black;
-# }
-
-# .navbar a.active {
-#   background-color: #04AA6D;
-#   color: white;
-# }
-
-# .navbar a {
-#   float: left;
-#   display: block;
-#   color: #f2f2f2;
-#   text-align: center;
-#   padding: 14px 16px;
-#   text-decoration: none;
-#   font-size: 17px;
-# }
-#   <a href="#home" class="active">Home</a>
-#   <a href="#news">News</a>
-#   <a href="#contact">Contact</a>
-#   font-family: Arial, Helvetica, sans-serif;
-
-# body {
-#   margin: 0;
-# }
-# margin-bottom: 30px;
