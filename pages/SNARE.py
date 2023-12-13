@@ -4,8 +4,6 @@ import pandas as pd
 from io import StringIO
 import streamlit_antd_components as sac
 
-st.write(os.listdir())
-
 def do_stuff_on_page_load():
     st.set_page_config(layout="wide",
                        initial_sidebar_state="collapsed")
@@ -100,3 +98,5 @@ st.markdown("""
   </tr>
 </table>
 """, unsafe_allow_html=True)
+
+st.write(os.listdir())
