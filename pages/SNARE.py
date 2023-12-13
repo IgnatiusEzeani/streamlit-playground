@@ -72,8 +72,8 @@ st.markdown("""<html> <body> <p style="background-color:#d5dade; padding:10x 10x
 </body> </html>""", unsafe_allow_html=True)
 
 st.markdown("""<style>
-div {
-  width:30%;  
+.navbar {
+  width:100%;  
   display:inline-block;
   background-color:#04AA6D;
   bottom: 0;
@@ -81,13 +81,9 @@ div {
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown("""<div>
+st.markdown("""<div class="navbar">
   <p>London is the capital city of England.</p>
-</div>
-<div>
   <p>Oslo is the capital city of Norway.</p>
-</div>
-<div>
   <p>Rome is the capital city of Italy.</p>
 </div>
 """, unsafe_allow_html=True)
@@ -95,7 +91,6 @@ st.markdown("""<div>
 
 # st.markdown("""<style>
 # .navbar {
-  
 #   background-color: #d5dade;
 #   position: fixed;
 #   bottom: 0;
