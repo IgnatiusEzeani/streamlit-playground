@@ -77,7 +77,6 @@ st.markdown("""<style>
     background-color: #a5a9b0;
     position: fixed;
     bottom: 0;
-    width: 85%;
     display:inline-block;
     table-layout: fixed;
   }
