@@ -120,15 +120,6 @@ st.write(ft, unsafe_allow_html=True)
 
 
 
-
-
-
-
-
-
-
-
-
 # st.markdown("""<style>
 #   .footer {
 #     background-color: #a5a9b0;
