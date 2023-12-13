@@ -1,7 +1,10 @@
+import os
 import streamlit as st
 import pandas as pd
 from io import StringIO
 import streamlit_antd_components as sac
+
+st.write(os.listdir())
 
 def do_stuff_on_page_load():
     st.set_page_config(layout="wide",
