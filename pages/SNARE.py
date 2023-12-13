@@ -78,12 +78,10 @@ st.markdown("""<style>
   background-color: #d5dade;
   position: fixed;
   bottom: 0;
-  width: 100%;
 }
 
 .main {
   padding: 16px;
-  margin-bottom: 30px;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -123,3 +121,4 @@ Contact
 # body {
 #   margin: 0;
 # }
+# margin-bottom: 30px;
