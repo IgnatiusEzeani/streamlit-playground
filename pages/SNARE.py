@@ -68,9 +68,6 @@ elif button=='Use Sample Corpus':
 else:
     pass
 
-st.markdown("""<html> <body> <p style="background-color:#d5dade; padding:10x 10x">📑 <b>SNARE 1.0</b> Spatial Narrative Representation Environment</p>
-</body> </html>""", unsafe_allow_html=True)
-
 st.markdown("""<style>
 .footer {
   background-color: #a5a9b0;
@@ -90,10 +87,10 @@ st.markdown("""<style>
 st.markdown("""
 <table class="footer">
   <tr>
-    <td  colspan="10"; style="background-color:#d5dade; padding:10x 10x">📑 <b>SNARE 1.0</b> Spatial Narrative Representation Environment</td>
+    <td  colspan="4"; style="background-color:#d5dade; padding:10x 10x">📑 <b>SNARE 1.0</b> Spatial Narrative Representation Environment</td>
   </tr>
   <tr>
-    <td><img src="STNlogo.png" height=10 width=30></img></td>
+    <td><img src='STNlogo.png' alt='STNLogo' height=10 width=30></img></td>
     <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
     <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
     <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
