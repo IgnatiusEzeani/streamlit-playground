@@ -80,7 +80,6 @@ st.markdown("""<style>
   display:inline-block;
   table-layout: fixed;
 }
-
 .footer td {
   word-wrap: break-word
 }         
@@ -94,6 +93,8 @@ st.markdown("""
     <td  colspan="2"; style="background-color:#d5dade; padding:10x 10x">📑 <b>SNARE 1.0</b> Spatial Narrative Representation Environment</td>
   </tr>
   <tr>
+    <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
+    <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
     <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
   </tr>
 </table>
