@@ -13,7 +13,7 @@ def do_stuff_on_page_load():
 
 do_stuff_on_page_load()
 
-st.markdown("""<style> ul{list-style-type: none; padding: 10px 10px; top:0; margin:0; overflow: hidden; background-color: #d5dade;}
+st.markdown("""<style> ul{list-style-type: none; padding: 10px 10px; margin:0; overflow: hidden; background-color: #d5dade;}
             li.left {float: left;} li.right {float: right;} li a:hover {background-color: #111; } </style>""", unsafe_allow_html=True)
 
 st.markdown("""<ul><li class='left'><b>📑SNARE 1.0</b> Spatial Narrative Representation Environment</li>
@@ -38,6 +38,7 @@ if button=='Paste your corpus':
     sac.buttons([
         sac.ButtonsItem(label='NEXT', color='#b9ebe2'),
         ], format_func='title', align='end')
+    
 elif button=='Open Existing Project':
     sac.tree(
         items=[
@@ -64,8 +65,10 @@ elif button=='Upload your corpus':
         # Can be used wherever a "file-like" object is accepted:
         dataframe = pd.read_csv(uploaded_file)
         st.write(dataframe)
+
 elif button=='Use Sample Corpus':
-    st.info(f'''**Under Construction:** This page is still being developed.''', icon="🚧")
+    st.info(f"""**Under Construction:** This page is still being developed.""", icon="🚧")
+
 else:
     pass
 
@@ -74,7 +77,7 @@ st.markdown("""<style>
     background-color: #a5a9b0;
     position: fixed;
     bottom: 0;
-    width: 100%;
+    width: 80%;
     display:inline-block;
     table-layout: fixed;
   }
