@@ -72,29 +72,100 @@ elif button=='Use Sample Corpus':
 else:
     pass
 
-st.markdown("""<style>
-  .footer {
-    background-color: #a5a9b0;
-    position: fixed;
-    bottom: 0;
-    display:inline-block;
-    table-layout: fixed;
-  }
-  .footer td {
-    word-wrap: break-word
-  }
-</style>""", unsafe_allow_html=True)
+ft = """
+<style>
+a:link , a:visited{
+color: #BFBFBF;  /* theme's text color hex code at 75 percent brightness*/
+background-color: transparent;
+text-decoration: none;
+}
 
-st.markdown("""<table class="footer">
-  <tr>
-    <td  colspan="4"; style="background-color:#d5dade; padding:10x 10x">📑 <b>SNARE 1.0</b> Spatial Narrative Representation Environment</td>
-  </tr>
-  <tr>
-    <td><image src="STNlogo.png" alt="STNLogo" height=10 width=30></image></td>
-    <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
-    <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
-    <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
-  </tr>
-</table>""", unsafe_allow_html=True)
+a:hover,  a:active {
+color: #0283C3; /* theme's primary color*/
+background-color: transparent;
+text-decoration: underline;
+}
+
+#page-container {
+  position: relative;
+  min-height: 10vh;
+}
+
+footer{
+    visibility:hidden;
+}
+
+.footer {
+position: relative;
+left: 0;
+top:230px;
+bottom: 0;
+width: 100%;
+background-color: transparent;
+color: #808080; /* theme's text color hex code at 50 percent brightness*/
+text-align: left; /* you can replace 'left' with 'center' or 'right' if you want*/
+}
+</style>
+
+<div id="page-container">
+
+<div class="footer">
+<p style='font-size: 0.875em;'>Made with <a style='display: inline; text-align: left;' href="https://streamlit.io/" target="_blank">Streamlit</a><br 'style= top:3px;'>
+with <img src="https://em-content.zobj.net/source/skype/289/red-heart_2764-fe0f.png" alt="heart" height= "10"/><a style='display: inline; text-align: left;' href="https://github.com/sape94" target="_blank"> by sape94</a></p>
+</div>
+
+</div>
+"""
+st.write(ft, unsafe_allow_html=True)
+
+
+
+
+
+
+
+
+
+
+
+
+# st.markdown("""<style>
+#   .footer {
+#     background-color: #a5a9b0;
+#     position: fixed;
+#     bottom: 0;
+#     width: 85%;
+#     display:inline-block;
+#     table-layout: fixed;
+#   }
+#   .footer td {
+#     word-wrap: break-word
+#   }
+# </style>""", unsafe_allow_html=True)
+
+# st.markdown("""<table class="footer">
+#   <tr>
+#     <td colspan="5"; style="background-color:#d5dade; padding:10x 10x">📑 <b>Company</b> Some company tagline</td>
+#   </tr>
+#   <tr>
+#     <td><image src="STNlogo.png" alt="STNLogo" height=10 width=30></image></td>
+#     <td>This is some chunk of introductory code explaining the project aims and objectives</td>
+#     <td>Logo for a partner organisation 1</td>
+#     <td>Logo for a partner organisation 2</td>
+#     <td>Logo for a partner organisation 3</td>
+#   </tr>
+# </table>""", unsafe_allow_html=True)
+
+# st.markdown("""<table class="footer">
+#   <tr>
+#     <td  colspan="4"; style="background-color:#d5dade; padding:10x 10x">📑 <b>SNARE 1.0</b> Spatial Narrative Representation Environment</td>
+#   </tr>
+#   <tr>
+#     <td><image src="STNlogo.png" alt="STNLogo" height=10 width=30></image></td>
+#     <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
+#     <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
+#     <td>SNARE is a project designed and developed by the Spatial Narratives Collaborative © 2023 (Apache License 2.0)</td>
+#   </tr>
+# </table>""", unsafe_allow_html=True)
 
 st.write(os.listdir())
