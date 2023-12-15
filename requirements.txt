@@ -1,4 +1,3 @@
-pip
 os
 pandas
 streamlit
