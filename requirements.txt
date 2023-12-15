@@ -1,3 +1,4 @@
+pip
 os
 pandas
 streamlit
@@ -8,6 +9,4 @@ matplotlib
 wordcloud
 seaborn
 textblob
-openpyxl
-summa
 streamlit_antd_components
