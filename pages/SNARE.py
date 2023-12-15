@@ -24,10 +24,10 @@ do_stuff_on_page_load()
 #             <li class='right'><a href="#ADVANCED">Advanced</a></li></ul>""", unsafe_allow_html=True)
 
 st.markdown("""<style>
-            .header{ color: black; background-color: #d5dade; position: fixed; left: 0; width: 100%; margin-top:-110px; font-size: 18px; border-collapse: collapse; border: none;}
-  .header tr {height:15%;} .header td {word-wrap: break-word;}
+            .header{color: black; background-color: #d5dade; position: fixed; left: 0; width: 100%; margin-top:-110px; font-size: 18px;}
+  .header tr {height:15%;} .header td {padding:10; border:none; word-wrap: break-word;}
   .footer{color: black; background-color: #a5a9b0; position: fixed; bottom: 0; left:0; font-size: 18px; border-collapse:collapse;}
-  .footer td {word-wrap: break-word; width:25%;}
+  .footer td {padding:10; border:none; word-wrap: break-word; width:25%;}
 </style>""", unsafe_allow_html=True)
 
 st.markdown("<h3 style='text-align: center; color: #0c0d0c;'><b>1. Load your corpus</b></h>", unsafe_allow_html=True)
@@ -99,12 +99,12 @@ st.markdown(f"""<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/
     <td colspan="7"; style="background-color:#d5dade; padding:10x 10x;">📑<b>SNARE <font color='gray'>1.0</font></b></td>
   </tr>
   <tr>
-    <td style="vertical-align:middle; text-align:right; width:8%; vertical-align: top; vertical-align: top">
+    <td style="vertical-align:middle; text-align:right; width:6%; vertical-align: top; vertical-align: top">
         <img src="https://github.com/SpaceTimeNarratives/spacetimenarratives.github.io/blob/master/assets/images/STNlogo.png?raw=true" alt="STNLogo" height=40 width=40></img></td>
-    <td style="padding:10border:none; width:40%; font-size:16px"><b>SNARE</b> is a project designed<br>and developed by the<br>Spatial Narratives Collaborative<br>© 2023 (Apache License 2.0) &nbsp;&nbsp; {github_svg} Github</td>
-    <td></td>
-    <td style="border:none;"><img src="https://assets.stickpng.com/thumbs/626ba43a1dc4c3b537787e1e.png" alt="Leeds Logo" height=140 width=240></img></td>
-    <td><img src="https://www.lancaster.ac.uk/media/wdp/style-assets/images/logos/lu-logo.svg" alt="Lancs_Logo" height=40 width=120></img></td>
+    <td style="width:35%; font-size:16px"><b>SNARE</b> is a project designed<br>and developed by the<br>Spatial Narratives Collaborative<br>© 2023 (Apache License 2.0) &nbsp;&nbsp; {github_svg} Github</td>
+    <td style="width:5%;"></td>
+    <td style="width:15%;"><img src="https://comms.leeds.ac.uk/wp-content/uploads/sites/51/2021/04/Visual-identity-section-images--e1618925864440.png" alt="Leeds Logo" height=60 width=180></img></td>
+    <td style="width:15%;"><img src="https://www.lancaster.ac.uk/media/wdp/style-assets/images/logos/lu-logo.svg" alt="Lancs_Logo" height=50 width=150></img></td>
     <td><image src="Stanford logo.png?raw=true" alt="Stanford logo.png" height=5 width=30></image></td>
     <td><image src="Manchester Logo.png?raw=true" alt="Manchester Logo" height=5 width=30></image></td>
   </tr>
