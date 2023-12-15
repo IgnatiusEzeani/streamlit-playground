@@ -26,8 +26,8 @@ do_stuff_on_page_load()
 st.markdown("""<style>
             .header{color: black; background-color: #d5dade; position: fixed; left: 0; width: 100%; margin-top:-110px; font-size: 18px;}
   .header tr {height:15%;} .header td {padding:10; border:none; word-wrap: break-word;}
-  .footer{color: black; background-color: #a5a9b0; position: fixed; bottom: 0; left:0; font-size: 18px; border-collapse:collapse;}
-  .footer td {padding:10; border:none; word-wrap: break-word; width:25%;}
+  .footer{color: black; background-color: #a5a9b0; position: fixed; bottom: 0; left:0; font-size: 18px;}
+  .footer td {padding:10; border:none; word-wrap: break-word; border-collapse:collapse;}
 </style>""", unsafe_allow_html=True)
 
 st.markdown("<h3 style='text-align: center; color: #0c0d0c;'><b>1. Load your corpus</b></h>", unsafe_allow_html=True)
@@ -105,7 +105,10 @@ st.markdown(f"""<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/
     <td style="width:5%;"></td>
     <td style="width:15%;"><img src="https://comms.leeds.ac.uk/wp-content/uploads/sites/51/2021/04/Visual-identity-section-images--e1618925864440.png" alt="Leeds Logo" height=60 width=180></img></td>
     <td style="width:15%;"><img src="https://www.lancaster.ac.uk/media/wdp/style-assets/images/logos/lu-logo.svg" alt="Lancs_Logo" height=50 width=150></img></td>
-    <td><image src="Stanford logo.png?raw=true" alt="Stanford logo.png" height=5 width=30></image></td>
+    <td style="width:30%;"><img src="https://identity.stanford.edu/wp-content/uploads/sites/3/2020/07/block-s-right.png" alt="Stanford logo.png" height=100 width=90></img>
+      <img src="https://identity.stanford.edu/wp-content/uploads/sites/3/2020/06/wordmark-nospace-stacked-red.png" alt="Stanford logo.png" height=40 width=90></img></td>
+
+
     <td><image src="Manchester Logo.png?raw=true" alt="Manchester Logo" height=5 width=30></image></td>
   </tr>
 </table>""", unsafe_allow_html=True)
