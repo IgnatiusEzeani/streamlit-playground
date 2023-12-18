@@ -99,13 +99,13 @@ st.markdown(f"""<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/
     <td colspan="7"; style="background-color:#d5dade; padding:10x 10x;">📑<b>SNARE <font color='gray'>1.0</font></b></td>
   </tr>
   <tr>
-    <td style="vertical-align:middle; text-align:right; width:6%; vertical-align: top; vertical-align: top">
+    <td style="vertical-align:middle; text-align:right; width:6%; vertical-align: top;">
         <img src="https://github.com/SpaceTimeNarratives/spacetimenarratives.github.io/blob/master/assets/images/STNlogo.png?raw=true" alt="STNLogo" height=40 width=40></img></td>
-    <td style="width:35%; font-size:16px"><b>SNARE</b> is a project designed<br>and developed by the<br>Spatial Narratives Collaborative<br>© 2023 (Apache License 2.0) &nbsp;&nbsp; {github_svg} Github</td>
+    <td style="width:40%; font-size:16px"><b>SNARE</b> is a project designed<br>and developed by the<br>Spatial Narratives Collaborative<br>© 2023 (Apache License 2.0) &nbsp;&nbsp; {github_svg} Github</td>
     <td style="width:5%;"></td>
-    <td style="width:15%;"><img src="https://comms.leeds.ac.uk/wp-content/uploads/sites/51/2021/04/Visual-identity-section-images--e1618925864440.png" alt="Leeds Logo" height=60 width=180></img></td>
+    <td style="width:15%;"><img src="https://raw.githubusercontent.com/IgnatiusEzeani/streamlit-playground/main/img/leeds.webp" alt="Leeds Logo" height=50 width=180></img></td>
     <td style="width:15%;"><img src="https://www.lancaster.ac.uk/media/wdp/style-assets/images/logos/lu-logo.svg" alt="Lancs_Logo" height=50 width=150></img></td>
-    <td style="width:30%;"><img src="https://github.com/IgnatiusEzeani/streamlit-playground/blob/main/img/Stanford.png?raw=true" alt="Stanford logo.png" height=40 width=100></img></td>
+    <td style="width:30%;"><img src="https://github.com/IgnatiusEzeani/streamlit-playground/blob/main/img/Stanford.png?raw=true" alt="Stanford logo.png" height=40 width=120></img></td>
     <td><image src="Manchester Logo.png?raw=true" alt="Manchester Logo" height=5 width=30></image></td>
   </tr>
 </table>""", unsafe_allow_html=True)
