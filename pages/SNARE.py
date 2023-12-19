@@ -16,13 +16,6 @@ def do_stuff_on_page_load():
 
 do_stuff_on_page_load()
 
-# st.markdown("""<style> ul{list-style-type: none; padding: 10px 10px; margin:0; overflow: hidden; background-color: #d5dade;}
-#             li.left {float: left;} li.right {float: right;} li a:hover {background-color: #111; } </style>""", unsafe_allow_html=True)
-
-# st.markdown("""<ul><li class='left'><b>📑SNARE 1.0</b> Spatial Narrative Representation Environment</li>
-#             <li class='right'><a href="#SNARE">About</a></li> 
-#             <li class='right'><a href="#ADVANCED">Advanced</a></li></ul>""", unsafe_allow_html=True)
-
 st.markdown("""<style>
             .header{color: black; background-color: #d5dade; position: fixed; left: 0; width: 100%; margin-top:-100px; font-size: 18px;}
   .header tr {height:15%;} .header td {padding:10; border:none; word-wrap: break-word;}
@@ -32,7 +25,7 @@ st.markdown("""<style>
 
 # st.markdown("<h3 style='text-align: center; color: #0c0d0c;'><b>1. Load your corpus</b></h>", unsafe_allow_html=True)
 
-st.markdown(""" <h3 style='text-align: center; color: #0c0d0c;'><b>1. Load your corpus</b></h>
+st.markdown("""<h3 style='text-align: center; color: #0c0d0c;'><b>1. Load your corpus</b></h>
 <table class="header">
   <tr>
     <td style="background-color:#d5dade;text-align:left;">📑 <b>SNARE <font color='gray'>1.0</font></b> Spatial Narrative Representation Environment</td>
@@ -54,13 +47,12 @@ st.markdown(f"""<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/
     <td style="text-align:right; vertical-align: top;">
         <img src="https://github.com/SpaceTimeNarratives/spacetimenarratives.github.io/blob/master/assets/images/STNlogo.png?raw=true" alt="STNLogo" height=30 width=30></img></td>
     <td style="width:25%; font-size:1vw; text-align:left;"><b>SNARE</b> is a project designed<br>and developed by the<br>Spatial Narratives Collaborative<br>© 2023 (Apache License 2.0) &nbsp;&nbsp; {github_svg} Github</td>
-    <td style="width:0%;"></td>
     <td style="width:12%;"><img src="https://www.lancaster.ac.uk/media/wdp/style-assets/images/logos/lu-logo.svg" alt="Lancs_Logo" height=auto width=80%></img></td>
     <td style="width:12%;"><img src="https://raw.githubusercontent.com/IgnatiusEzeani/streamlit-playground/main/img/leeds.webp" alt="Leeds Logo" height=auto width=100%></img></td>
     <td style="width:12%;"><img src="https://github.com/IgnatiusEzeani/streamlit-playground/blob/main/img/Stanford.png?raw=true" alt="Stanford logo.png" height=auto width=80%></img></td>
     <td style="width:12%;"><img src="https://github.com/IgnatiusEzeani/streamlit-playground/blob/main/img/manchester_logo.png?raw=true" alt="Manchester Logo" height=auto width=80%></image></td>
     <td style="width:12%;"><img src="https://github.com/IgnatiusEzeani/streamlit-playground/blob/main/img/bristol_logo.png?raw=true" alt="Bristol Logo" height=auto width=100%></image></td>
-    <td style="width:12%;"><img src="https://github.com/IgnatiusEzeani/streamlit-playground/blob/main/img/IUPUI_logo.png?raw=true" alt="IUPUI Logo" height=auto width=100%></image></td>
+    <td style="width:12%;"><img src="https://github.com/IgnatiusEzeani/streamlit-playground/blob/main/img/IUPUI_logo.png?raw=true" alt="IUPUI Logo" height=auto width=80%></image></td>
 
   </tr>
 </table>""", unsafe_allow_html=True)
@@ -76,7 +68,7 @@ button = sac.buttons([
 
 
 if button=='Paste your corpus':
-    text_data = st.text_area('', placeholder='Copy and paste your data from other applications or websites. You can use tabular (TSV, CSV, DSV) or JSON data.', height=250)
+    text_data = st.text_area('', placeholder='Copy and paste your data from other applications or websites. You can use tabular (TSV, CSV, DSV) or JSON data.', height=150)
     sac.buttons([
         sac.ButtonsItem(label='NEXT', color='#b9ebe2'),
         ], format_func='title', align='end')
