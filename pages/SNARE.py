@@ -27,7 +27,7 @@ st.markdown("""<style>
             .header{color: black; background-color: #d5dade; position: fixed; left: 0; width: 100%; margin-top:-100px; font-size: 18px;}
   .header tr {height:15%;} .header td {padding:10; border:none; word-wrap: break-word;}
   .footer{color: black; background-color: #a5a9b0; position: fixed; bottom: 0; left:0; font-size: 18px;}
-  .footer td {border:none; word-wrap: break-word; border-collapse:collapse;}
+  .footer td {border:none; word-wrap: break-word; border-collapse:collapse; vertical-align:middle; text-align:center;}
 </style>""", unsafe_allow_html=True)
 
 # st.markdown("<h3 style='text-align: center; color: #0c0d0c;'><b>1. Load your corpus</b></h>", unsafe_allow_html=True)
@@ -35,7 +35,7 @@ st.markdown("""<style>
 st.markdown(""" <h3 style='text-align: center; color: #0c0d0c;'><b>1. Load your corpus</b></h>
 <table class="header">
   <tr>
-    <td style="background-color:#d5dade; padding:10x 10x">📑 <b>SNARE <font color='gray'>1.0</font></b> Spatial Narrative Representation Environment</td>
+    <td style="background-color:#d5dade;text-align:left;">📑 <b>SNARE <font color='gray'>1.0</font></b> Spatial Narrative Representation Environment</td>
     <td style="text-align: center; width:10%"><a href="#ADVANCED">Advanced</a></td>
     <td style="text-align: center; width:10%"><a href="#ABOUT">About</a></td>
   </tr>
@@ -48,25 +48,27 @@ github_svg = """<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" f
 st.markdown(f"""<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 <table class="footer">
   <tr>
-    <td colspan="7"; style="background-color:#d5dade; padding:10x 10x;">📑<b>SNARE <font color='gray'>1.0</font></b></td>
+    <td colspan="9"; style="background-color:#d5dade; padding:10x 10x; text-align:left;">📑<b>SNARE <font color='gray'>1.0</font></b></td>
   </tr>
   <tr>
-    <td style="vertical-align:middle; text-align:right; width:5%; vertical-align: top;">
+    <td style="text-align:right; vertical-align: top;">
         <img src="https://github.com/SpaceTimeNarratives/spacetimenarratives.github.io/blob/master/assets/images/STNlogo.png?raw=true" alt="STNLogo" height=30 width=30></img></td>
-    <td style="width:40%; font-size:16px"><b>SNARE</b> is a project designed<br>and developed by the<br>Spatial Narratives Collaborative<br>© 2023 (Apache License 2.0) &nbsp;&nbsp; {github_svg} Github</td>
-    <td style="width:5%;"></td>
-    <td style="width:10%;"><img src="https://raw.githubusercontent.com/IgnatiusEzeani/streamlit-playground/main/img/leeds.webp" alt="Leeds Logo" height=50 width=180></img></td>
-    <td style="width:10%;"><img src="https://www.lancaster.ac.uk/media/wdp/style-assets/images/logos/lu-logo.svg" alt="Lancs_Logo" height=50 width=150></img></td>
-    <td style="width:10%;"><img src="https://github.com/IgnatiusEzeani/streamlit-playground/blob/main/img/Stanford.png?raw=true" alt="Stanford logo.png" height=40 width=120></img></td>
-    <td style="width:10%;"><img src="https://github.com/IgnatiusEzeani/streamlit-playground/blob/main/img/manchester_logo.png?raw=true" alt="Manchester Logo" height=50 width=125></image></td>
+    <td style="width:25%; font-size:1vw; text-align:left;"><b>SNARE</b> is a project designed<br>and developed by the<br>Spatial Narratives Collaborative<br>© 2023 (Apache License 2.0) &nbsp;&nbsp; {github_svg} Github</td>
+    <td style="width:0%;"></td>
+    <td style="width:12%;"><img src="https://www.lancaster.ac.uk/media/wdp/style-assets/images/logos/lu-logo.svg" alt="Lancs_Logo" height=auto width=80%></img></td>
+    <td style="width:12%;"><img src="https://raw.githubusercontent.com/IgnatiusEzeani/streamlit-playground/main/img/leeds.webp" alt="Leeds Logo" height=auto width=100%></img></td>
+    <td style="width:12%;"><img src="https://github.com/IgnatiusEzeani/streamlit-playground/blob/main/img/Stanford.png?raw=true" alt="Stanford logo.png" height=auto width=80%></img></td>
+    <td style="width:12%;"><img src="https://github.com/IgnatiusEzeani/streamlit-playground/blob/main/img/manchester_logo.png?raw=true" alt="Manchester Logo" height=auto width=80%></image></td>
+    <td style="width:12%;"><img src="https://github.com/IgnatiusEzeani/streamlit-playground/blob/main/img/bristol_logo.png?raw=true" alt="Bristol Logo" height=auto width=100%></image></td>
+    <td style="width:12%;"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/IUPUI_wordmark.svg/200px-IUPUI_wordmark.svg.png" alt="IUPUI Logo" height=auto width=100%></image></td>
 
   </tr>
 </table>""", unsafe_allow_html=True)
 
 button = sac.buttons([
+    sac.ButtonsItem(label='Paste your corpus',     icon='clipboard',     color='#b9ebe2'),
     sac.ButtonsItem(label='Use Sample Corpus',     icon='gift',          color='#b9ebe2'),
     sac.ButtonsItem(label='Upload your corpus',    icon='upload',        color='#b9ebe2'),
-    sac.ButtonsItem(label='Paste your corpus',     icon='clipboard',     color='#b9ebe2'),
     sac.ButtonsItem(label='Open Existing Project', icon='folder2-open',  color='#b9ebe2'),
     sac.ButtonsItem(label='Run SPARQL Query',      icon='cloud',         color='#b9ebe2' , disabled=True),
     # sac.ButtonsItem(label='Open an existing project', icon='share-fill', href='https://ant.design/components/button'),
@@ -111,7 +113,4 @@ elif button=='Use Sample Corpus':
 
 else:
     pass
-
-
-
 # st.write(os.listdir())
