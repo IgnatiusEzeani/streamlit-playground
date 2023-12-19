@@ -60,7 +60,7 @@ st.markdown(f"""<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/
     <td style="width:12%;"><img src="https://github.com/IgnatiusEzeani/streamlit-playground/blob/main/img/Stanford.png?raw=true" alt="Stanford logo.png" height=auto width=80%></img></td>
     <td style="width:12%;"><img src="https://github.com/IgnatiusEzeani/streamlit-playground/blob/main/img/manchester_logo.png?raw=true" alt="Manchester Logo" height=auto width=80%></image></td>
     <td style="width:12%;"><img src="https://github.com/IgnatiusEzeani/streamlit-playground/blob/main/img/bristol_logo.png?raw=true" alt="Bristol Logo" height=auto width=100%></image></td>
-    <td style="width:12%;"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/IUPUI_wordmark.svg/200px-IUPUI_wordmark.svg.png" alt="IUPUI Logo" height=auto width=100%></image></td>
+    <td style="width:12%;"><img src="https://github.com/IgnatiusEzeani/streamlit-playground/blob/main/img/IUPUI_logo.png?raw=true" alt="IUPUI Logo" height=auto width=100%></image></td>
 
   </tr>
 </table>""", unsafe_allow_html=True)
