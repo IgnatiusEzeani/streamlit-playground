@@ -24,19 +24,42 @@ do_stuff_on_page_load()
 #             <li class='right'><a href="#ADVANCED">Advanced</a></li></ul>""", unsafe_allow_html=True)
 
 st.markdown("""<style>
-            .header{color: black; background-color: #d5dade; position: fixed; left: 0; width: 100%; margin-top:-110px; font-size: 18px;}
+            .header{color: black; background-color: #d5dade; position: fixed; left: 0; width: 100%; margin-top:-100px; font-size: 18px;}
   .header tr {height:15%;} .header td {padding:10; border:none; word-wrap: break-word;}
   .footer{color: black; background-color: #a5a9b0; position: fixed; bottom: 0; left:0; font-size: 18px;}
-  .footer td {padding:10; border:none; word-wrap: break-word; border-collapse:collapse;}
+  .footer td {border:none; word-wrap: break-word; border-collapse:collapse;}
 </style>""", unsafe_allow_html=True)
 
-st.markdown("<h3 style='text-align: center; color: #0c0d0c;'><b>1. Load your corpus</b></h>", unsafe_allow_html=True)
+# st.markdown("<h3 style='text-align: center; color: #0c0d0c;'><b>1. Load your corpus</b></h>", unsafe_allow_html=True)
 
-st.markdown("""<table class="header">
+st.markdown(""" <h3 style='text-align: center; color: #0c0d0c;'><b>1. Load your corpus</b></h>
+<table class="header">
   <tr>
     <td style="background-color:#d5dade; padding:10x 10x">📑 <b>SNARE <font color='gray'>1.0</font></b> Spatial Narrative Representation Environment</td>
     <td style="text-align: center; width:10%"><a href="#ADVANCED">Advanced</a></td>
     <td style="text-align: center; width:10%"><a href="#ABOUT">About</a></td>
+  </tr>
+</table>""", unsafe_allow_html=True)
+
+github_svg = """<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+ <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
+</svg>"""
+
+st.markdown(f"""<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+<table class="footer">
+  <tr>
+    <td colspan="7"; style="background-color:#d5dade; padding:10x 10x;">📑<b>SNARE <font color='gray'>1.0</font></b></td>
+  </tr>
+  <tr>
+    <td style="vertical-align:middle; text-align:right; width:5%; vertical-align: top;">
+        <img src="https://github.com/SpaceTimeNarratives/spacetimenarratives.github.io/blob/master/assets/images/STNlogo.png?raw=true" alt="STNLogo" height=30 width=30></img></td>
+    <td style="width:40%; font-size:16px"><b>SNARE</b> is a project designed<br>and developed by the<br>Spatial Narratives Collaborative<br>© 2023 (Apache License 2.0) &nbsp;&nbsp; {github_svg} Github</td>
+    <td style="width:5%;"></td>
+    <td style="width:10%;"><img src="https://raw.githubusercontent.com/IgnatiusEzeani/streamlit-playground/main/img/leeds.webp" alt="Leeds Logo" height=50 width=180></img></td>
+    <td style="width:10%;"><img src="https://www.lancaster.ac.uk/media/wdp/style-assets/images/logos/lu-logo.svg" alt="Lancs_Logo" height=50 width=150></img></td>
+    <td style="width:10%;"><img src="https://github.com/IgnatiusEzeani/streamlit-playground/blob/main/img/Stanford.png?raw=true" alt="Stanford logo.png" height=40 width=120></img></td>
+    <td style="width:10%;"><img src="https://github.com/IgnatiusEzeani/streamlit-playground/blob/main/img/manchester_logo.png?raw=true" alt="Manchester Logo" height=50 width=125></image></td>
+
   </tr>
 </table>""", unsafe_allow_html=True)
 
@@ -89,25 +112,6 @@ elif button=='Use Sample Corpus':
 else:
     pass
 
-github_svg = """<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
- <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
-</svg>"""
 
-st.markdown(f"""<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-<table class="footer">
-  <tr>
-    <td colspan="7"; style="background-color:#d5dade; padding:10x 10x;">📑<b>SNARE <font color='gray'>1.0</font></b></td>
-  </tr>
-  <tr>
-    <td style="vertical-align:middle; text-align:right; width:6%; vertical-align: top;">
-        <img src="https://github.com/SpaceTimeNarratives/spacetimenarratives.github.io/blob/master/assets/images/STNlogo.png?raw=true" alt="STNLogo" height=40 width=40></img></td>
-    <td style="width:40%; font-size:16px"><b>SNARE</b> is a project designed<br>and developed by the<br>Spatial Narratives Collaborative<br>© 2023 (Apache License 2.0) &nbsp;&nbsp; {github_svg} Github</td>
-    <td style="width:5%;"></td>
-    <td style="width:15%;"><img src="https://raw.githubusercontent.com/IgnatiusEzeani/streamlit-playground/main/img/leeds.webp" alt="Leeds Logo" height=50 width=180></img></td>
-    <td style="width:15%;"><img src="https://www.lancaster.ac.uk/media/wdp/style-assets/images/logos/lu-logo.svg" alt="Lancs_Logo" height=50 width=150></img></td>
-    <td style="width:30%;"><img src="https://github.com/IgnatiusEzeani/streamlit-playground/blob/main/img/Stanford.png?raw=true" alt="Stanford logo.png" height=40 width=120></img></td>
-    <td><image src="Manchester Logo.png?raw=true" alt="Manchester Logo" height=5 width=30></image></td>
-  </tr>
-</table>""", unsafe_allow_html=True)
 
 # st.write(os.listdir())
