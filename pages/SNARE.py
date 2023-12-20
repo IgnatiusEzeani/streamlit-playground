@@ -47,7 +47,7 @@ st.markdown(f"""<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/
     <td style="text-align:right; vertical-align: top;">
         <img src="https://github.com/SpaceTimeNarratives/spacetimenarratives.github.io/blob/master/assets/images/STNlogo.png?raw=true" alt="STNLogo" height=30 width=30></img></td>
     <td style="width:25%; font-size:1vw; text-align:left;"><b>SNARE</b> is a project designed<br>and developed by the<br>Spatial Narratives Collaborative<br>© 2023 (Apache License 2.0) &nbsp;&nbsp; {github_svg} Github</td>
-    <td style="width:12%;"><img src="https://www.lancaster.ac.uk/media/wdp/style-assets/images/logos/lu-logo.svg" alt="Lancs_Logo" height=auto width=80%></img></td>
+    <td style="width:12%;"><img src="https://raw.githubusercontent.com/IgnatiusEzeani/streamlit-playground/main/img/lancs-logo.svg" alt="Lancs_Logo" height=auto width=80%></img></td>
     <td style="width:12%;"><img src="https://raw.githubusercontent.com/IgnatiusEzeani/streamlit-playground/main/img/leeds.webp" alt="Leeds Logo" height=auto width=100%></img></td>
     <td style="width:12%;"><img src="https://github.com/IgnatiusEzeani/streamlit-playground/blob/main/img/Stanford.png?raw=true" alt="Stanford logo.png" height=auto width=80%></img></td>
     <td style="width:12%;"><img src="https://github.com/IgnatiusEzeani/streamlit-playground/blob/main/img/manchester_logo.png?raw=true" alt="Manchester Logo" height=auto width=80%></image></td>
