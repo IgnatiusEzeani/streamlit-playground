@@ -43,8 +43,8 @@ button = sac.buttons([
     sac.ButtonsItem(label='Upload your corpus',    icon='upload',        color='#b9ebe2'),
     sac.ButtonsItem(label='Open Existing Project', icon='folder2-open',  color='#b9ebe2'),
     sac.ButtonsItem(label='Run SPARQL Query',      icon='cloud',         color='#b9ebe2' , disabled=True),
+
     # sac.ButtonsItem(label='Open an existing project', icon='share-fill', href='https://ant.design/components/button'),
-    ], position='left', format_func='title', align='center', )
 
 
 if button=='Paste your corpus':
